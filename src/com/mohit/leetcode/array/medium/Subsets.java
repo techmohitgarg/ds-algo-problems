@@ -40,18 +40,12 @@ public class Subsets {
     }
 
     private void makeSubsets(List<List<Integer>> lists, List<Integer> integers, int[] nums, int start) {
-        if (start <= nums.length) {
-            lists.add(new ArrayList<>(integers));
-        }
-        if (start >= nums.length) {
-            return;
-        }
+        lists.add(new ArrayList<>(integers));
         for (int i = start; i < nums.length; i++) {
             integers.add(nums[i]);
             makeSubsets(lists, integers, nums, i + 1);
             integers.remove(integers.size() - 1);
         }
-
     }
 
 }
