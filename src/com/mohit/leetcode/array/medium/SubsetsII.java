@@ -39,12 +39,7 @@ public class SubsetsII {
     }
 
     private void makeSubsets(List<List<Integer>> lists, List<Integer> integers, int[] nums, int start) {
-        if (start <= nums.length) {
-            lists.add(new ArrayList<>(integers));
-        }
-        if (start >= nums.length) {
-            return;
-        }
+        lists.add(new ArrayList<>(integers));
         for (int i = start; i < nums.length; i++) {
             if (i > start && nums[i] == nums[i - 1]) {
                 continue;

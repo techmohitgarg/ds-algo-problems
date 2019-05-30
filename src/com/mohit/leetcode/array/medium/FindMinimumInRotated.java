@@ -34,6 +34,26 @@ public class FindMinimumInRotated {
         if (nums.length == 1) {
             return nums[0];
         }
+        int center = -1;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                center = i;
+                break;
+            }
+        }
+        if (center == -1) {
+            return nums[0];
+        } else {
+            return nums[center + 1];
+        }
+    }
+    /*public int findMin(int[] nums) {
+        if (nums.length == 0) {
+            return -1;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
         int middle = getMiddle(nums, 0, nums.length - 1);
         if (middle == -1) {
             return nums[0];
@@ -63,5 +83,5 @@ public class FindMinimumInRotated {
             return getMiddle(nums, left, mid - 1);
         }
         return getMiddle(nums, mid + 1, right);
-    }
+    }*/
 }

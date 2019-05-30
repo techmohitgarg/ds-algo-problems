@@ -1,50 +1,28 @@
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println(main.search(new int[]{4, 2, 1}, 2));
+        System.out.println(main.findPeakElement(new int[]{1, 2, 3, 1}));
     }
 
-    public boolean search(int[] nums, int target) {
+    public int findPeakElement(int[] nums) {
+        int i;
         if (nums.length == 0) {
-            return false;
+            return -1;
         }
-
-        int piovt = -1;
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] > nums[i + 1]) {
-                piovt = i;
-                break;
-            }
+        if (nums.length == 1) {
+            return 0;
         }
-        // check if pivot
-        if (piovt == -1) {
-            return binarySearch(nums, 0, nums.length - 1, target) == -1 ? false : true;
-        }
-        if (nums[piovt] == target) {
-            return true;
-        }
-
-        if (nums[0] > target) {
-            return binarySearch(nums, piovt+1, nums.length - 1, target) == -1 ? false : true;
-        }
-        return binarySearch(nums, 0, piovt, target) == -1 ? false : true;
-    }
-
-    public int binarySearch(int[] nums, int left, int right, int target) {
-        if (left <= right) {
-            int m = (right + left) / 2;
-            if (nums[m] == target) {
-                return m;
-            }
-            if (nums[m] > target) {
-                return binarySearch(nums, left, m - 1, target);
-            } else {
-                return binarySearch(nums, m + 1, right, target);
+        for (i = 0; i < nums.length; i++) {
+            if ((i == 0 && nums[i] >= nums[i + 1]) || (i == nums.length - 1 && nums[i - 1] <= nums[i])) {
+                return i;
+            } else if (i > 0 && i <= nums.length - 1 && nums[i - 1] <= nums[i] && nums[i] >= nums[i + 1]) {
+                return i;
             }
         }
         return -1;
     }
-
 
 }

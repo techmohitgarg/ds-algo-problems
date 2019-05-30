@@ -27,15 +27,49 @@ public class MaximumProductSubarray {
         if (nums.length == 0) {
             return 0;
         }
+        int maxProduct = nums[0];
         int max = nums[0];
-        int currentMin = nums[0];
-        int currentMax = nums[0];
+        int min = nums[0];
         for (int i = 1; i < nums.length; i++) {
-            int temp = currentMax;
-            currentMax = Math.max(nums[i], Math.max(currentMax * nums[i], currentMin * nums[i]));
-            currentMin = Math.min(nums[i], Math.min(temp * nums[i], currentMin * nums[i]));
-            max = Math.max(max, currentMax);
+            int temp = nums[i];
+            max = max * temp;
+            min = min * temp;
+            if (min > max) {
+                int pMax = max;
+                max = min;
+                min = pMax;
+            }
+            if (temp > max) {
+                max = temp;
+            }
+            if (min > temp) {
+                min = temp;
+            }
+            maxProduct = Math.max(max, maxProduct);
         }
-        return max;
+        return maxProduct;
+    }
+//    public int maxProduct(int[] nums) {
+//        if (nums.length == 0) {
+//            return 0;
+//        }
+//        int max = nums[0];
+//        int currentMin = nums[0];
+//        int currentMax = nums[0];
+//        for (int i = 1; i < nums.length; i++) {
+//            int temp = currentMax;
+//            currentMax = max(nums[i], max(currentMax * nums[i], currentMin * nums[i]));
+//            currentMin = min(nums[i], min(temp * nums[i], currentMin * nums[i]));
+//            max = max(max, currentMax);
+//        }
+//        return max;
+//    }
+
+    public int max(int a, int b) {
+        return a > b ? a : b;
+    }
+
+    public int min(int a, int b) {
+        return a < b ? a : b;
     }
 }
