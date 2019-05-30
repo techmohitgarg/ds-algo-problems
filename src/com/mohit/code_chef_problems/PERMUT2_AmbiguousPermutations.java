@@ -16,19 +16,18 @@ public class PERMUT2_AmbiguousPermutations {
             System.out.println((isAmbigouesPermutations(num)));
             t--;
         }
-        System.out.println(0);
     }
 
     // 1 4 3 2
-    public static int isAmbigouesPermutations(int[] num) {
+    public static String isAmbigouesPermutations(int[] num) {
         int[] temp = new int[num.length];
         for (int i = 0; i < num.length; i++) {
-            int index = num[i] - 1;
+            int index = num[num[i] - 1] - 1;
             temp[index] = num[i];
             if (temp[i] != num[i]) {
-                return 0;
+                return "not ambiguous";
             }
         }
-        return 1;
+        return "ambiguous";
     }
 }
