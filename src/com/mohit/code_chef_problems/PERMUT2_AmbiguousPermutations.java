@@ -7,8 +7,8 @@ public class PERMUT2_AmbiguousPermutations {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         while (n != 0) {
-            int[] num = new int[n];
-            for (int i = 0; i < n; i++) {
+            int[] num = new int[n + 1];
+            for (int i = 1; i <= n; i++) {
                 num[i] = sc.nextInt();
             }
             // Set result
@@ -19,11 +19,8 @@ public class PERMUT2_AmbiguousPermutations {
 
     // 1 4 3 2
     public static String isAmbigouesPermutations(int[] num) {
-        int[] temp = new int[num.length];
-        for (int i = 0; i < num.length; i++) {
-            int index = num[num[i] - 1] - 1;
-            temp[index] = num[i];
-            if (temp[i] != num[i]) {
+        for (int i = 1; i < num.length; i++) {
+            if (num[num[i]] != i) {
                 return "not ambiguous";
             }
         }

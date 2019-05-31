@@ -26,6 +26,22 @@ public class SummaryRanges {
 
     public List<String> summaryRanges(int[] nums) {
         List<String> list = new ArrayList<>();
+        int left = 0;
+        int start = 0;
+        while (left < nums.length) {
+            start = nums[left];
+            while (left < nums.length - 1 && nums[left] + 1 == nums[left + 1]) {
+                left++;
+            }
+            if (start == nums[left]) {
+                list.add(start + "");
+            } else {
+                list.add(start + "->" + nums[left]);
+            }
+            left++;
+        }
+        return list;
+        /*List<String> list = new ArrayList<>();
         Integer start = null;
         if (nums.length == 0) {
             return list;
@@ -45,7 +61,8 @@ public class SummaryRanges {
                 list.add(String.valueOf(start));
             }
         }
-        return list;
+        return list;*/
+
     }
 
 }

@@ -18,11 +18,10 @@ public class MinimumSizeSubarraySum {
         MinimumSizeSubarraySum subarraySum = new MinimumSizeSubarraySum();
         int sum = 213;
         System.out.println(subarraySum.minSubArrayLen(sum, new int[]{12, 28, 83, 4, 25, 26, 25, 2, 25, 25, 25, 12}));
-        System.out.println(subarraySum.minSubArrayLen1(sum, new int[]{12, 28, 83, 4, 25, 26, 25, 2, 25, 25, 25, 12}));
     }
 
 
-    public int minSubArrayLen(int s, int[] nums) {
+    /*public int minSubArrayLen(int s, int[] nums) {
         int minLen = 0;
         for (int i = 0; i < nums.length; i++) {
             int sum = 0;
@@ -38,9 +37,9 @@ public class MinimumSizeSubarraySum {
             }
         }
         return minLen;
-    }
+    }*/
 
-    public int minSubArrayLen1(int s, int[] nums) {
+    /*public int minSubArrayLen1(int s, int[] nums) {
         int n = nums.length, start = 0, sum = 0, minlen = Integer.MAX_VALUE;
         for (int i = 0; i < n; i++) {
             sum += nums[i];
@@ -50,5 +49,26 @@ public class MinimumSizeSubarraySum {
             }
         }
         return minlen == Integer.MAX_VALUE ? 0 : minlen;
+    }*/
+
+    public int minSubArrayLen(int s, int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+
+        int left = 0;
+        int start = 0;
+        int sum = 0;
+        int len = Integer.MAX_VALUE;
+        while (left < nums.length) {
+            sum += nums[left];
+            left++;
+            while (sum >= s && start < left) {
+                len = Math.min(len, left - start);
+                sum -= nums[start];
+                start++;
+            }
+        }
+        return len == Integer.MAX_VALUE ? 0 : len;
     }
 }
