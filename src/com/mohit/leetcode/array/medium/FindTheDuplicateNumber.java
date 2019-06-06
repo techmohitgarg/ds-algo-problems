@@ -26,17 +26,37 @@ public class FindTheDuplicateNumber {
         FindTheDuplicateNumber duplicateNumber = new FindTheDuplicateNumber();
     }
 
+    /*public int findDuplicate(int[] nums) {
+        if (nums.length == 0) {
+            return -1;
+        }
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                return nums[i];
+            }
+        }
+        return -1;
+    }*/
+
     public int findDuplicate(int[] nums) {
         if (nums.length == 0) {
             return 0;
         }
-        Arrays.sort(nums);
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] == nums[i + 1]) {
-                return nums[i];
-            }
-        }
 
-        return 0;
+        int a = nums[0];
+        int b = nums[0];
+        do {
+            a = nums[a];
+            b = nums[nums[b]];
+        } while (a != b);
+
+        int c = nums[0];
+        int d = a;
+        while (c != d) {
+            c = nums[c];
+            d = nums[d];
+        }
+        return c;
     }
 }

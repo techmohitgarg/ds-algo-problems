@@ -23,36 +23,54 @@ public class MajorityElementII {
 
     public static void main(String[] args) {
         MajorityElementII elementII = new MajorityElementII();
-        System.out.println(elementII.majorityElement(new int[]{1,1,1,3,3,2,2,2}));
+        System.out.println(elementII.majorityElement(new int[]{1, 1, 1, 3, 3, 2, 2, 2}));
     }
 
     public List<Integer> majorityElement(int[] nums) {
-        if (nums.length == 0) {
-            return new ArrayList<>();
-        }
         List<Integer> list = new ArrayList<>();
         Arrays.sort(nums);
-        int count = 0;
-        int i = 0;
-        int start = -1;
-        for (i = 0; i < nums.length; i++) {
-            if (count == 0 || nums[start] == nums[i]) {
-                if (count == 0) {
-                    start = i;
-                }
+        int n = nums.length;
+
+        for (int i = 0; i < nums.length; ) {
+            int start = i;
+            int count = 0;
+            while (i < nums.length && nums[start] == nums[i]) {
                 count++;
-            } else {
-                if (count > (nums.length / 3)) {
-                    list.add(nums[start]);
-                }
-                count = 1;
-                start = i;
+                i++;
             }
-        }
-        if (count > (nums.length / 3)) {
-            list.add(nums[i - 1]);
+            if (count > n / 3) {
+                list.add(nums[start]);
+            }
         }
         return list;
     }
+//    public List<Integer> majorityElement(int[] nums) {
+////        if (nums.length == 0) {
+////            return new ArrayList<>();
+////        }
+////        List<Integer> list = new ArrayList<>();
+////        Arrays.sort(nums);
+////        int count = 0;
+////        int i = 0;
+////        int start = -1;
+////        for (i = 0; i < nums.length; i++) {
+////            if (count == 0 || nums[start] == nums[i]) {
+////                if (count == 0) {
+////                    start = i;
+////                }
+////                count++;
+////            } else {
+////                if (count > (nums.length / 3)) {
+////                    list.add(nums[start]);
+////                }
+////                count = 1;
+////                start = i;
+////            }
+////        }
+////        if (count > (nums.length / 3)) {
+////            list.add(nums[i - 1]);
+////        }
+////        return list;
+////    }
 
 }

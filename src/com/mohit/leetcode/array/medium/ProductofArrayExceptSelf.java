@@ -17,7 +17,7 @@ Could you solve it with constant space complexity? (The output array does not co
 public class ProductofArrayExceptSelf {
     public static void main(String[] args) {
         ProductofArrayExceptSelf exceptSelf = new ProductofArrayExceptSelf();
-        new PrintArray().printSingleArray(exceptSelf.productExceptSelf(new int[]{1, 2, 3, 4}));
+        new PrintArray().printSingleArray(exceptSelf.productExceptSelf(new int[]{9, 0, -2}));
     }
 
     public int[] productExceptSelf(int[] nums) {
@@ -26,7 +26,7 @@ public class ProductofArrayExceptSelf {
             return output;
         }
         for (int i = 0; i < nums.length; i++) {
-            output[i] = (i == 0) ? nums[i] : output[i - 1] * nums[i - 1];
+            output[i] = (i == 0) ? 1 : (i == 1) ? nums[i - 1] : output[i - 1] * nums[i - 1];
         }
         int product = nums[nums.length - 1];
         for (int i = nums.length - 2; i >= 0; i--) {
