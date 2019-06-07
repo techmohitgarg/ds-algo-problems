@@ -1,11 +1,9 @@
-import com.mohit.sorting.PrintArray;
+package com.mohit.strings.easy;
 
-import java.util.*;
-
-public class Main {
+public class StringCompression {
 
     public static void main(String[] args) {
-        Main main = new Main();
+        StringCompression main = new StringCompression();
         System.out.println(main.compress(new char[]{'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'c'}));
     }
 
