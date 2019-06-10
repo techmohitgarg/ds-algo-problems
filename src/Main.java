@@ -1,36 +1,34 @@
-import com.mohit.sorting.PrintArray;
-
-import java.util.*;
-
+/*
+https://leetcode.com/problems/valid-palindrome-ii/
+ */
 public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println(main.detectCapitalUse("abaababaab"));
+        System.out.println(main.validPalindrome("abca"));
     }
 
-    public boolean detectCapitalUse(String word) {
-        if (word.length() == 0) {
-            return false;
-        }
-        boolean isFirstCaptial = (word.charAt(0) >= 'A' && word.charAt(0) <= 'Z') ? true : false;
-        int countCap = 0;
-        int countSmall = 0;
-        for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) >= 'a' && word.charAt(i) <= 'z') {
-                countSmall++;
+    public boolean validPalindrome(String s) {
+        int l = 0, r = s.length() - 1;
+        while (l < r) {
+            if (s.charAt(l) != s.charAt(r)) {
+
+            } else {
+                l++;
+                r--;
             }
-            if (word.charAt(i) >= 'A' && word.charAt(i) <= 'Z') {
-                countCap++;
-            }
-            if ((countCap > 1 && countSmall > 0)) {
-                return false;
-            }
+
         }
-        if ((isFirstCaptial && countSmall == word.length() - 1) || countCap == word.length() || countSmall == word.length()) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
 }
+/*
+Today Target : 10 Problems
+
+1. https://leetcode.com/problems/reverse-string-ii/
+2.https://leetcode.com/problems/student-attendance-record-i/
+3.https://leetcode.com/problems/reverse-words-in-a-string-iii/
+4.https://leetcode.com/problems/robot-return-to-origin/
+5.
+ */
