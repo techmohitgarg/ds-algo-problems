@@ -1,11 +1,12 @@
+package com.mohit.leetcode.strings.easy;
 
 /*
-https://leetcode.com/problems/rotated-digits/
+https://leetcode.com/problems/reverse-only-letters/
  */
-public class Main {
+public class ReverseOnlyLetters {
 
     public static void main(String[] args) {
-        Main main = new Main();
+        ReverseOnlyLetters main = new ReverseOnlyLetters();
         System.out.println(main.reverseOnlyLetters("ab-cd"));
     }
 
