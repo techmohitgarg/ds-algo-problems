@@ -1,11 +1,9 @@
-import com.mohit.sorting.PrintArray;
+package com.mohit.strings.easy;
 
-import java.util.*;
-
-public class Main {
+public class DetectCapital {
 
     public static void main(String[] args) {
-        Main main = new Main();
+        DetectCapital main = new DetectCapital();
         System.out.println(main.detectCapitalUse("abaababaab"));
     }
 
