@@ -2,5 +2,5 @@
 *.iml
 /out
 .DS_Store
-/target
-/script.sh
+target
+script.sh
