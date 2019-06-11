@@ -1,14 +1,12 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+package com.mohit.leetcode.strings.easy;
 
 /*
 https://leetcode.com/problems/goat-latin/
  */
-public class Main {
+public class GoatLatin {
 
     public static void main(String[] args) {
-        Main main = new Main();
+        GoatLatin main = new GoatLatin();
         System.out.println(main.toGoatLatin("I speak Goat Latin"));
     }
 
