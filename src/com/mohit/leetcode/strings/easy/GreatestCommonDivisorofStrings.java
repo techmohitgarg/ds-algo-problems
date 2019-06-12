@@ -1,14 +1,12 @@
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package com.mohit.leetcode.strings.easy;
 
 /*
-https://leetcode.com/problems/unique-email-addresses/
+https://leetcode.com/problems/greatest-common-divisor-of-strings/
  */
-public class Main {
+public class GreatestCommonDivisorofStrings {
 
     public static void main(String[] args) {
-        Main main = new Main();
+        GreatestCommonDivisorofStrings main = new GreatestCommonDivisorofStrings();
         System.out.println(main.gcdOfStrings("ABCABC", "ABC"));
 
     }
