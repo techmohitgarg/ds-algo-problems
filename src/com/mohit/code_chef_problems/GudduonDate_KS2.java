@@ -1,5 +1,6 @@
 package com.mohit.code_chef_problems;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class GudduonDate_KS2 {
@@ -7,24 +8,30 @@ public class GudduonDate_KS2 {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         while (t > 0) {
-            long val = sc.nextLong();
-            System.out.println(getValue(val));
+            String val = sc.next();
+            String result = getValue(val);
+            System.out.println(result);
             t--;
         }
+
     }
 
-    public static long getValue(long val) {
-        long n = val;
+    public static String getValue(String num) {
+        String val = num + "0";
+        char[] ch = val.toCharArray();
         long sum = 0;
-        while (n > 0) {
-            sum += n % 10;
-            n = n / 10;
+        int j = 0;
+        while (j < ch.length) {
+            sum += ch[j] - '0';
+            j++;
         }
-        if (sum > 10) {
-            return getValue(val + 1);
+        int i = 0;
+        while (i < 10 && ((sum + i) % 10) != 0) {
+            i++;
         }
-        long diff = 10 - sum;
-        long num = 10 * val + diff;
-        return num;
+        if (((sum + i) % 10) == 0) {
+            return num + i;
+        }
+        return "";
     }
 }
