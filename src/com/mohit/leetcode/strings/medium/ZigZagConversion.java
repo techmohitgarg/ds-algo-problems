@@ -1,22 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ https://leetcode.com/problems/zigzag-conversion/solution/
  */
 package com.mohit.leetcode.strings.medium;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- *
  * @author Mohit Garg
  */
 public class ZigZagConversion {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         ZigZagConversion problems = new ZigZagConversion();
         String string = "AB";
@@ -25,35 +15,73 @@ public class ZigZagConversion {
     }
 
     public String convert(String s, int numRows) {
+        if (numRows == 1) return s;
+        StringBuilder ret = new StringBuilder();
+        int n = s.length();
+        int cycleLen = 2 * numRows - 2;
 
-        List<String> list = new ArrayList<>();
         for (int i = 0; i < numRows; i++) {
-            list.add("");
-        }
-        if (numRows == 1) {
-            return s;
-        }
-        int row = 0;
-        boolean up = false;
-        for (int i = 0; i < s.length(); i++) {
-            list.set(row, list.get(row) + s.charAt(i));
-            if (up) {
-                row--;
-            } else {
-                row++;
+            for (int j = 0; j + i < n; j += cycleLen) {
+                ret.append(s.charAt(j + i));
+                if (i != 0 && i != numRows - 1 && j + cycleLen - i < n)
+                    ret.append(s.charAt(j + cycleLen - i));
             }
-            if (row == (numRows - 1)) {
+        }
+        return ret.toString();
+    }
+    /*public String convert(String s, int numRows) {
+
+        if (numRows == 1) return s;
+
+        List<StringBuilder> rows = new ArrayList<>();
+        for (int i = 0; i < Math.min(numRows, s.length()); i++)
+            rows.add(new StringBuilder());
+
+        int curRow = 0;
+        boolean goingDown = false;
+
+        for (char c : s.toCharArray()) {
+            rows.get(curRow).append(c);
+            if (curRow == 0 || curRow == numRows - 1) goingDown = !goingDown;
+            curRow += goingDown ? 1 : -1;
+        }
+
+        StringBuilder ret = new StringBuilder();
+        for (StringBuilder row : rows) ret.append(row);
+        return ret.toString();
+    }*/
+
+   /* public String convert(String s, int numRows) {
+        HashMap<Integer, StringBuilder> set = new HashMap<>();
+        int i = 1;
+        boolean up = false;
+        for (char c : s.toCharArray()) {
+            StringBuilder builder = new StringBuilder();
+            if (set.containsKey(i)) {
+                builder.append(set.get(i));
+                builder.append(c);
+            } else {
+                builder.append(c);
+            }
+            set.put(i, builder);
+            if (up) {
+                i--;
+            } else {
+                i++;
+            }
+            if (i == numRows) {
                 up = true;
             }
-            if (row == 0) {
+            if (i == 1) {
                 up = false;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        for (String string : list) {
-            sb.append(string);
+        StringBuilder builder = new StringBuilder();
+        for (int key : set.keySet()) {
+            builder.append(set.get(key));
         }
-        return sb.toString();
-    }
+
+        return builder.toString();
+    }*/
 
 }
