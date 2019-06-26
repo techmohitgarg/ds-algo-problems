@@ -1,6 +1,5 @@
 package com.mohit.code_chef_problems;
 
-import java.math.BigInteger;
 import java.util.Scanner;
 
 public class GudduonDate_KS2 {
