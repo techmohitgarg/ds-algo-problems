@@ -16,7 +16,7 @@ public class MultiplyStrings {
      */
     public static void main(String[] args) {
         MultiplyStrings problems = new MultiplyStrings();
-        System.out.println(problems.multiply("0", "0"));
+        System.out.println(problems.multiply("9", "9"));
     }
 
     public String multiply(String num1, String num2) {

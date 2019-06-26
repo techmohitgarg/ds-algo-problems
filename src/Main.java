@@ -9,41 +9,49 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println(main.gcdOfStrings("ABCABC", "ABC"));
-
+        System.out.println(main.multiply("9", "9"));
     }
 
-    public String gcdOfStrings(String str1, String str2) {
-        int a = str1.length();
-        int b = str2.length();
-        if (str1.equals(str2)) {
-            return str1;
-        }
-        if (!str1.equals(str2) && a == b) {
+
+    public String multiply(String num1, String num2) {
+        if (num1.length() == 0 && num2.length() == 0) {
             return "";
         }
-        if (a > b) {
-            if (!str1.contains(str2)) {
-                return "";
-            }
-        } else {
-            if (!str2.contains(str1)) {
-                return "";
-            }
+        if (num1.length() == 0) {
+            return num2;
         }
-        int gcd = gcd(a, b);
-        if (a > gcd) {
-            return str1.substring(0, gcd);
+        if (num2.length() == 0) {
+            return num1;
         }
-        return str2.substring(0, gcd);
-    }
 
-    public int gcd(int a, int b) {
-        if (a == 0) {
-            return b;
+        int[] multiply = new int[num1.length() + num2.length()];
+        int m = 0;
+        for (int i = num1.length() - 1; i >= 0; i--) {
+            int a = num1.charAt(i) - '0';
+            int carry = 0;
+            int n = 0;
+            for (int j = num2.length() - 1; j >= 0; j--) {
+                int num = ((num2.charAt(j) - '0') * a) + carry + multiply[m + n];
+                multiply[m + n] = num % 10;
+                carry = num / 10;
+                n++;
+            }
+            if (carry > 0) {
+                multiply[m + n] = carry;
+            }
+            m++;
         }
-        return gcd(b % a, a);
 
+        int num = multiply.length - 1;
+        while (num > 0 && multiply[num] == 0) {
+            num--;
+        }
+        StringBuilder builder = new StringBuilder();
+        while (num >= 0) {
+            builder.append(multiply[num]);
+            num--;
+        }
+        return builder.toString();
     }
 
 }
