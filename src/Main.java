@@ -3,55 +3,41 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
-https://leetcode.com/problems/unique-email-addresses/
+Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
+Output:
+[
+  ["ate","eat","tea"],
+  ["nat","tan"],
+  ["bat"]
+]
  */
 public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println(main.multiply("9", "9"));
+        System.out.println(main.numDecodings("12"));
     }
 
-
-    public String multiply(String num1, String num2) {
-        if (num1.length() == 0 && num2.length() == 0) {
-            return "";
+    public int numDecodings(String s) {
+        if (s.charAt(0) == '0' || s.length() == 0) {
+            return 0;
         }
-        if (num1.length() == 0) {
-            return num2;
-        }
-        if (num2.length() == 0) {
-            return num1;
-        }
-
-        int[] multiply = new int[num1.length() + num2.length()];
-        int m = 0;
-        for (int i = num1.length() - 1; i >= 0; i--) {
-            int a = num1.charAt(i) - '0';
-            int carry = 0;
-            int n = 0;
-            for (int j = num2.length() - 1; j >= 0; j--) {
-                int num = ((num2.charAt(j) - '0') * a) + carry + multiply[m + n];
-                multiply[m + n] = num % 10;
-                carry = num / 10;
-                n++;
+        int[] count = new int[s.length() + 1];
+        count[0] = 1;
+        count[1] = 1;
+        for (int i = 2; i < count.length; i++) {
+            count[i] = 0;
+            if (s.charAt(i - 1) > '0') {
+                count[i] = count[i - 1];
             }
-            if (carry > 0) {
-                multiply[m + n] = carry;
-            }
-            m++;
-        }
 
-        int num = multiply.length - 1;
-        while (num > 0 && multiply[num] == 0) {
-            num--;
+            if (s.charAt(i - 2) == '1' || s.charAt(i - 2) == '2' && s.charAt(i - 1) < '7') {
+                count[i] += count[i - 2];
+            }
         }
-        StringBuilder builder = new StringBuilder();
-        while (num >= 0) {
-            builder.append(multiply[num]);
-            num--;
-        }
-        return builder.toString();
+        return count[count.length - 1];
     }
+
 
 }
+

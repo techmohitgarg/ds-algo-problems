@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author Mohit Garg
  */
 public class GroupAnagrams {
@@ -42,7 +41,6 @@ public class GroupAnagrams {
                 hm.put(tempNew, ses);
             }
         }
-
         for (Map.Entry<String, List<String>> entry : hm.entrySet()) {
             List<String> value = entry.getValue();
             list.add(value);
