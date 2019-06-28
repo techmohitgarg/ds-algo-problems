@@ -19,11 +19,9 @@ public class ReverseStringII {
         int index = 1;
         for (int i = 0; i < n; i = 2 * k * index, index++) {
             if (ch.length - i < k) {
-                reverse(ch, i, ch.length - 1);//(For this condition If there are less than k characters left, reverse all of them)
+                reverse(ch, i, ch.length - 1);
             } else {
                 reverse(ch, i, i + k - 1);
-                // (For normal reverse like (2*k moves) and for this condition If there are less than 2k but greater than
-                // or equal to k characters, then reverse the first k characters and left the other as original)
             }
         }
         return String.valueOf(ch);

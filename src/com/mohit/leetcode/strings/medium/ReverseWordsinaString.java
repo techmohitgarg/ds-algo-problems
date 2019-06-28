@@ -6,7 +6,6 @@
 package com.mohit.leetcode.strings.medium;
 
 /**
- *
  * @author Mohit Garg
  */
 public class ReverseWordsinaString {
@@ -20,9 +19,26 @@ public class ReverseWordsinaString {
         System.out.println(problems.reverseWords(string));
     }
 
-//Input: "the sky is blue",
-//Output: "blue is sky the".
     public String reverseWords(String s) {
+        StringBuilder builder = new StringBuilder();
+        char[] ch = s.toCharArray();
+        int n = ch.length - 1;
+        for (int i = n; i >= 0; ) {
+            while (i >= 0 && ch[i] == ' ') {
+                i--;
+            }
+            int start = i;
+            while (i >= 0 && ch[i] != ' ') {
+                i--;
+            }
+
+            builder.append(s.substring(i + 1, start + 1));
+            builder.append(" ");
+        }
+        return builder.toString().trim();
+    }
+
+    /*public String reverseWords(String s) {
         if (s.length() == 0) {
             return s;
         }
@@ -46,6 +62,6 @@ public class ReverseWordsinaString {
             sb.append(" ");
         }
         return sb.toString().trim();
-    }
+    }*/
 
 }
