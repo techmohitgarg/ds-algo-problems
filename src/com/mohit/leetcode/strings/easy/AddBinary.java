@@ -27,7 +27,7 @@ public class AddBinary {
             }
 
             if (sum > 2) {
-                carry = 0;
+                carry = 1;
                 builder.append(1);
             } else if (sum == 2) {
                 carry = 1;

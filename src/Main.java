@@ -31,43 +31,69 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println(main.compareVersion("111111111111111111112.0", "111111111111111111112.1"));
+
+        //System.out.println(Pattern.matches("[a-fA-F0-9]{4}", "8A2E"));
+        System.out.println(main.validIPAddress("2001:0db8:85a3:00000:0:8A2E:0370:7334"));
     }
 
-    public int compareVersion(String version1, String version2) {
-        if (version1.length() == 0 && version2.length() == 0) return 0;
-        if (version1.length() == 0) return -1;
-        if (version2.length() == 0) return 1;
-        int i = 0;
-        int j = 0;
-        while (i < version1.length() || j < version2.length()) {
-            while (i < version1.length() && version1.charAt(i) == '0') i++;
-            while (j < version2.length() && version2.charAt(j) == '0') j++;
-            while (i < version1.length() && version1.charAt(i) != '.' || j < version2.length() && version2.charAt(j) != '.') {
-                int b1 = 0;
-                if (i < version1.length()) {
-                    b1 = version1.charAt(i) - '0';
-                }
-
-                int b2 = 0;
-                if (j < version2.length()) {
-                    b2 = version2.charAt(j) - '0';
-                }
-                if (b1 > b2) {
-                    return 1;
-                }
-                if (b1 < b2) {
-                    return -1;
-                }
-                i++;
-                j++;
-            }
-
-            i++;
-            j++;
+    public String validIPAddress(String IP) {
+        final String IPV4 = "IPv4";
+        final String IPV6 = "IPv6";
+        final String NOTHING = "Neither";
+        if (IP.length() <= 0) {
+            return NOTHING;
         }
-        return 0;
+        if ((IP.charAt(IP.length() - 1) == '.') || (IP.charAt(IP.length() - 1) == ':')) {
+            return NOTHING;
+        }
+        if (isIPV4(IP)) return IPV4;
+        if (isIPV6(IP)) return IPV6;
+        return NOTHING;
     }
 
+    public boolean isIPV4(String IP) {
+        String[] val = IP.split("\\.");
+        if (val.length != 4) return false;
+        for (int i = 0; i < val.length; i++) {
+            if (!isValid(val[i], 1)) return false;
+        }
+        return true;
+    }
+
+    public boolean isIPV6(String IP) {
+        String[] val = IP.split(":");
+        if (val.length != 8) return false;
+        for (int i = 0; i < val.length; i++) {
+            if (val[i].length() == 0) return false;
+            if (!isValid(val[i], 2)) return false;
+        }
+        return true;
+    }
+
+    public boolean isValid(String value, int b) {
+        if (b == 1) {
+            if (value.length() == 0 || value.length() > 3 || value.length() > 1 && value.charAt(0) == '0') {
+                return false;
+            }
+            for (char s : value.toCharArray()) {
+                if (s >= 'A' && s <= 'Z' || s >= 'a' && s <= 'z') {
+                    return false;
+                }
+            }
+            if (Integer.parseInt(value) > 255) {
+                return false;
+            }
+        } else if (b == 2) {
+            if (value.length() > 4 || value.charAt(0) == '-' || value.charAt(0) == '+') {
+                return false;
+            }
+            for (char s : value.toCharArray()) {
+                if ((s > 'F' && s <= 'Z') || (s > 'f' && s <= 'z')) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
 
