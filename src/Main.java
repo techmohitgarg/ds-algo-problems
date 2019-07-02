@@ -1,46 +1,32 @@
-import java.math.BigInteger;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
-/*
-Input: ["23:59","00:00"]
-Output: 1
- */
 public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        List<String> list = new ArrayList<>();
-        list.add("23:59");
-        list.add("11:05");
-        System.out.println(main.findMinDifference(list));
+        System.out.println(main.minDistance("sea", "eat"));
     }
 
-    public int findMinDifference(List<String> timePoints) {
-        int mindiff = Integer.MAX_VALUE;
-        int n = timePoints.size();
-        Collections.sort(timePoints);
-        for (int i = 0; i < timePoints.size(); i++) {
-            int diff = Math.abs(timeDiff(timePoints.get((i - 1 + n) % n), timePoints.get(i)));
-            diff = Math.min(diff, 1440 - diff);
-            mindiff = Math.min(mindiff, diff);
-        }
-        return mindiff;
-    }
 
-    private int timeDiff(String s1, String s2) {
-        try {
-            Date dt1 = new SimpleDateFormat("HH:mm").parse(s1);
-            Date dt2 = new SimpleDateFormat("HH:mm").parse(s2);
-            long diff = Math.abs(dt2.getTime() - dt1.getTime());
-            long diffMinutes = (diff / 1000) / 60;
-            return (int) diffMinutes;
-        } catch (ParseException e) {
+    public int minDistance(String word1, String word2) {
+        int n1 = word1.length();
+        int n2 = word2.length();
+        if (n1 == 0) return n2;
+        if (n2 == 0) return n1;
+        int[][] temp = new int[n1 + 1][n2 + 1];
+        for (int i = 1; i <= n1; i++) {
+            for (int j = 1; j <= n2; j++) {
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    temp[i][j] = temp[i - 1][j - 1] + 1;
+                } else {
+                    temp[i][j] = Math.max(temp[i - 1][j], temp[i][j - 1]);
+                }
+            }
         }
-        return 0;
+        int minMatch = temp[n1][n2];
+        int ans = (n1 - minMatch) + (n2 - minMatch);
+        return ans;
     }
 }
 
