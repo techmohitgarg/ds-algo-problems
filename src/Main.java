@@ -1,30 +1,40 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println(main.minDistance("sea", "eat"));
+        System.out.println(main.findDuplicate(new String[]{"root/a 1.txt(abcd) 2.txt(efsfgh)"
+                , "root/c 3.txt(abdfcd)", "root/c/d 4.txt(efggdfh)"}));
     }
 
-
-    public int minDistance(String word1, String word2) {
-        int n1 = word1.length();
-        int n2 = word2.length();
-        if (n1 == 0) return n2;
-        if (n2 == 0) return n1;
-        int[][] temp = new int[n1 + 1][n2 + 1];
-        for (int i = 1; i <= n1; i++) {
-            for (int j = 1; j <= n2; j++) {
-                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
-                    temp[i][j] = temp[i - 1][j - 1] + 1;
+    //
+    public List<List<String>> findDuplicate(String[] paths) {
+        HashMap<String, List<String>> map = new HashMap<>();
+        for (int i = 0; i < paths.length; i++) {
+            String[] path = paths[i].split(" ");
+            for (int j = 1; j < path.length; j++) {
+                String temp = path[j];
+                String fileName = temp.substring(0, temp.indexOf("("));
+                String content = temp.substring(temp.indexOf("(") + 1, temp.indexOf(")"));
+                List<String> list = new ArrayList<>();
+                if (!map.containsKey(content)) {
+                    list.add(path[0] + "/" + fileName);
                 } else {
-                    temp[i][j] = Math.max(temp[i - 1][j], temp[i][j - 1]);
+                    list = map.get(content);
+                    list.add(path[0] + "/" + fileName);
                 }
+                map.put(content, list);
             }
         }
-        int minMatch = temp[n1][n2];
-        int ans = (n1 - minMatch) + (n2 - minMatch);
-        return ans;
+        List<List<String>> list = new ArrayList<>();
+        for (String key : map.keySet()) {
+            if (map.get(key).size() > 1)
+                list.add(map.get(key));
+        }
+        return list;
     }
 }
 
