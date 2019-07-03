@@ -6,17 +6,29 @@
 package com.mohit.leetcode.strings.medium;
 
 /**
- *
  * @author Mohit Garg
  */
 public class PalindromicSubstrings {
 
     public static void main(String[] args) {
         PalindromicSubstrings problems = new PalindromicSubstrings();
-        System.out.println(problems.countSubstrings("aaa"));
+        System.out.println(problems.countSubstrings("abaaa"));
     }
 
-    public int countSubstrings(String s) {
+    public int countSubstrings(String S) {
+        int N = S.length(), ans = 0;
+        for (int center = 0; center <= 2 * N - 1; ++center) {
+            int left = center / 2;
+            int right = left + center % 2;
+            while (left >= 0 && right < N && S.charAt(left) == S.charAt(right)) {
+                ans++;
+                left--;
+                right++;
+            }
+        }
+        return ans;
+    }
+   /* public int countSubstrings(String s) {
         if (s.length() == 0) {
             return 0;
         }
@@ -40,6 +52,7 @@ public class PalindromicSubstrings {
             right--;
         }
         return true;
-    }
+    }*/
+
 
 }
