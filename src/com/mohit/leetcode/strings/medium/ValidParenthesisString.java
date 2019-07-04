@@ -8,7 +8,6 @@ package com.mohit.leetcode.strings.medium;
 import java.util.Stack;
 
 /**
- *
  * @author Mohit Garg
  */
 public class ValidParenthesisString {
@@ -19,41 +18,42 @@ public class ValidParenthesisString {
     }
 
     public boolean checkValidString(String s) {
-        int n = s.length();
-        if (n == 0) {
-            return false;
-        }
-        Stack<Character> stack = new Stack<>();
+        int lo = 0;
+        int hi = 0;
         for (char c : s.toCharArray()) {
-            if (c == '(' || c == '*') {
-                stack.push(c);
-            } else if (c == ')') {
-                if (!stack.isEmpty()) {
-                    if (stack.peek() == '*' || stack.peek() == '(') {
-                        char temp = stack.pop();
-                        if (temp == '(') {
-                            continue;
-                        }
-                        if (!stack.isEmpty() && stack.peek() == '(') {
-                            stack.pop();
-                            stack.push(temp);
-                        } else if (temp == '*') {
-
-                        } else {
-                            return false;
-                        }
-                    }
-                }
-
+            lo += (c == '(') ? 1 : -1;
+            hi += (c != ')') ? 1 : -1;
+            if (hi < 0) {
+                break;
             }
+            lo = Math.max(lo, 0);
         }
 
-        while (!stack.isEmpty()) {
-            if (stack.pop() == '(') {
-                return false;
-            }
-        }
 
-        return true;
+        return lo == 0;
     }
+
+
+    /*public boolean checkValidString(String s) {
+        int leftBalance = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if ((s.charAt(i) == '(') || (s.charAt(i) == '*'))
+                leftBalance++;
+            else
+                leftBalance--;
+
+            if (leftBalance < 0) return false;
+        }
+        if (leftBalance == 0) return true;
+        int rightBalance = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if ((s.charAt(i) == ')') || (s.charAt(i) == '*'))
+                rightBalance++;
+            else
+                rightBalance--;
+
+            if (rightBalance < 0) return false;
+        }
+        return true;
+    }*/
 }

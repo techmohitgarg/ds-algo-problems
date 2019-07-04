@@ -1,4 +1,4 @@
-package com.mohit.leetcode.strings;
+package com.mohit.leetcode.strings.medium;
 
 import java.util.ArrayList;
 import java.util.List;
