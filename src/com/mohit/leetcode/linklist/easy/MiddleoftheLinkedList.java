@@ -1,13 +1,27 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.easy;
+
+import com.mohit.linklist.ListNode;
 
 public class MiddleoftheLinkedList {
 
     public static void main(String[] args) {
-         MiddleoftheLinkedList list = new MiddleoftheLinkedList();
+        MiddleoftheLinkedList list = new MiddleoftheLinkedList();
+        list.middleNode(null);
 
     }
 
     public ListNode middleNode(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode slow = head;
+        ListNode fast = slow;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    /*public ListNode middleNode(ListNode head) {
         if (head == null) {
             return head;
         }
@@ -26,5 +40,6 @@ public class MiddleoftheLinkedList {
             i++;
         }
         return node;
-    }
+    }*/
+
 }

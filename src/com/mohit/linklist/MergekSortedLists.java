@@ -1,5 +1,7 @@
 package com.mohit.linklist;
 
+import com.mohit.leetcode.linklist.easy.MergeTwoSortedLists;
+
 public class MergekSortedLists {
 
     public static void main(String[] args) {

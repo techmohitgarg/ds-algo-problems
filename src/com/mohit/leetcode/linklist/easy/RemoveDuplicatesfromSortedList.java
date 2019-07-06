@@ -1,4 +1,7 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.easy;
+
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 public class RemoveDuplicatesfromSortedList {
 
@@ -35,6 +38,20 @@ public class RemoveDuplicatesfromSortedList {
                 iter.next = iter.next.next;
             }
             iter = iter.next;
+        }
+        return head;
+    }
+    public ListNode deleteDuplicates2(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode iter = head;
+        while (iter.next != null) {
+            if (iter.val == iter.next.val) {
+                iter.next = iter.next.next;
+            } else {
+                iter = iter.next;
+            }
         }
         return head;
     }

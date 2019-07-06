@@ -1,4 +1,7 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.medium;
+
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 public class RemoveNthNodeFromEndofList {
 
@@ -34,6 +37,31 @@ public class RemoveNthNodeFromEndofList {
                     node = node.next;
                 }
                 node.next = node.next.next;
+            }
+        }
+        return head;
+    }
+
+    public ListNode removeNthFromEnd1(ListNode head, int n) {
+        if (head == null) return head;
+
+        ListNode dummy = head;
+        int size = 0;
+        while (dummy != null) {
+            dummy = dummy.next;
+            size++;
+        }
+        dummy = head;
+        int i = 1;
+        if (n <= size) {
+            if (n == size) {
+                head = head.next;
+            } else {
+                while (dummy.next != null && (size - i) > n) {
+                    dummy = dummy.next;
+                    i++;
+                }
+                dummy.next = dummy.next.next;
             }
         }
         return head;

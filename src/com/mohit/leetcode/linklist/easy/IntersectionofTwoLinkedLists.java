@@ -1,4 +1,10 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.easy;
+
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class IntersectionofTwoLinkedLists {
     public static void main(String[] args) {
@@ -20,7 +26,46 @@ public class IntersectionofTwoLinkedLists {
 
     }
 
+
+    /*public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+        ListNode a1 = headA;
+        while (a1 != null) {
+
+            ListNode b1 = headB;
+            while (b1 != null) {
+
+                if (b1 == a1) return b1;
+
+                b1 = b1.next;
+            }
+            a1 = a1.next;
+        }
+
+
+        return null;
+    }*/
+
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        Set<ListNode> set = new HashSet<>();
+        ListNode a1 = headA;
+        while (a1 != null) {
+            set.add(a1);
+            a1 = a1.next;
+        }
+
+        if (set.isEmpty()) return null;
+        ListNode b1 = headB;
+        while (b1 != null) {
+            if (set.contains(b1)) return b1;
+            b1 = b1.next;
+        }
+
+        return null;
+    }
+
+
+    /*public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
             return null;
         }
@@ -64,5 +109,5 @@ public class IntersectionofTwoLinkedLists {
             iterB = iterB.next;
         }
         return iterA;
-    }
+    }*/
 }

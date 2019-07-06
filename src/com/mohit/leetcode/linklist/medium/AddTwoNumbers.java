@@ -1,6 +1,7 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.medium;
 
-import java.util.Stack;
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 public class AddTwoNumbers {
 
@@ -56,5 +57,33 @@ public class AddTwoNumbers {
             p = p.next;
         }
         return dummy.next;
+    }
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        if (l1 == null && l2 == null) return l1;
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+
+        ListNode node = new ListNode(0);
+        ListNode iter = node;
+
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int sum = carry;
+            if (l1 != null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
+            iter.next = new ListNode(sum % 10);
+            iter = iter.next;
+            carry = sum / 10;
+        }
+        if (carry == 1) {
+            iter.next = new ListNode(carry);
+        }
+        return node.next;
     }
 }
