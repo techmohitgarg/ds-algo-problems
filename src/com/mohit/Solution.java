@@ -14,53 +14,43 @@ public class Solution {
         ListNode node = new ListNode(1);
         node.next = new ListNode(2);
         node.next.next = new ListNode(3);
-        node.next.next.next = new ListNode(3);
-        node.next.next.next.next = new ListNode(4);
-        PrintLinkList.print(main.deleteDuplicates(node));
+        node.next.next.next = new ListNode(4);
+        node.next.next.next.next = new ListNode(5);
+        PrintLinkList.print(main.reverseBetween(node, 2, 4));
     }
 
-    public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) return head;
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if (head == null || m == n || m > n) return head;
+        int start = 1;
 
-        ListNode prev = new ListNode(-1);
-        prev.next = head;
-
-        ListNode curr = head;
-        while (curr != null) {
-            while (curr != null && prev.val == curr.next.val) {
-                curr = curr.next;
-            }
-            if (prev.val != curr.val) {
-                prev = prev.next;
-            } else {
-                prev = curr;
-            }
-            curr = prev;
+        ListNode listNode = new ListNode(0);
+        listNode.next = head;
+        ListNode curr = listNode;
+        while (start < m && curr != null) {
+            curr = curr.next;
+            start++;
         }
-        return head;
+
+        ListNode prev = null;
+        ListNode next = null;
+        ListNode node = curr.next;
+        while (node != null && start <= n) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+            start++;
+        }
+
+        ListNode r = prev;
+        while (r.next != null) {
+            r = r.next;
+        }
+        r.next = next;
+        curr.next = prev;
+
+        return listNode.next;
     }
 
-    public ListNode deleteDuplicates1(ListNode head) {
-        HashMap<Integer, Integer> set = new HashMap<>();
-        ListNode iter = head;
 
-        while (iter != null) {
-            set.put(iter.val, set.getOrDefault(iter.val, 0) + 1);
-            iter = iter.next;
-        }
-        ListNode node = new ListNode(0);
-        ListNode listNode = node;
-
-
-        iter = head;
-        while (iter != null) {
-            if (set.get(iter.val) == 1) {
-                listNode.next = new ListNode(iter.val);
-                listNode = listNode.next;
-            }
-            iter = iter.next;
-        }
-
-        return node.next;
-    }
 }
