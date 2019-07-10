@@ -1,4 +1,6 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.easy;
+
+import com.mohit.linklist.ListNode;
 
 public class LinkedListCycle {
 

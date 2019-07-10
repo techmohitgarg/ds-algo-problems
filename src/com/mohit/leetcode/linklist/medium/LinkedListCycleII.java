@@ -1,7 +1,8 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.medium;
+
+import com.mohit.linklist.ListNode;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class LinkedListCycleII {
 
@@ -30,7 +31,7 @@ public class LinkedListCycleII {
 
         ListNode iter = head;
         ListNode found = isFound;
-        while (iter != null) {
+        while (iter != null && found != null) {
             if (iter == found) {
                 return iter;
             }

@@ -1,4 +1,7 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.medium;
+
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 public class PartitionList {
 
@@ -37,4 +40,28 @@ public class PartitionList {
         before.next = node_.next;
         return node.next;
     }
+    /*public ListNode partition(ListNode head, int x) {
+        if (head == null) return head;
+
+        ListNode lessThan = new ListNode(-1);
+        ListNode node = lessThan;
+        ListNode itr = new ListNode(-1);
+        itr.next = head;
+        ListNode greater = itr;
+        while (greater.next != null) {
+            if (greater.next.val < x) {
+                // Add Small number in linked list
+                node.next = new ListNode(greater.next.val);
+                node = node.next;
+
+                // Than remove small number from main list
+                greater.next = greater.next.next;
+            } else {
+                greater = greater.next;
+            }
+        }
+
+        node.next = itr.next;
+        return lessThan.next;
+    }*/
 }
