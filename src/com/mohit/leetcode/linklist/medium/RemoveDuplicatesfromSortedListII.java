@@ -1,6 +1,7 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.medium;
 
-import java.util.List;
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 public class RemoveDuplicatesfromSortedListII {
     public static void main(String[] args) {
@@ -39,4 +40,27 @@ public class RemoveDuplicatesfromSortedListII {
         return node.next;
     }
 
+    /*public ListNode deleteDuplicates(ListNode head) {
+        HashMap<Integer, Integer> set = new HashMap<>();
+        ListNode iter = head;
+
+        while (iter != null) {
+            set.put(iter.val, set.getOrDefault(iter.val, 0) + 1);
+            iter = iter.next;
+        }
+        ListNode node = new ListNode(0);
+        ListNode listNode = node;
+
+
+        iter = head;
+        while (iter != null) {
+            if (set.get(iter.val) == 1) {
+                listNode.next = new ListNode(iter.val);
+                listNode = listNode.next;
+            }
+            iter = iter.next;
+        }
+
+        return node.next;
+    }*/
 }

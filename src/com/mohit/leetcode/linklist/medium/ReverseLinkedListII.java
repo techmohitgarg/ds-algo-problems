@@ -1,7 +1,8 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.medium;
 
 
-import java.util.List;
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 public class ReverseLinkedListII {
 
@@ -61,4 +62,36 @@ public class ReverseLinkedListII {
 
         return reverseNode.next;
     }
+    /*public ListNode reverseBetween(ListNode head, int m, int n) {
+        if (head == null || m == n || m > n) return head;
+        int start = 1;
+
+        ListNode listNode = new ListNode(0);
+        listNode.next = head;
+        ListNode curr = listNode;
+        while (start < m && curr != null) {
+            curr = curr.next;
+            start++;
+        }
+
+        ListNode prev = null;
+        ListNode next = null;
+        ListNode node = curr.next;
+        while (node != null && start <= n) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+            start++;
+        }
+
+        ListNode r = prev;
+        while (r.next != null) {
+            r = r.next;
+        }
+        r.next = next;
+        curr.next = prev;
+
+        return listNode.next;
+    }*/
 }
