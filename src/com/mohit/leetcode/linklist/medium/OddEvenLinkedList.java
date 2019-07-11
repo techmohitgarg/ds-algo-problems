@@ -1,4 +1,7 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.medium;
+
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 public class OddEvenLinkedList {
 
@@ -30,33 +33,28 @@ public class OddEvenLinkedList {
         return head;
     }
 
-    public ListNode oddEvenList1(ListNode head) {
-        if (head == null || head.next == null || head.next.next == null) {
+    /*public ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) {
             return head;
         }
-        ListNode odd = new ListNode(0);
-        ListNode listNode1 = odd;
-        ListNode even = new ListNode(0);
-        ListNode listNode2 = even;
 
-        ListNode iter = head;
-        while (iter != null && iter.next != null) {
-            listNode1.next = new ListNode(iter.val);
-            listNode1 = listNode1.next;
-            iter = iter.next;
+        ListNode even = new ListNode(-1);
+        ListNode itrEven = even;
 
-            listNode2.next = new ListNode(iter.val);
-            listNode2 = listNode2.next;
-            iter = iter.next;
+        ListNode curr = head;
+        while (curr.next != null && curr.next.next != null) {
+            itrEven.next = new ListNode(curr.next.val);
+            itrEven = itrEven.next;
+            curr.next = curr.next.next;
+            curr = curr.next;
+
         }
 
-        if (iter != null) {
-            listNode1.next = new ListNode(iter.val);
-            listNode1 = listNode1.next;
+        if (curr.next != null) {
+            itrEven.next = new ListNode(curr.next.val);
         }
-        listNode1.next = even.next;
-        return odd.next;
-    }
-
-
+        // Add Even Node after odd nodes
+        curr.next = even.next;
+        return head;
+    }*/
 }

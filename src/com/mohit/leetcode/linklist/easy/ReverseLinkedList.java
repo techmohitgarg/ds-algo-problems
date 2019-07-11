@@ -1,4 +1,7 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.easy;
+
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 public class ReverseLinkedList {
     public static void main(String[] args) {

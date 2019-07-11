@@ -1,5 +1,8 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist.medium;
 
+
+import com.mohit.linklist.ListNode;
+import com.mohit.linklist.PrintLinkList;
 
 import java.util.*;
 
