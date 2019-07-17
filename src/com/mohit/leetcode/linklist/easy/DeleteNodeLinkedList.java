@@ -1,6 +1,6 @@
 package com.mohit.leetcode.linklist.easy;
 
-import com.mohit.linklist.ListNode;
+import com.mohit.leetcode.linklist.ListNode;
 
 public class DeleteNodeLinkedList {
 

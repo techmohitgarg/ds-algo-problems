@@ -1,6 +1,6 @@
 package com.mohit.leetcode.linklist.medium;
 
-import com.mohit.linklist.ListNode;
+import com.mohit.leetcode.linklist.ListNode;
 
 import java.util.HashMap;
 

@@ -1,7 +1,7 @@
 package com.mohit.leetcode.linklist.easy;
 
-import com.mohit.linklist.ListNode;
-import com.mohit.linklist.PrintLinkList;
+import com.mohit.leetcode.linklist.ListNode;
+import com.mohit.leetcode.linklist.PrintLinkList;
 
 import java.util.HashSet;
 import java.util.Set;

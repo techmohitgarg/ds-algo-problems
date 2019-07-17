@@ -1,4 +1,4 @@
-package com.mohit.linklist;
+package com.mohit.leetcode.linklist;
 
 public class PrintLinkList {
 

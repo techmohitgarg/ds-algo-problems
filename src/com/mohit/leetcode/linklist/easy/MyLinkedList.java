@@ -1,12 +1,6 @@
 package com.mohit.leetcode.linklist.easy;
 
-import com.mohit.linklist.ListNode;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.mohit.leetcode.linklist.ListNode;
 
 public class MyLinkedList {
 
