@@ -1,8 +1,8 @@
-package com.mohit;
+package com.mohit.code_chef_problems;
 
 import java.util.Scanner;
 
-public class Solution {
+public class DECINC_DecrementORIncrement {
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
