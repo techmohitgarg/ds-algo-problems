@@ -3,6 +3,11 @@ package com.mohit.leetcode.linklist.medium;
 import com.mohit.leetcode.linklist.ListNode;
 import com.mohit.leetcode.linklist.PrintLinkList;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
+
 public class NextGreaterNodeInLinkedList {
 
     public static void main(String[] args) {
@@ -15,8 +20,30 @@ public class NextGreaterNodeInLinkedList {
         main.nextLargerNodes(one);
     }
 
-
     public int[] nextLargerNodes(ListNode head) {
+        if (head == null) return new int[0];
+        ListNode itr = head;
+        int len = 0;
+        while (itr != null) {
+            itr = itr.next;
+            len++;
+        }
+        itr = head;
+        int[] num = new int[len];
+        Stack<int[]> s = new Stack<>();
+        int i = 0;
+        while (itr != null) {
+            while (!s.isEmpty() && itr.val > s.peek()[1]) {
+                num[s.peek()[0]] = itr.val;
+                s.pop();
+            }
+            s.push(new int[]{i++, itr.val});
+            itr = itr.next;
+        }
+        return num;
+    }
+
+    /*public int[] nextLargerNodes(ListNode head) {
         if (head == null) return new int[0];
         ListNode itr = head;
         int len = 0;
@@ -41,7 +68,7 @@ public class NextGreaterNodeInLinkedList {
             itr = next;
         }
         return num;
-    }
+    }*/
 
     /*public int[] nextLargerNodes(ListNode head) {
         if (head == null) return new int[0];
