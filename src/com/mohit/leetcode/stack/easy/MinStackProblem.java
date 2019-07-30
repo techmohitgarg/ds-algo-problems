@@ -1,9 +1,8 @@
-package com.mohit;
+package com.mohit.leetcode.stack.easy;
 
-import java.util.Scanner;
 import java.util.Stack;
 
-public class Solution {
+public class MinStackProblem {
 
     public static void main(String[] args) {
 
