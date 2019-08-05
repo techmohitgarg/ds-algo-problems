@@ -1,8 +1,5 @@
 package com.mohit.code_chef_problems;
 
-import com.mohit.greeksofgreeks.mathematical_and_algorithmic_puzzle.GCDoftwonumbers;
-import sun.misc.GC;
-
 import java.util.Scanner;
 
 public class FLOW016_GCDandLCM {

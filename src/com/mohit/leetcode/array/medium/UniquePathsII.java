@@ -52,7 +52,7 @@ public class UniquePathsII {
         return paths[obstacleGrid[0].length - 1];
     }
 
-    // Solution Without memory o(1) Space
+    // MinStackProblem Without memory o(1) Space
     public int uniquePathsWithObstacles1(int[][] obstacleGrid) {
         int m = obstacleGrid.length, n = obstacleGrid[0].length;
         if (obstacleGrid[0][0] == 1 || obstacleGrid[m - 1][n - 1] == 1) return 0;
