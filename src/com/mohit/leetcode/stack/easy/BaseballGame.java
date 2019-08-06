@@ -1,12 +1,11 @@
-package com.mohit;
+package com.mohit.leetcode.stack.easy;
 
-import java.util.HashMap;
 import java.util.Stack;
 
-public class Solution {
+public class BaseballGame {
 
     public static void main(String[] args) {
-
+        new BaseballGame().calPoints(new String[]{"5", "2", "C", "D", "+"});
     }
 
     public int calPoints(String[] ops) {

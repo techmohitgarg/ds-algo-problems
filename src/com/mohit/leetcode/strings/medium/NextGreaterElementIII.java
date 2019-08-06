@@ -14,7 +14,7 @@ public class NextGreaterElementIII {
     public static void main(String[] args) {
         NextGreaterElementIII bcii = new NextGreaterElementIII();
         System.out.println(bcii.nextGreaterElement(999999));
-    }
+}
 
     public int nextGreaterElement(int n) {
         if (n <= 11) {
