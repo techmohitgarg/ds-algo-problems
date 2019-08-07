@@ -1,12 +1,11 @@
-package com.mohit;
+package com.mohit.leetcode.stack.easy;
 
-import java.util.HashMap;
 import java.util.Stack;
 
-public class Solution {
+public class RemoveAllAdjacentDuplicatesInString {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().removeDuplicates("abbaca"));
+        System.out.println(new RemoveAllAdjacentDuplicatesInString().removeDuplicates("abbaca"));
     }
 
     public String removeDuplicates(String S) {
