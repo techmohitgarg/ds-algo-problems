@@ -1,13 +1,11 @@
-package com.mohit;
+package com.mohit.leetcode.stack.medium;
 
-import com.mohit.tree.book_practice.binary_tree.TreeNode;
+import java.util.Stack;
 
-import java.util.*;
-
-public class Solution {
+public class DecodeString {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().decodeString("2[abc]3[cd]ef"));
+        System.out.println(new DecodeString().decodeString("2[abc]3[cd]ef"));
     }
 
     public String decodeString(String s) {
