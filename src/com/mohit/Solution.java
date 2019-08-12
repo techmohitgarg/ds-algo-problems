@@ -1,47 +1,45 @@
 package com.mohit;
 
-import com.mohit.tree.book_practice.binary_tree.TreeNode;
-
-import java.util.*;
+import java.util.Stack;
 
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().decodeString("2[abc]3[cd]ef"));
+        new Solution().nextGreaterElements(new int[]{1, 2, 1});
     }
 
-    public String decodeString(String s) {
-        Stack<String> strings = new Stack<>();
-        Stack<Integer> num = new Stack<>();
-        String data = "";
-        int val = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == '[') {
-                // Check if num is not equal to 0;
-                if (val != 0) {
-                    num.push(val);
-                    val = 0;
+    public int[] nextGreaterElements(int[] nums) {
+        int[] next = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            int j = i + 1;
+            boolean isFind = false;
+            while (j % nums.length != i) {
+                if (nums[j % nums.length] > nums[i]) {
+                    next[i] = nums[j % nums.length];
+                    isFind = true;
+                    break;
                 }
-                strings.push(data);
-                data = "";
-
-            } else if (c == ']') {
-                if (!num.isEmpty()) {
-                    int count = num.pop();
-                    StringBuilder sb = new StringBuilder();
-                    for (int j = 0; j < count; j++) {
-                        sb.append(data);
-                    }
-                    data = strings.isEmpty() ? sb.toString() : strings.pop() + sb.toString();
-                }
-
-            } else if (c >= '0' && c <= '9') {
-                val = val * 10 + (c - '0');
-            } else {
-                data += c;
+                j++;
+            }
+            if (!isFind) {
+                next[i] = -1;
             }
         }
-        return data;
+        return next;
     }
+
+
+    public int[] nextGreaterElements2(int[] nums) {
+        int[] next = new int[nums.length];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = nums.length * 2 - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && nums[stack.peek()] <= nums[i % nums.length]) {
+                stack.pop();
+            }
+            next[i % nums.length] = stack.isEmpty() ? -1 : nums[stack.peek()];
+            stack.push(i % nums.length);
+        }
+        return next;
+    }
+
 }

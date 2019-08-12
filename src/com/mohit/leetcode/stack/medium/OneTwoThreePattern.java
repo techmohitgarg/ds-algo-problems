@@ -1,22 +1,20 @@
-package com.mohit.stacks.leetcode;
+package com.mohit.leetcode.stack.medium;
 
 import java.util.Stack;
 
-public class Pattern132 {
+public class OneTwoThreePattern {
 
     public static void main(String[] args) {
-        Pattern132 pattern132 = new Pattern132();
-        System.out.println(pattern132.find132patternUsingStack(new int[]{3, 1, 4, 2}));
+        System.out.println(new OneTwoThreePattern().find132pattern(new int[]{-1, 2, 0}));
     }
 
-    //i < j < k and ai < ak < aj
+    /*//i < j < k and ai < ak < aj
     public boolean find132pattern(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 if (nums[i] < nums[j]) {
                     for (int k = j + 1; k < nums.length; k++) {
                         if (nums[i] < nums[k] && nums[k] < nums[j]) {
-                            System.out.println(i + " " + j + " " + k);
                             return true;
                         }
                     }
@@ -27,26 +25,29 @@ public class Pattern132 {
             }
         }
         return false;
-    }
+    }*/
 
-    public boolean find132patternUsingStack(int[] nums) {
+    public boolean find132pattern(int[] nums) {
+        if (nums.length <= 2) return false;
         Stack<Integer> stack = new Stack<>();
         int min = Integer.MAX_VALUE;
-        for (int num : nums) {
-            if (num <= min) {
-                min = num;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]<=min) {
+                min = nums[i];
             } else {
-                while (!stack.empty()) {
-                    if (stack.peek() >= num) {
+                while (!stack.isEmpty()) {
+                    if (stack.peek() >= nums[i]) {
                         break;
                     }
                     stack.pop();
-                    if (stack.pop() > num) {
+                    if (!stack.isEmpty() && stack.pop() > nums[i]) {
                         return true;
                     }
                 }
-                stack.push(num);
+
+                stack.push(nums[i]);
                 stack.push(min);
+
             }
         }
         return false;

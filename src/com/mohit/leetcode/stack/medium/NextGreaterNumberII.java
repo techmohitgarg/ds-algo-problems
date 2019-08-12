@@ -1,4 +1,4 @@
-package com.mohit.stacks.leetcode;
+package com.mohit.leetcode.stack.medium;
 
 import java.util.Stack;
 
@@ -49,29 +49,5 @@ public class NextGreaterNumberII {
         return res;
     }
 
-    // 1,2,1
-    public int[] nextGreaterElementsUsingStack(int[] nums) {
-        int[] values = new int[nums.length];
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < nums.length; i++) {
-            int j;
-            if (i == nums.length - 1) {
-                j = 0;
-            } else {
-                j = i + 1;
-            }
-            while (stack.empty() == false) {
-                if (nums[stack.peek()] < nums[j]) {
-                    values[stack.pop()] = nums[j];
-                }
-                if (stack.empty()) {
-                    break;
-                }
-            }
-            stack.push(i);
-
-        }
-        return values;
-    }
 
 }
