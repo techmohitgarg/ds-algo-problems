@@ -1,45 +1,49 @@
 package com.mohit;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class Solution {
-
     public static void main(String[] args) {
-        new Solution().nextGreaterElements(new int[]{1, 2, 1});
-    }
-
-    public int[] nextGreaterElements(int[] nums) {
-        int[] next = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            int j = i + 1;
-            boolean isFind = false;
-            while (j % nums.length != i) {
-                if (nums[j % nums.length] > nums[i]) {
-                    next[i] = nums[j % nums.length];
-                    isFind = true;
-                    break;
-                }
-                j++;
-            }
-            if (!isFind) {
-                next[i] = -1;
-            }
+        String[] str = new String[]{"0:start:0", "0:end:100000000"};
+        List<String> logs = new ArrayList<>();
+        for (String log : str) {
+            logs.add(log);
         }
-        return next;
+        new Solution().exclusiveTime(1, logs);
     }
 
-
-    public int[] nextGreaterElements2(int[] nums) {
-        int[] next = new int[nums.length];
+    public int[] exclusiveTime(int n, List<String> logs) {
+        if (logs.size() == 0) return new int[]{};
+        int[] data = new int[n];
         Stack<Integer> stack = new Stack<>();
-        for (int i = nums.length * 2 - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && nums[stack.peek()] <= nums[i % nums.length]) {
+
+        String[] s = logs.get(0).split(":");
+        stack.push(Integer.parseInt(s[0]));
+        int time = Integer.parseInt(s[2]);
+        int i = 1;
+        while (i < logs.size()) {
+            s = logs.get(i).split(":");
+            int t = Integer.parseInt(s[2]);
+            if (time < t) {
+                int diff = t - time;
+                data[stack.peek()] += diff;
+                time += diff;
+
+            }
+            if (s[1].equals("start")) {
+                stack.push(Integer.parseInt(s[0]));
+            } else {
+                data[stack.peek()]++;
+                time++;
                 stack.pop();
             }
-            next[i % nums.length] = stack.isEmpty() ? -1 : nums[stack.peek()];
-            stack.push(i % nums.length);
+            i++;
+
         }
-        return next;
+        return data;
     }
+
 
 }
