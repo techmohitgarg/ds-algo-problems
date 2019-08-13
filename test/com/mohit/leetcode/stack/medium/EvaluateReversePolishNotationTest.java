@@ -1,4 +1,4 @@
-package com.mohit.leetcode.stack.medium.medium;
+package com.mohit.leetcode.stack.medium;
 
 import com.mohit.leetcode.stack.medium.EvaluateReversePolishNotation;
 import org.junit.Assert;
