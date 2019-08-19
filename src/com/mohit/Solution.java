@@ -3,7 +3,6 @@ package com.mohit;
 public class Solution {
     public static void main(String[] args) {
         System.out.println(new Solution().sumSubarrayMins(new int[]{3, 1, 2, 4, 5}));
-        //System.out.println(new Solution().subArray(new int[]{3, 1, 2, 4}, 0));
     }
 
     public int sumSubarrayMins(int[] A) {
@@ -21,43 +20,13 @@ public class Solution {
 
     public int subArray(int[] num, int window) {
         int i = 0;
-        Integer min = null;
-        Integer temp = null;
-        int index = 0;
         int sum = 0;
-        while (i < num.length) {
-            if (window > 0) {
-                // Find min number
-                if (temp == null || num[temp] < num[i]) {
-                    min = temp;
-                    temp = i;
-                } else if (min == null || num[min] < num[i]) {
-                    // Update next greater num than min
-                    min = i;
-                }
-
-                window--;
-            } else {
-                if (temp == null || num[temp] < num[i]) {
-                    min = temp;
-                    temp = i;
-                } else if (min == null || num[min] < num[i]) {
-                    // Update next greater num than min
-                    min = i;
-                }
+        while (i <= num.length - window) {
+            int min = num[i];
+            for (int k = i; k < i + window; k++) {
+                min = Math.min(min, num[k]);
             }
-            // if Window is complete
-            if (window == 0) {
-                // Add min num in Sum
-                sum += num[min];
-                // if start index is same as min index update min index with next greater index which will be min number for next window
-                if (min == index) {
-                    min = temp;
-                }
-                temp = min;
-                // Increase stating index of window
-                index++;
-            }
+            sum += min;
             i++;
         }
         return sum;
