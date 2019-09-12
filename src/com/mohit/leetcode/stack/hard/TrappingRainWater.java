@@ -1,6 +1,4 @@
-package com.mohit.stacks.leetcode;
-
-import java.util.List;
+package com.mohit.leetcode.stack.hard;
 
 public class TrappingRainWater {
     public static void main(String[] args) {
@@ -9,7 +7,7 @@ public class TrappingRainWater {
 
     }
 
-    /*public int trap(int[] height) {
+    public int trap(int[] height) {
         int ans = 0;
         int maxLeft = 0;
         int maxRight = 0;
@@ -28,23 +26,23 @@ public class TrappingRainWater {
             }
         }
         return ans;
-    }*/
+    }
 
-    public int trap(int[] height) {
-        int ans = 0;
+
+    public int trap1(int[] height) {
+        int trapWater = 0;
+        int n = height.length;
         int[] left = new int[height.length];
         int[] right = new int[height.length];
-
-        for (int i = 0; i < left.length; i++) {
+        for (int i = 0; i < n; i++) {
             left[i] = (i == 0 ? height[i] : Math.max(left[i - 1], height[i]));
-        }
-        for (int i = right.length - 1; i >= 0; i--) {
-            right[i] = (i == right.length - 1 ? height[i] : Math.max(right[i + 1], height[i]));
+            right[n - i - 1] = (i == 0 ? height[n - i - 1] : Math.max(right[n - i], height[n - i - 1]));
         }
 
-        for (int i = 1; i < left.length - 1; i++) {
-            ans += Math.min(left[i], right[i]) - height[i];
+        for (int i = 0; i < n; i++) {
+            trapWater += Math.abs(Math.min(left[i], right[i]) - height[i]);
         }
-        return ans;
+
+        return trapWater;
     }
 }

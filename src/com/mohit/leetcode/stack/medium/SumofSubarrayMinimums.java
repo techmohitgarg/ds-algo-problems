@@ -9,44 +9,34 @@ public class SumofSubarrayMinimums {
 
 
     public int sumSubarrayMins(int[] A) {
-        if (A.length == 0) return 0;
-        int mod = 1000000007;
-        int sum = 0;
-        for (int i : A) {
-            sum += i;
-        }
-        int[] min_upto = new int[A.length];
-        Stack<Integer> s = new Stack<>();
+        int[] left = new int[A.length];
+        int[] right = new int[A.length];
+
+        Stack<int[]> stack = new Stack<>();
         for (int i = 0; i < A.length; i++) {
-            while (!s.empty() && A[s.peek()] > A[i]) {
-                min_upto[s.peek()] = i - 1;
-                s.pop();
+            int count = 1;
+            while (!stack.isEmpty() && stack.peek()[0] > A[i]) {
+                count += stack.pop()[1];
             }
-            s.push(i);
+            stack.push(new int[]{A[i], count});
+            left[i] = count;
         }
-        while (!s.empty()) {
-            min_upto[s.peek()] = A.length - 1;
-            s.pop();
-        }
-        for (int i = 2; i <= A.length; i++) {
-            int data = subArray(A, min_upto, i);
-            sum = (sum + data) % mod;
-        }
-        return sum % mod;
-    }
-
-    public int subArray(int[] num, int[] min_upto, int window) {
-        int mod = 1000000007;
-        int sum = 0;
-        int j = 0;
-        for (int i = 0; i <= num.length - window; i++) {
-            while (j < i || min_upto[j] < i + window - 1) {
-                j++;
+        stack.clear();
+        for (int i = A.length - 1; i >= 0; i--) {
+            int count = 1;
+            while (!stack.isEmpty() && stack.peek()[0] >= A[i]) {
+                count += stack.pop()[1];
             }
-            sum = (sum + num[j]) % mod;
+            stack.push(new int[]{A[i], count});
+            right[i] = count;
         }
 
-
-        return sum;
+        int ans = 0;
+        int MOD = 1000000007;
+        for (int i = 0; i < A.length; ++i) {
+            ans += (left[i]) * (right[i]) % MOD * A[i] % MOD;
+            ans %= MOD;
+        }
+        return ans;
     }
 }
