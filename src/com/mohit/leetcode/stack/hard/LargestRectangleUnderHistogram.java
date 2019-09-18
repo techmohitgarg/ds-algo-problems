@@ -12,7 +12,7 @@ Input: [2,1,5,6,2,3]
 Output: 10
  */
 
-package com.mohit.stacks;
+package com.mohit.leetcode.stack.hard;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -21,8 +21,6 @@ public class LargestRectangleUnderHistogram {
     public static void main(String[] args) {
         LargestRectangleUnderHistogram histogram = new LargestRectangleUnderHistogram();
         System.out.println(histogram.largestRectangle(new int[]{1, 1}));
-
-
     }
 
     public int largestRectangle(int[] arr) {
@@ -73,5 +71,41 @@ public class LargestRectangleUnderHistogram {
             max_area = Math.max(max_area, A.get(tp) * (s.empty() ? i : i - s.peek() - 1));
         }
         return max_area;
+    }
+
+    public int largestRectangleArea1(int[] heights) {
+        if (heights == null || heights.length == 0)
+            return 0;
+        int len = heights.length;
+        Stack<Integer> stack = new Stack<>();
+        int[] left = new int[len];
+        int[] right = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            right[i] = len;
+            left[i] = -1;
+        }
+        for (int i = 0; i < len; i++) {
+            while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
+                stack.pop();
+            }
+            left[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(i);
+        }
+
+        stack = new Stack<>();
+        for (int i = 0; i < len; i++) {
+            while (!stack.isEmpty() && heights[stack.peek()] > heights[i]) {
+                right[stack.peek()] = i;
+                stack.pop();
+            }
+            stack.push(i);
+        }
+
+        int max = 0;
+        for (int i = 0; i < len; i++) {
+            max = Math.max(max, (right[i] - left[i] - 1) * heights[i]);
+        }
+        return max;
     }
 }

@@ -1,10 +1,10 @@
-package com.mohit;
+package com.mohit.leetcode.stack.hard;
 
 import java.util.Stack;
 
-public class Solution {
+public class BasicCalculator {
     public static void main(String[] args) {
-        System.out.println(new Solution().calculate("(1+(4+5+2)-3)+(6+8)"));
+        System.out.println(new BasicCalculator().calculate("(1+(4+5+2)-3)+(6+8)"));
     }
 
     public int calculate(String s) {
