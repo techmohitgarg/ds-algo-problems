@@ -1,14 +1,16 @@
-package com.mohit.stacks;
+package com.mohit.greeksofgreeks.stacks;
 
 import java.util.Stack;
 
-public class PrefixToPostfix {
+public class PerfixToInfix {
+
     public static void main(String[] args) {
-        PrefixToPostfix prefix = new PrefixToPostfix();
-        System.out.println(prefix.convertPrefixToPostfix("*+AB-CD"));
+        PerfixToInfix perfixToInfix = new PerfixToInfix();
+        System.out.println(perfixToInfix.convertPerfixToInfix("*+AB-CD"));
+
     }
 
-    public String convertPrefixToPostfix(String s) {
+    public String convertPerfixToInfix(String s) {
         if (s.length() == 0) {
             return s;
         }
@@ -20,7 +22,7 @@ public class PrefixToPostfix {
             } else {
                 String s1 = stack.pop();
                 String s2 = stack.pop();
-                stack.push(s1 + s2 + s.charAt(i));
+                stack.push("(" + s1 + s.charAt(i) + s2 + ")");
             }
             i--;
         }
@@ -30,4 +32,5 @@ public class PrefixToPostfix {
         }
         return sb.toString();
     }
+
 }

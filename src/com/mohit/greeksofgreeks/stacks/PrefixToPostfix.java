@@ -1,28 +1,28 @@
-package com.mohit.stacks;
+package com.mohit.greeksofgreeks.stacks;
 
 import java.util.Stack;
 
-public class PostfixToPrefix {
+public class PrefixToPostfix {
     public static void main(String[] args) {
-        PostfixToPrefix prefix = new PostfixToPrefix();
-        System.out.println(prefix.convertPostfixToPrefix("ABC/-AK/L-*"));
+        PrefixToPostfix prefix = new PrefixToPostfix();
+        System.out.println(prefix.convertPrefixToPostfix("*+AB-CD"));
     }
 
-    public String convertPostfixToPrefix(String s) {
+    public String convertPrefixToPostfix(String s) {
         if (s.length() == 0) {
             return s;
         }
         Stack<String> stack = new Stack<>();
-        int i = 0;
-        while (i < s.length()) {
+        int i = s.length() - 1;
+        while (i >= 0) {
             if (Character.isLetterOrDigit(s.charAt(i))) {
                 stack.push(String.valueOf(s.charAt(i)));
             } else {
                 String s1 = stack.pop();
                 String s2 = stack.pop();
-                stack.push(s.charAt(i) + s2 + s1);
+                stack.push(s1 + s2 + s.charAt(i));
             }
-            i++;
+            i--;
         }
         StringBuilder sb = new StringBuilder();
         for (String s1 : stack) {

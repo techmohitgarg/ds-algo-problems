@@ -1,4 +1,4 @@
-package com.mohit.stacks;
+package com.mohit.greeksofgreeks.stacks;
 
 import java.util.HashMap;
 import java.util.Stack;

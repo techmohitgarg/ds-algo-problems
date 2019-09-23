@@ -1,12 +1,11 @@
-package com.mohit;
+package com.mohit.greeksofgreeks.stacks;
 
-import java.util.HashMap;
 import java.util.Stack;
 
-public class Solution {
+public class NumberofNGEsright {
 
     public static void main(String[] args) {
-        new Solution().numberNGERight(new int[]{3, 4, 2, 7, 5, 8, 10, 6});
+        new NumberofNGEsright().numberNGERight(new int[]{3, 4, 2, 7, 5, 8, 10, 6});
     }
 
     //Number of NGEs to the right

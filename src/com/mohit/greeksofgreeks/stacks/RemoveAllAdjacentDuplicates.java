@@ -1,6 +1,4 @@
-package com.mohit.stacks;
-
-import java.util.Stack;
+package com.mohit.greeksofgreeks.stacks;
 
 class RemoveAllAdjacentDuplicates {
 

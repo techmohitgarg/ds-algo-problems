@@ -17,7 +17,7 @@ minStack.top();      --> Returns 0.
 minStack.getMin();   --> Returns -2.
  */
 
-package com.mohit.stacks;
+package com.mohit.greeksofgreeks.stacks;
 
 import java.util.Stack;
 

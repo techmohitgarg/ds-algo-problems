@@ -1,35 +1,35 @@
-package com.mohit.stacks;
+package com.mohit.greeksofgreeks.stacks;
 
 import java.util.Stack;
 
-public class InfixToPostfix {
+public class InfixToPrefix {
 
     public static void main(String[] args) {
-        InfixToPostfix postfix = new InfixToPostfix();
-        System.out.println(postfix.infixToPostFix("(A+B)*(C-D)"));
+        System.out.println(new InfixToPrefix().infixToPrefix("A+B*C+D"));
+        System.out.println(new InfixToPostfix().infixToPostFix("A+B*C+D"));
     }
 
-    public String infixToPostFix(String s) {
+    public String infixToPrefix(String s) {
         if (s.length() == 0) {
             return s;
         }
         Stack<Character> stack = new Stack<>();
         StringBuilder sb = new StringBuilder();
         char[] ch = s.toCharArray();
-        int i = 0;
-        while (i < ch.length) {
+        int i = ch.length - 1;
+        while (i >= 0) {
             if (ch[i] == ' ') {
                 continue;
             }
             if (Character.isLetterOrDigit(ch[i])) {
                 sb.append(ch[i]);
-            } else if (ch[i] == '(') {
-                stack.push(ch[i]);
             } else if (ch[i] == ')') {
-                while (!stack.empty() && stack.peek() != '(') {
+                stack.push(ch[i]);
+            } else if (ch[i] == '(') {
+                while (!stack.empty() && stack.peek() != ')') {
                     sb.append(stack.pop());
                 }
-                if (!stack.empty() && stack.peek() == '(') {
+                if (!stack.empty() && stack.peek() == ')') {
                     stack.pop();
                 } else {
                     new Throwable("Invalid expression");
@@ -41,12 +41,13 @@ public class InfixToPostfix {
                 }
                 stack.push(ch[i]);
             }
-            i++;
+            i--;
         }
         while (!stack.empty()) {
             sb.append(stack.pop());
         }
-        return sb.toString();
+        return sb.reverse().toString();
+
     }
 
     public int getSign(char ch) {

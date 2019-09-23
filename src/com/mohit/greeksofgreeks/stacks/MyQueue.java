@@ -21,7 +21,7 @@ You must use only standard operations of a stack -- which means only push to top
 Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended queue), as long as you use only standard operations of a stack.
 You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
  */
-package com.mohit.stacks;
+package com.mohit.greeksofgreeks.stacks;
 
 import java.util.Stack;
 
