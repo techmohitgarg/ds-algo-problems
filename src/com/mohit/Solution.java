@@ -6,34 +6,76 @@ import java.util.Stack;
 public class Solution {
 
     public static void main(String[] args) {
-        new Solution().numberNGERight(new int[]{3, 4, 2, 7, 5, 8, 10, 6});
+        System.out.println(evaluate("10 + 2 * 6"));
     }
 
-    //Number of NGEs to the right
-    public void numberNGERight(int[] arr) {
+        /*
+        "10 + 2 * 6"--->22
+        "100 * 2 + 12"--->212
+        "100 * ( 2 + 12 )"--->1400
+        "100 * ( 2 + 12 ) / 14"--->100
+        */
+
+    public static int evaluate(String expression) {
+        int result = 0;
+
+        Stack<Character> operator = new Stack<>();
         Stack<Integer> stack = new Stack<>();
-        int i = 1;
-        // Find ALl the next greater elements
-        int[] NGE = new int[arr.length];
-        stack.push(0);
-        while (i < arr.length) {
-            while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
-                NGE[stack.pop()] = i;
+        int num = 0;
+        char[] ch = expression.toCharArray();
+        for (char c : ch) {
+            if (c == ' ') continue;
+            else if (Character.isDigit(c)) {
+                num = 10 * num + (c - '0');
+            } else if (c == '(') {
+                operator.push(c);
+                stack.push(num);
+                num = 0;
+            } else if (c == ')') {
+                stack.push(performOperation(stack, operator));
+            } else {
+                stack.push(num);
+                while (!operator.isEmpty() && getOperaterValue(operator.peek()) >= getOperaterValue(c)) {
+                    stack.push(performOperation(stack, operator));
+                }
+                operator.push(c);
+                num = 0;
             }
-            stack.push(i);
-            i++;
         }
-        // Add all -1 value for remaining value
-        while (!stack.isEmpty()) {
-            NGE[stack.pop()] = -1;
-        }
+        result = performOperation(stack, operator);
+        return result;
+    }
 
-        // Find ALl next greater number count
-        int[] dp = new int[arr.length];
-        for (int j = arr.length - 2; j >= 0; j--) {
-            dp[j] = NGE[j] == -1 ? 0 : 1 + dp[NGE[j]];
+    private static int getOperaterValue(char c) {
+        switch (c) {
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
         }
+        return -1;
+    }
 
+    private static int performOperation(Stack<Integer> stack, Stack<Character> operator) {
+        if (stack.size() < 2 && operator.size() < 1) {
+            return 0;
+        }
+        int b = stack.pop();
+        int a = stack.pop();
+        switch (operator.pop()) {
+            case '+':
+                return a + b;
+            case '-':
+                return a - b;
+            case '*':
+                return a * b;
+            case '/':
+                return a / b;
+        }
+        return 0;
     }
 
 }
+
