@@ -1,20 +1,11 @@
-package com.mohit;
+package com.mohit.greeksofgreeks.stacks;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Stack;
 
-public class Solution {
+public class ExpressionEvaluation {
 
     public static void main(String[] args) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-
-        map.put(1, 1);
-        map.put(3, 15);
-        map.put(2, 13);
-        map.put(4, 12);
-        map.put(5, 12);
-        System.out.println(map);
+        System.out.println(evaluate("100 * ( 2 + 12 ) / 14"));
     }
 
         /*
