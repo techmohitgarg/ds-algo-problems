@@ -26,8 +26,8 @@ public class OnlineStockSpan {
 
         public int next(int price) {
             int days = 1;
-                while (!prices.isEmpty() && prices.peek() <= price) {
-                    prices.pop();
+            while (!prices.isEmpty() && prices.peek() <= price) {
+                prices.pop();
                     days += weight.pop();
             }
             // Add Current Price Value

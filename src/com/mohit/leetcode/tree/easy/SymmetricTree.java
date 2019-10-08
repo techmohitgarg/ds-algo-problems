@@ -21,22 +21,22 @@ public class SymmetricTree {
     }
 
     public boolean isSymmetric1(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
+        if (root == null) return true;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         queue.add(root);
         while (!queue.isEmpty()) {
-            TreeNode t1 = queue.poll();
-            TreeNode t2 = queue.poll();
-            if (t1 == null && t2 == null) continue;
-            if (t1 == null || t2 == null) return false;
-            if (t1.val != t2.val) return false;
-            queue.add(t1.left);
-            queue.add(t2.right);
-            queue.add(t1.right);
-            queue.add(t2.left);
+            TreeNode left = queue.poll();
+            TreeNode right = queue.poll();
+            if (left == null && right == null) continue;
+            if (left == null || right == null) return false;
+            if (left.val != right.val) return false;
+
+            // Add the Child node in the Queue
+            queue.add(left.left);
+            queue.add(right.right);
+            queue.add(left.right);
+            queue.add(right.left);
         }
         return true;
     }
