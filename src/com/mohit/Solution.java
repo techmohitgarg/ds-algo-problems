@@ -11,15 +11,15 @@ public class Solution {
 
         TreeNode a = new TreeNode(1);
         a.left = new TreeNode(2);
-        a.right = new TreeNode(2);
+        a.right = new TreeNode(3);
 
-        a.left.left = new TreeNode(3);
-        a.left.right = new TreeNode(4);
+        a.left.left = new TreeNode(4);
+        a.left.right = new TreeNode(5);
 
-        a.right.left = new TreeNode(4);
-        a.right.right = new TreeNode(3);
+        a.right.left = new TreeNode(6);
+        a.right.right = new TreeNode(7);
 
-        System.out.println(new Solution().sortedArrayToBST(new int[]{-10, -3, 0, 5, 9}));
+        System.out.println(new Solution().levelOrderTraversal(a));
     }
 
     //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
@@ -44,6 +44,105 @@ public class Solution {
             root.right = temp;
         }
         return root;
+    }
+
+    public List<List<Integer>> levelOrderTraversal(TreeNode root) {
+        List<List<Integer>> arrayList = new ArrayList<>();
+        if (root == null) return arrayList;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(null);
+        List<Integer> list = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            TreeNode curr = queue.poll();
+            if (curr != null) {
+                list.add(curr.val);
+                if (curr.left != null) queue.add(curr.left);
+                if (curr.right != null) queue.add(curr.right);
+            } else {
+                List<Integer> integers = new ArrayList<>(list);
+                arrayList.add(integers);
+                list.clear();
+
+                if (!queue.isEmpty()) queue.add(null);
+            }
+        }
+        return arrayList;
+    }
+
+
+    //https://leetcode.com/problems/binary-tree-postorder-traversal/
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            // Peek the current node from stack
+            TreeNode curr = stack.peek();
+            if (prev == null || prev.left == curr || prev.right == curr) {
+
+                if (curr.left != null) {
+                    stack.push(curr.left);
+                } else if (curr.right != null) {
+                    stack.push(curr.right);
+                }
+
+            } else if (curr.left == prev) {
+                if (curr.right != null) {
+                    stack.push(curr.right);
+                }
+            } else {
+                list.add(stack.pop().val);
+            }
+
+            prev = curr;
+        }
+
+
+        return list;
+    }
+
+    //https://leetcode.com/problems/binary-tree-inorder-traversal/
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+        while (true) {
+            if (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            } else {
+                if (stack.isEmpty()) {
+                    break;
+                }
+                TreeNode rootNode = stack.pop();
+                list.add(rootNode.val);
+
+                curr = rootNode.right;
+            }
+        }
+        return list;
+    }
+
+    //https://leetcode.com/problems/binary-tree-preorder-traversal/submissions/
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            // Add the Root Value in the List
+            list.add(node.val);
+
+            //Add the Right Node And Left Node in the Stack
+            if (node.right != null) stack.push(node.right);
+            if (node.left != null) stack.push(node.left);
+        }
+        return list;
     }
 
 

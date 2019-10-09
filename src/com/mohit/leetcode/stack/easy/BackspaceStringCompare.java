@@ -11,13 +11,13 @@ public class BackspaceStringCompare {
         int i = S.length() - 1, j = T.length() - 1;
         int skipS = 0, skipT = 0;
 
-        while (i >= 0 || j >= 0) { // While there may be chars in build(S) or build (T)
+        while (i >= 0 || j >= 0) { // While there may be chars in build(S) or build (TreeBookPractice)
             while (i >= 0) { // Find position of next possible char in build(S)
                 if (S.charAt(i) == '#') {skipS++; i--;}
                 else if (skipS > 0) {skipS--; i--;}
                 else break;
             }
-            while (j >= 0) { // Find position of next possible char in build(T)
+            while (j >= 0) { // Find position of next possible char in build(TreeBookPractice)
                 if (T.charAt(j) == '#') {skipT++; j--;}
                 else if (skipT > 0) {skipT--; j--;}
                 else break;
@@ -50,7 +50,7 @@ public class BackspaceStringCompare {
             }
             i++;
         }
-        // Remove all backspace from T
+        // Remove all backspace from TreeBookPractice
         i = 0;
         while (i < T.length()) {
             char c = T.charAt(i);
