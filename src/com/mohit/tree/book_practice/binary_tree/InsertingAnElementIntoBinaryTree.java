@@ -11,46 +11,68 @@ public class InsertingAnElementIntoBinaryTree {
         tree.right = new TreeNode(3);
         tree.left.left = new TreeNode(4);
         tree.left.right = new TreeNode(5);
-        tree.right.left = new TreeNode(6);
+        tree.right.left=new TreeNode(6);
         tree.right.right = new TreeNode(7);
+        tree.left.left.left = new TreeNode(8);
+        tree.left.left.right = new TreeNode(9);
+
+        tree.left.right.left = new TreeNode(10);
+        tree.left.right.right = new TreeNode(11);
+
+        new InsertingAnElementIntoBinaryTree().insert(12, tree);
     }
 
-    private TreeNode inseartInBinaryTreeLevel(TreeNode root, int data) {
-        if (root == null) {
-            return root;
-        }
-        Queue<TreeNode> nodes = new LinkedList<>();
-        nodes.offer(root);
-        while (!nodes.isEmpty()) {
-            TreeNode node = nodes.poll();
-            if (node != null) {
-                if (node.left != null) {
-                    nodes.offer(node.left);
+    //Recursively
+    //This is working only for left subtree value node
+    public TreeNode insert(int data, TreeNode node) {
+        if (node == null) {
+            node = new TreeNode(data);
+        } else {
+            if (node.left == null)
+                node.left = new TreeNode(data);
+            else if (node.right == null)
+                node.right = new TreeNode(data);
+            else {
+                if (checkVaccancyAt(node.left)) {
+                    insert(data, node.left);
                 } else {
-                    node.left = new TreeNode(data);
-                    return root;
-                }
-                if (node.right != null) {
-                    nodes.offer(node.right);
-                } else {
-                    node.right = new TreeNode(data);
-                    return root;
+                    if (checkVaccancyAt(node.right))
+                        insert(data, node.right);
+                    else {
+                        insert(data, node.left);
+                    }
                 }
             }
         }
-        return root;
+        return node;
+    }
+
+    private boolean checkVaccancyAt(TreeNode node) {
+        return node.left == null || node.right == null;
     }
 
 
-    private TreeNode inseartInBinaryTreeLevel1(TreeNode root, int data) {
-        if (root == null) {
-            root = new TreeNode(data);
-        }
-        if (root.val < data) {
-            root.left = inseartInBinaryTreeLevel1(root.left, data);
-        }
-        if (root.val > data) {
-            root.right = inseartInBinaryTreeLevel1(root.right, data);
+    // This Solution is linear iterate solution with o(n) time Complexity
+    public TreeNode insert1(TreeNode root, int data) {
+        if (root == null) return root;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+            if (temp != null) {
+                if (temp.left == null) {
+                    temp.left = new TreeNode(data);
+                    break;
+                } else {
+                    queue.add(temp.left);
+                }
+                if (temp.right == null) {
+                    temp.right = new TreeNode(data);
+                    break;
+                } else {
+                    queue.add(temp.right);
+                }
+            }
         }
         return root;
     }

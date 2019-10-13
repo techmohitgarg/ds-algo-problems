@@ -1,8 +1,6 @@
 package com.mohit.tree.book_practice.binary_tree;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class FindingTheHeightOrDepthofTheBinaryTree {
 
@@ -14,7 +12,8 @@ public class FindingTheHeightOrDepthofTheBinaryTree {
         tree.left.left = new TreeNode(4);
         tree.left.right = new TreeNode(5);
         System.out.println(heightOrDepthofTheBinaryTree.maxHeightOrDepth(tree));
-        System.out.println(heightOrDepthofTheBinaryTree.maxHeightOrDepthIterateMode(tree));
+        System.out.println(heightOrDepthofTheBinaryTree.maxHeightOrDepthIterateModeUsingInOrderTraversal(tree));
+        System.out.println(heightOrDepthofTheBinaryTree.maxHeightOrDepthIterateModeUsingPostOrderTraversal(tree));
         System.out.println(heightOrDepthofTheBinaryTree.minDepth(tree));
         System.out.println(heightOrDepthofTheBinaryTree.minHeightOrDepth(tree));
     }
@@ -33,7 +32,36 @@ public class FindingTheHeightOrDepthofTheBinaryTree {
         }
     }
 
-    public int maxHeightOrDepthIterateMode(TreeNode node) {
+    public int maxHeightOrDepthIterateModeUsingInOrderTraversal(TreeNode node) {
+        List<Integer> list = new ArrayList<>();
+        int max = 0;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = node;
+        while (true) {
+            if (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            } else {
+                if (stack.isEmpty()) {
+                    break;
+                }
+                TreeNode rootNode = stack.pop();
+                list.add(rootNode.val);
+
+                curr = rootNode.right;
+            }
+            if (max < stack.size()) {
+                max = stack.size();
+            }
+        }
+        // Also check if the loop is over
+        if (max < stack.size()) {
+            max = stack.size();
+        }
+        return max;
+    }
+
+    public int maxHeightOrDepthIterateModeUsingPostOrderTraversal(TreeNode node) {
         if (node == null) {
             return 0;
         }
