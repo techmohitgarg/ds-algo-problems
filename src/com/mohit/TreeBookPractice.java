@@ -8,17 +8,61 @@ import java.util.*;
 public class TreeBookPractice {
 
     public static void main(String[] args) {
-        TreeNode a = new TreeNode(4);
-        a.left = new TreeNode(2);
-        a.right = new TreeNode(7);
+        TreeNode a = new TreeNode(10);
+        a.left = new TreeNode(20);
+        a.right = new TreeNode(30);
+        a.right.right = new TreeNode(40);
+        new TreeBookPractice().deleteNode(a, 20);
 
-        a.left.left = new TreeNode(1);
-        a.left.right = new TreeNode(3);
+    }
 
-        a.right.left = new TreeNode(6);
-        a.right.right = new TreeNode(9);
-        new TreeBookPractice().invertTree(a);
 
+    public TreeNode deleteNode(TreeNode node, int deleteNode) {
+        if (node == null) return null;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(node);
+        //Delete Node Data
+        TreeNode delete = null;
+        TreeNode treeNode = null;
+        while (!queue.isEmpty()) {
+            treeNode = queue.poll();
+            if (treeNode.val == deleteNode) {
+                delete = treeNode;
+            }
+            if (treeNode.left != null) queue.add(treeNode.left);
+            if (treeNode.right != null) queue.add(treeNode.right);
+        }
+        if (delete != null) {
+            // Deepest Node Value
+            int val = treeNode.val;
+            //Delete the Deepest Node from tree
+            queue.add(node);
+            while (!queue.isEmpty()) {
+                TreeNode temp = queue.poll();
+                if (temp == treeNode) {
+                    temp = null;
+                    break;
+                }
+                if (temp.left != null && temp.left == treeNode) {
+                    temp.left = null;
+                    break;
+                } else {
+                    queue.add(temp.left);
+                }
+                if (temp.right != null && temp.right == treeNode) {
+                    temp.right = null;
+                    break;
+                } else {
+                    queue.add(temp.right);
+                }
+            }
+
+            // Add the Deepest Node at the Delete position
+            delete.val = val;
+
+        }
+
+        return node;
     }
 
     public TreeNode invertTree(TreeNode root) {

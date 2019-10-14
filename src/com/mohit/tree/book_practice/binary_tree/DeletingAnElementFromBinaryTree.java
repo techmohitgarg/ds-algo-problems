@@ -17,66 +17,59 @@ public class DeletingAnElementFromBinaryTree {
         tree.right.right = new TreeNode(8);
         elementFromBinaryTree.inOrder(tree);
         System.out.println();
-        elementFromBinaryTree.getDeepestNode(tree, 11);
+        elementFromBinaryTree.deleteNode(tree, 11);
         elementFromBinaryTree.inOrder(tree);
 
     }
 
 
     // find the deepest node of the tree
-    public void getDeepestNode(TreeNode node, int deleteNode) {
-        if (node == null) {
-            return;
-        }
-
+    public TreeNode deleteNode(TreeNode node, int deleteNode) {
+        if (node == null) return null;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(node);
+        //Delete Node Data
+        TreeNode delete = null;
         TreeNode treeNode = null;
-        TreeNode tree = null;
         while (!queue.isEmpty()) {
-            tree = queue.poll();
-            if (tree.val == deleteNode) {
-                treeNode = tree;
+            treeNode = queue.poll();
+            if (treeNode.val == deleteNode) {
+                delete = treeNode;
             }
-            if (tree.left != null) {
-                queue.add(tree.left);
-            }
-            if (tree.right != null) {
-                queue.add(tree.right);
-            }
+            if (treeNode.left != null) queue.add(treeNode.left);
+            if (treeNode.right != null) queue.add(treeNode.right);
         }
-        int key = tree.val;
-        deleteNode(node, tree);
-        treeNode.val = key;
-    }
-
-
-    private void deleteNode(TreeNode root, TreeNode deleteNode) {
-        if (root == null) {
-            return;
-        }
-        Queue<TreeNode> nodeQueue = new LinkedList<>();
-        nodeQueue.add(root);
-        while (!nodeQueue.isEmpty()) {
-            TreeNode tree = nodeQueue.poll();
-            if (tree.right != null) {
-                if (tree.right == deleteNode) {
-                    tree.right = null;
-                    deleteNode = null;
-                } else {
-                    nodeQueue.add(tree.right);
+        if (delete != null) {
+            // Deepest Node Value
+            int val = treeNode.val;
+            //Delete the Deepest Node from tree
+            queue.add(node);
+            while (!queue.isEmpty()) {
+                TreeNode temp = queue.poll();
+                if (temp == treeNode) {
+                    temp = null;
+                    break;
                 }
-
-            }
-            if (tree.left != null) {
-                if (tree.left == deleteNode) {
-                    tree.left = null;
-                    deleteNode = null;
+                if (temp.left != null && temp.left == treeNode) {
+                    temp.left = null;
+                    break;
                 } else {
-                    nodeQueue.add(tree.left);
+                    queue.add(temp.left);
+                }
+                if (temp.right != null && temp.right == treeNode) {
+                    temp.right = null;
+                    break;
+                } else {
+                    queue.add(temp.right);
                 }
             }
+
+            // Add the Deepest Node at the Delete position
+            delete.val = val;
+
         }
+
+        return node;
     }
 
 
