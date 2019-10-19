@@ -5,7 +5,7 @@ import com.mohit.tree.book_practice.binary_tree.TreeNode;
 public class InvertBinaryTree {
 
     public static void main(String[] args) {
-        InvertBinaryTree zigzagTreeTraversal = new InvertBinaryTree();
+        InvertBinaryTree invertBinaryTree = new InvertBinaryTree();
         TreeNode tree = new TreeNode(1);
         tree.left = new TreeNode(2);
         tree.right = new TreeNode(3);
@@ -13,7 +13,7 @@ public class InvertBinaryTree {
         tree.left.right = new TreeNode(5);
         tree.right.left = new TreeNode(6);
         tree.right.right = new TreeNode(7);
-        System.out.println(zigzagTreeTraversal.invertTree(tree));
+        System.out.println(invertBinaryTree.invertTree(tree));
     }
 
 

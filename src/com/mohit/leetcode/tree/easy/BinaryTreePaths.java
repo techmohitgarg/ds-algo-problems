@@ -17,32 +17,23 @@ public class BinaryTreePaths {
     }
 
     public List<String> binaryTreePaths(TreeNode root) {
-        List<String> list = new ArrayList<>();
-        printPaths(list, new ArrayList<>(), root);
-        return list;
+        List<String> paths = new ArrayList<>();
+        printPaths(paths, "", root);
+        return paths;
     }
 
-
-    public void printPaths(List<String> list, List<Integer> integers, TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        integers.add(root.val);
+    private void printPaths(List<String> paths, String pathToLeaf, TreeNode root) {
+        if (root == null) return;
+        // Add the value in the array
+        pathToLeaf += root.val;
+        // if the both child node is null means path has been completed
         if (root.left == null && root.right == null) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < integers.size(); i++) {
-                sb.append(integers.get(i) + "->");
-            }
-            if (sb.length() > 2) {
-                sb.deleteCharAt(sb.length() - 1);
-                sb.deleteCharAt(sb.length() - 1);
-            }
-            list.add(sb.toString());
-
+            paths.add(pathToLeaf);
         }
-        printPaths(list, integers, root.left);
-        printPaths(list, integers, root.right);
-        integers.remove(integers.size() - 1);
+        // Move the array left side
+        printPaths(paths, pathToLeaf + "->", root.left);
+        // Move the array Right side
+        printPaths(paths, pathToLeaf + "->", root.right);
     }
 
 

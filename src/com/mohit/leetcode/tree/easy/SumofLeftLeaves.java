@@ -58,5 +58,17 @@ public class SumofLeftLeaves {
         }
         return sum;
     }
+    public int sumOfLeftLeaves2(TreeNode root) {
+        return sumOfLeaves(root, false);
+    }
 
+    public int sumOfLeaves(TreeNode root, boolean isleft) {
+        if (root == null) return 0;
+        int left = sumOfLeaves(root.left, true);
+        if (isleft && root.left == null && root.right == null) {
+            return root.val;
+        }
+        int right = sumOfLeaves(root.right, false);
+        return left + right;
+    }
 }

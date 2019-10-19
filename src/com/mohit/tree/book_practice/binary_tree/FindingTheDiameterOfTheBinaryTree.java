@@ -1,5 +1,7 @@
 package com.mohit.tree.book_practice.binary_tree;
 
+import com.mohit.TreeBookPractice;
+
 public class FindingTheDiameterOfTheBinaryTree {
     public static void main(String[] args) {
         FindingTheDiameterOfTheBinaryTree diameterOfTheBinaryTree =
@@ -13,6 +15,9 @@ public class FindingTheDiameterOfTheBinaryTree {
         tree.right.right = new TreeNode(7);
         System.out.println(diameterOfTheBinaryTree.getDiameterOfTree(tree));
         System.out.println(diameterOfTheBinaryTree.getDiameterTreeUsingIterate(tree));
+        System.out.println(diameterOfTheBinaryTree.diameterOpt(tree, new Height()));
+        diameterOfTheBinaryTree.diameterUsingHeight(tree);
+        System.out.println(MaxHeight.height);
     }
 
 
@@ -59,6 +64,69 @@ public class FindingTheDiameterOfTheBinaryTree {
         }
         return getDiameterCount(root.left, k - 1) + getDiameterCount(root.right, k - 1);
     }
+    // region Calculate the height with help of diameter function as well than maybe its works for O(n)
+    static class Height {
+        int h;
+    }
+
+    int diameterOpt(TreeNode root, Height height) {
+        /* lh --> Height of left subtree
+           rh --> Height of right subtree */
+        Height lh = new Height(), rh = new Height();
+        if (root == null) {
+            height.h = 0;
+            return 0; /* diameter is also 0 */
+        }
+        int ldiameter = diameterOpt(root.left, lh);
+        int rdiameter = diameterOpt(root.right, rh);
+
+        height.h = Math.max(lh.h, rh.h) + 1;
+        return Math.max(lh.h + rh.h + 1, Math.max(ldiameter, rdiameter));
+    }
+    //endregion
+
+
+    //region Get the diameter of tree is nothing but (left_right+1) so
+    static class MaxHeight {
+        static int height = Integer.MIN_VALUE;
+    }
+
+    public int diameterUsingHeight(TreeNode root) {
+        if (root == null) return 0;
+
+        int leftHeight = diameterUsingHeight(root.left);
+        int rightHeight = diameterUsingHeight(root.right);
+
+        // Calculate the Max Diameter of tree here
+        MaxHeight.height = Math.max(MaxHeight.height, 1 + leftHeight + rightHeight);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+    //endregion
+
+
+    // region this is O(n2) solution will try this O(n)
+    public int findMaxDiameterTree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        // Find the hieght of left and right subtree
+        int height = width(root.left) + width(root.right) + 1;
+        // Find the Diameter of  left and right subtree
+        int diameter = Math.max(findMaxDiameterTree(root.left), findMaxDiameterTree(root.right));
+
+        return Math.max(height, diameter);
+    }
+
+
+    // find the width if tree
+    public int width(TreeNode root) {
+        if (root == null) return 0;
+        int left = width(root.left);
+        int right = width(root.right);
+        return 1 + Math.max(left, right);
+    }
+    // endregion
 }
 
 
