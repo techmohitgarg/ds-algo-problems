@@ -8,26 +8,22 @@ import java.util.*;
 public class TreeBookPractice {
 
     public static void main(String[] args) {
-        TreeNode tree = new TreeNode(3);
-        tree.left = new TreeNode(9);
-        tree.right = new TreeNode(20);
-        tree.right.left = new TreeNode(15);
-        tree.right.right = new TreeNode(7);
-        System.out.println(new TreeBookPractice().sumOfLeftLeaves(tree));
+        TreeNode tree = new TreeNode(6);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(8);
+        tree.left.left = new TreeNode(0);
+        tree.left.right = new TreeNode(4);
+        tree.left.right.left = new TreeNode(3);
+        tree.left.right.right = new TreeNode(5);
+        tree.right.left = new TreeNode(7);
+        tree.right.right = new TreeNode(9);
+        TreeNode p = new TreeNode(2);
+        TreeNode q = new TreeNode(8);
+
     }
 
 
-    public int sumOfLeftLeaves(TreeNode root) {
-        return sumOfLeaves(root, false);
-    }
 
-    public int sumOfLeaves(TreeNode root, boolean isleft) {
-        if (root == null) return 0;
-        int left = sumOfLeaves(root.left, true);
-        if (isleft && root.left == null && root.right == null) {
-            return root.val;
-        }
-        int right = sumOfLeaves(root.right, false);
-        return left + right;
-    }
+
+
 }
