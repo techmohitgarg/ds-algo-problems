@@ -8,12 +8,12 @@ import java.util.List;
 public class BinaryTreePaths {
 
     public static void main(String[] args) {
-        BinaryTreePaths zigzagTreeTraversal = new BinaryTreePaths();
+        BinaryTreePaths binaryTreePaths = new BinaryTreePaths();
         TreeNode tree = new TreeNode(1);
         tree.left = new TreeNode(2);
         tree.right = new TreeNode(3);
         tree.left.right = new TreeNode(5);
-        System.out.println(zigzagTreeTraversal.binaryTreePaths(tree));
+        System.out.println(binaryTreePaths.binaryTreePaths(tree));
     }
 
     public List<String> binaryTreePaths(TreeNode root) {

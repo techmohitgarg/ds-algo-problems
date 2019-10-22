@@ -1,5 +1,7 @@
 package com.mohit.leetcode.tree.easy;
 
+import com.mohit.TreeBookPractice;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,4 +53,34 @@ public class NaryTreeLevelOrderTraversal {
 
     }
 
+    public List<List<Integer>> levelOrder1(Node root) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (root == null) return list;
+        List<Integer> childData = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(null);
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            if (node != null) {
+                childData.add(node.val);
+                for (Node data : node.children) {
+                    queue.add(data);
+                }
+            } else {
+                if (childData.size() > 0)
+                    list.add(new ArrayList<>(childData));
+
+                childData.clear();
+                if (!queue.isEmpty()) {
+                    queue.add(null);
+                }
+
+
+            }
+
+
+        }
+        return list;
+    }
 }
