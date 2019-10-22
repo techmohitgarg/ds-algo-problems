@@ -8,18 +8,7 @@ import java.util.*;
 
 public class TreeBookPractice {
 
-    class Node {
-        public int val;
-        public List<Node> children;
 
-        public Node() {
-        }
-
-        public Node(int _val, List<Node> _children) {
-            val = _val;
-            children = _children;
-        }
-    }
 
     public static void main(String[] args) {
         TreeNode node = new TreeNode(5);
