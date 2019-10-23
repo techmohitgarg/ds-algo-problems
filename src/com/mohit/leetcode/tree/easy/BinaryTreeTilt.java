@@ -16,16 +16,23 @@ public class BinaryTreeTilt {
         System.out.println(treeTilt.findTilt(node));
     }
 
+    int tilt = 0;
 
     public int findTilt(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int tilt = 0;
-        int left = findTilt(root.left);
-        int right = findTilt(root.right);
+        find(root);
+        return tilt;
+    }
 
-        return tilt + Math.abs((root.val + left + right) - (root.val + left + right));
+    public int find(TreeNode root) {
+        if (root == null) return 0;
+        // Move to left
+        int left = find(root.left);
+        // Move to Right
+        int right = find(root.right);
+
+        tilt += Math.abs(left - right);
+
+        return left + right + root.val;
     }
 
 }
