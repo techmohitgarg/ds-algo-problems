@@ -14,23 +14,35 @@ public class TreeBookPractice {
         TreeNode node = new TreeNode(1);
         node.left = new TreeNode(2);
         node.right = new TreeNode(3);
-        node.left.left = new TreeNode(4);
-        node.right.left = new TreeNode(5);
+        node.left.right = new TreeNode(4);
+        //node.right.left = new TreeNode(5);
 
+        System.out.println(new TreeBookPractice().tree2str(node));
     }
 
-    public boolean isSubtree(TreeNode s, TreeNode t) {
-        if (s == null) return false;
-        boolean isSubTree = isSame(s, t);
-        if (isSubTree) return true;
-        return isSubtree(s.left, t) || isSubtree(s.right, t);
-    }
+    public String tree2str(TreeNode t) {
+        if (t == null) return "";
+        StringBuilder sb = new StringBuilder();
+        // Add Node value here
+        sb.append(t.val);
+        //check if node has left sub-tree
+        if (t.left != null) {
+            sb.append("(");
+            sb.append(tree2str(t.left));
+            sb.append(")");
+        }
 
-    public boolean isSame(TreeNode a, TreeNode b) {
-        if (a == null && b == null) return true;
-        if (a == null || b == null) return false;
-        if (a.val != b.val) return false;
-        return isSame(a.left, b.left) && isSame(a.right, b.right);
+        if (t.right != null) {
+            if (t.left == null) {
+                sb.append("()");
+            }
+
+            sb.append("(");
+            sb.append(tree2str(t.right));
+            sb.append(")");
+
+        }
+        return sb.toString();
     }
 
 

@@ -65,4 +65,32 @@ public class ConstructingbinarytreefromGivenInorderandPreorder {
         newNode.right = buildBinaryTree(preOrder, preStart + offSet - inStart + 1, preEnd, inOrder, offSet + 1, inEnd);
         return newNode;
     }
+
+    int preStart = 0;
+
+    /**
+     * @param preOrder   pass the inOrder list or String
+     * @param inOrder    pass the preOrder list or String
+     * @param inStart    = first starting index 0;
+     * @param inEnd      =last index means (inorder.length-1)
+     * @param preStart=0
+     * @return
+     */
+    private TreeNode makeTree(String preOrder, String inOrder, int inStart, int inEnd) {
+        if (inStart > inEnd) return null;
+        //Find the index from inorder tree
+        char data = preOrder.charAt(preStart++);
+        TreeNode root = new TreeNode(data - '0');
+        if (inStart == inEnd) return root;
+        // Search the perIndex Current index value in the InOrder String
+        int iIndex = inStart;
+        for (; iIndex < inEnd; iIndex++) {
+            if (inOrder.charAt(iIndex) == data) {
+                break;
+            }
+        }
+        root.left = makeTree(preOrder, inOrder, inStart, iIndex - 1);
+        root.right = makeTree(preOrder, inOrder, iIndex + 1, inEnd);
+        return root;
+    }
 }

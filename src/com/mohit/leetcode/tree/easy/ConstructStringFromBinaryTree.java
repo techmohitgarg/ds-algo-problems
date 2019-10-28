@@ -2,10 +2,10 @@ package com.mohit.leetcode.tree.easy;
 
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
-public class ConstructStringfromBinaryTree {
+public class ConstructStringFromBinaryTree {
 
     public static void main(String[] s) {
-        ConstructStringfromBinaryTree binaryTree = new ConstructStringfromBinaryTree();
+        ConstructStringFromBinaryTree binaryTree = new ConstructStringFromBinaryTree();
         TreeNode node = new TreeNode(1);
         node.left = new TreeNode(2);
         node.right = new TreeNode(3);
