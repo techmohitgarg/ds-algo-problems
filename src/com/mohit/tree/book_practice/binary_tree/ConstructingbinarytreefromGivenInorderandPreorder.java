@@ -1,6 +1,7 @@
 package com.mohit.tree.book_practice.binary_tree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ConstructingbinarytreefromGivenInorderandPreorder {
 
@@ -68,29 +69,34 @@ public class ConstructingbinarytreefromGivenInorderandPreorder {
 
     int preStart = 0;
 
-    /**
-     * @param preOrder   pass the inOrder list or String
-     * @param inOrder    pass the preOrder list or String
-     * @param inStart    = first starting index 0;
-     * @param inEnd      =last index means (inorder.length-1)
-     * @param preStart=0
-     * @return
-     */
-    private TreeNode makeTree(String preOrder, String inOrder, int inStart, int inEnd) {
-        if (inStart > inEnd) return null;
-        //Find the index from inorder tree
-        char data = preOrder.charAt(preStart++);
-        TreeNode root = new TreeNode(data - '0');
-        if (inStart == inEnd) return root;
-        // Search the perIndex Current index value in the InOrder String
-        int iIndex = inStart;
-        for (; iIndex < inEnd; iIndex++) {
-            if (inOrder.charAt(iIndex) == data) {
-                break;
-            }
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null || preorder.length != inorder.length) {
+            return null;
         }
-        root.left = makeTree(preOrder, inOrder, inStart, iIndex - 1);
-        root.right = makeTree(preOrder, inOrder, iIndex + 1, inEnd);
+
+        // Make HashMap to avoid search index in Inorder arr for preOrder value
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        return buildTree(preorder, map, 0, preorder.length - 1);
+    }
+
+    private TreeNode buildTree(int[] preorder, HashMap<Integer, Integer> map, int inStart, int inEnd) {
+        if (inStart > inEnd) return null;
+        // getting preStart index value from preOrder array
+        int data = preorder[preStart++];
+        // Make a new node with new data
+        TreeNode root = new TreeNode(data);
+        // If both has same value means doesn't have child's
+        if (inStart == inEnd) return root;
+        // Get the iIndex value from map
+        int iIndex = map.get(data);
+        // Call left subtree
+        root.left = buildTree(preorder, map, inStart, iIndex - 1);
+        // call right subtree
+        root.right = buildTree(preorder, map, iIndex + 1, inEnd);
+        //return root node
         return root;
     }
 }

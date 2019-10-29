@@ -44,10 +44,6 @@ public class FindingLCAOfTwoNodesInBinaryTree {
 
     }
 
-    public int lca(TreeNode A, int B, int C) {
-        return LCA(A, new TreeNode(B),new TreeNode(C)).val;
-    }
-
     public int findLCA(TreeNode root, TreeNode a, TreeNode b) {
         if (root == null) {
             return -1;
