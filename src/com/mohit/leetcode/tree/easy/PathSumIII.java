@@ -1,24 +1,21 @@
 package com.mohit.leetcode.tree.easy;
 
 
+import com.mohit.TreeBookPractice;
+import com.mohit.leetcode.tree.MakeTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class PathSumIII {
     public static void main(String[] s) {
         PathSumIII sumIII = new PathSumIII();
-        TreeNode node = new TreeNode(10);
-        node.left = new TreeNode(5);
-        node.right = new TreeNode(-3);
-        node.right.right = new TreeNode(11);
-        node.left.left = new TreeNode(3);
-        node.left.right = new TreeNode(2);
-        node.left.right.right = new TreeNode(1);
-        node.left.left.left = new TreeNode(3);
-        node.left.left.right = new TreeNode(-2);
-        System.out.println(sumIII.pathSum(node, 8));
+        TreeNode node = MakeTree.stringToTreeNode("[5,4,8,11,null,13,4,7,2,null,null,5,1]");
+        int sum = 22;
+        System.out.println(sumIII.pathSum(node, sum));
+        System.out.println(sumIII.pathSum2(node, sum));
     }
 
 
@@ -53,4 +50,48 @@ public class PathSumIII {
         return count;
     }
 
+    public int pathSum1(TreeNode root, int sum) {
+        if (root == null) return 0;
+        int count = path(root, sum);
+        count += pathSum1(root.left, sum);
+        count += pathSum1(root.right, sum);
+        return count;
+    }
+
+    public int path(TreeNode root, int sum) {
+        if (root == null) {
+            return 0;
+        }
+        int count = 0;
+        if (root.val == sum) {
+            count++;
+        }
+        count += path(root.left, sum - root.val);
+        count += path(root.right, sum - root.val);
+        return count;
+    }
+
+
+    public int pathSum2(TreeNode root, int sum) {
+        if (root == null) return 0;
+        int count = sum(root, sum, new ArrayList<>());
+        return count;
+    }
+
+    public int sum(TreeNode root, int sum, ArrayList<Integer> data) {
+        if (root == null) return 0;
+        data.add(root.val);
+        int left = sum(root.left, sum, data);
+        int right = sum(root.right, sum, data);
+
+        int count = 0;
+        int val = 0;
+        for (int i = data.size() - 1; i >= 0; i--) {
+            val += data.get(i);
+            if (val == sum) count++;
+        }
+        data.remove(data.size() - 1);
+        return count + left + right;
+    }
 }
+
