@@ -2,38 +2,44 @@ package com.mohit;
 
 import com.mohit.leetcode.tree.MakeTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
+import com.sun.source.tree.Tree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class TreeBookPractice {
 
 
     public static void main(String[] args) {
-        //[10,5,-3,3,2,null,11,3,-2,null,1]
-        TreeNode t1 = MakeTree.stringToTreeNode("[5,4,8,11,null,13,4,7,2,null,null,5,1]");
-        TreeNode t2 = MakeTree.stringToTreeNode("[5,4,8,11,null,13,4,7,2,null,null,5,1]");
-        System.out.println(new TreeBookPractice().mergeTrees(t1, t2));
+
+        TreeNode t1 = MakeTree.stringToTreeNode("[2,2,5,null,null,5,7]");
+        System.out.println(new TreeBookPractice().findSecondMinimumValue(t1));
     }
 
-    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-        if (t1 == null && t2 == null) {
-            return null;
-        }
-        if (t1 == null) {
-            return t2;
-        }
-        if (t2 == null) {
-            return t1;
-        }
-        TreeNode temp = null;
-        if (t1 != null && t2 != null) {
-            temp = new TreeNode(t1.val + t2.val);
-        }
-        temp.left = mergeTrees(t1.left, t2.left);
-        temp.right = mergeTrees(t1.right, t2.right);
-        return temp;
-    }
+    public int findSecondMinimumValue(TreeNode root) {
+        int first = Integer.MAX_VALUE, second = first;
+        if (root == null) return -1;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int len = queue.size();
+            while (len > 0) {
+                TreeNode node = queue.poll();
+                int val = node.val;
+                if (first > val) {
+                    second = first;
+                    first = val;
+                } else if (second > val && val > first) {
+                    second = val;
+                }
 
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+
+                len--;
+            }
+
+        }
+        if (first == second) return -1;
+        return second == Integer.MAX_VALUE ? -1 : second;
+    }
 }
