@@ -1,6 +1,5 @@
 package com.mohit.leetcode.tree.easy;
 
-import com.mohit.TreeBookPractice;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 public class LowestCommonAncestorBinarySearchTree {

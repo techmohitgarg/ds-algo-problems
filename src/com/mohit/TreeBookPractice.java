@@ -10,36 +10,27 @@ public class TreeBookPractice {
 
 
     public static void main(String[] args) {
-
-        TreeNode t1 = MakeTree.stringToTreeNode("[2,2,5,null,null,5,7]");
-        System.out.println(new TreeBookPractice().findSecondMinimumValue(t1));
+        TreeNode t1 = MakeTree.stringToTreeNode("[1,0,1,0,1,0,1]");
+        System.out.println(new TreeBookPractice().sumRootToLeaf(t1));
     }
 
-    public int findSecondMinimumValue(TreeNode root) {
-        int first = Integer.MAX_VALUE, second = first;
-        if (root == null) return -1;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            int len = queue.size();
-            while (len > 0) {
-                TreeNode node = queue.poll();
-                int val = node.val;
-                if (first > val) {
-                    second = first;
-                    first = val;
-                } else if (second > val && val > first) {
-                    second = val;
-                }
+    public int sumRootToLeaf(TreeNode root) {
+        if (root == null) return 0;
+        int sum = 0;
+        sum = printGetAllPath("", root);
+        return sum;
+    }
 
-                if (node.left != null) queue.add(node.left);
-                if (node.right != null) queue.add(node.right);
-
-                len--;
-            }
-
+    private int printGetAllPath(String binaryString, TreeNode root) {
+        if (root == null) return 0;
+        binaryString += root.val;
+        int left = printGetAllPath(binaryString, root.left);
+        int right = printGetAllPath(binaryString, root.right);
+        int sum = 0;
+        if (root.left == null && root.right == null) {
+            sum += Integer.parseInt(binaryString, 2);
         }
-        if (first == second) return -1;
-        return second == Integer.MAX_VALUE ? -1 : second;
+        return sum + left + right;
     }
+
 }

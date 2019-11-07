@@ -2,8 +2,6 @@ package com.mohit.leetcode.tree.easy;
 
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
-import java.nio.file.Path;
-
 public class PathSum {
 
     public static void main(String[] args) {

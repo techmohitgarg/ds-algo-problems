@@ -5,7 +5,6 @@ import com.mohit.tree.book_practice.binary_tree.TreeNode;
 public class UnivaluedBinaryTree {
 
     public static void main(String[] s) {
-        UnivaluedBinaryTree binaryTree = new UnivaluedBinaryTree();
     }
 
     public boolean isUnivalTree(TreeNode root) {
