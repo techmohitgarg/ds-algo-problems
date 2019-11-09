@@ -1,5 +1,7 @@
 package com.mohit.leetcode.tree.medium;
 
+import com.mohit.leetcode.tree.Node;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -20,11 +22,10 @@ public class PopulatingNextRightPointersEachNode2 {
         node.left = new TreeLinkNode(2);
         node.right = new TreeLinkNode(3);
         node.left.left = new TreeLinkNode(4);
-        node.left.right = new TreeLinkNode(5);
         node.right.right = new TreeLinkNode(6);
         node.left.left.left = new TreeLinkNode(7);
         node.right.right.right = new TreeLinkNode(8);
-        eachNode.connect2(node);
+        eachNode.connect1(node);
     }
 
     public void connect(TreeLinkNode root) {
@@ -116,4 +117,44 @@ public class PopulatingNextRightPointersEachNode2 {
 
         }
     }
+   /* public Node connect(Node root) {
+        if (root == null) return null;
+
+        if (root.left != null) {
+            if (root.right != null) {
+                root.left.next = root.right;
+            } else {
+                // Find the next pointer
+                root.left.next = getNextNode(root);
+            }
+        }
+
+        if (root.right != null) {
+            if (root.next != null) {
+                if (root.next.left != null) {
+                    root.right.next = root.next.left;
+                } else if (root.next.right != null) {
+                    root.right.next = root.next.right;
+                } else {
+                    // Find the next pointer
+                    root.right.next = getNextNode(root);
+                }
+            }
+        }
+
+        connect(root.right);
+        connect(root.left);
+        return root;
+    }
+
+    private Node getNextNode(Node node) {
+        if (node == null) {
+            return null;
+        } else if (node.next != null && node.next.left != null) {
+            return node.next.left;
+        } else if (node.next != null && node.next.right != null) {
+            return node.next.right;
+        }
+        return getNextNode(node.next);
+    }*/
 }

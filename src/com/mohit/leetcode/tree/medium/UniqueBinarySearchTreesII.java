@@ -9,7 +9,7 @@ public class UniqueBinarySearchTreesII {
 
     public static void main(String[] s) {
         UniqueBinarySearchTreesII treesII = new UniqueBinarySearchTreesII();
-        System.out.println(treesII.generateTrees(3));
+        System.out.println(treesII.generateTrees(2));
 
     }
 

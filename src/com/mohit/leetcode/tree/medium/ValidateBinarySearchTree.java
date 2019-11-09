@@ -1,14 +1,36 @@
 package com.mohit.leetcode.tree.medium;
 
+import com.mohit.TreeBookPractice;
+import com.mohit.leetcode.tree.MakeTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 public class ValidateBinarySearchTree {
 
     public static void main(String[] s) {
-
+        TreeNode t1 = MakeTree.stringToTreeNode("[10,5,15,null,null,6,20]");
+        System.out.println(new ValidateBinarySearchTree().isValidBST(t1));
     }
 
-    public boolean isBST1(TreeNode root) {
+
+    // O(n) solution using inorder traversal method
+    Integer prev = null;
+
+    public boolean isValidBST(TreeNode root) {
+        return isValid(root);
+    }
+
+    public boolean isValid(TreeNode node) {
+        if (node == null) return true;
+        boolean left = isValid(node.left);
+        if (prev != null && prev >= node.val) {
+            return false;
+        }
+        prev = node.val;
+        boolean right = isValidBST(node.right);
+        return left && right;
+    }
+
+    /*public boolean isBST1(TreeNode root) {
         if (root == null) {
             return true;
         }
@@ -59,5 +81,5 @@ public class ValidateBinarySearchTree {
             root = root.right;
         }
         return root.val;
-    }
+    }*/
 }

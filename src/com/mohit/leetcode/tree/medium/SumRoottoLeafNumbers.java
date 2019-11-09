@@ -14,7 +14,22 @@ public class SumRoottoLeafNumbers {
         System.out.println(leafNumbers.sumNumbers(node));
     }
 
-    int total = 0;
+    public int sumNumbers(TreeNode root) {
+        if (root == null) return 0;
+        return total(root, 0);
+    }
+
+    private int total(TreeNode root, int sum) {
+        if (root == null) return 0;
+        sum = (10 * sum) + root.val;
+        if (root.left == null && root.right == null) {
+            return sum;
+        }
+        int left = total(root.left, sum);
+        int right = total(root.right, sum);
+        return left + right;
+    }
+    /*int total = 0;
 
     public int sumNumbers(TreeNode root) {
         if (root == null) {
@@ -36,5 +51,5 @@ public class SumRoottoLeafNumbers {
         getSum(root.right, sum);
         sum = (sum / 10);
     }
-
+*/
 }
