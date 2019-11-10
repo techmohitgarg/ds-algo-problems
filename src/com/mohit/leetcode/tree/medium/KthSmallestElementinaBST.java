@@ -1,11 +1,12 @@
-package com.mohit.tree.book_practice.binary_search_tree;
+package com.mohit.leetcode.tree.medium;
 
+import com.mohit.tree.book_practice.binary_search_tree.BinarySearchTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
-public class FindKthMinimunNumber {
+public class KthSmallestElementinaBST {
 
     public static void main(String[] args) {
-        FindKthMinimunNumber minimunNumber = new FindKthMinimunNumber();
+        KthSmallestElementinaBST minimunNumber = new KthSmallestElementinaBST();
         int[] nums = {1, 2, 3, 4, 5, 6, 7};
         TreeNode tree = new BinarySearchTree(nums).getBinaryTree();
         minimunNumber.findKMin(tree, 3);

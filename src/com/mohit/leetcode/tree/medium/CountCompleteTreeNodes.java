@@ -1,24 +1,28 @@
 package com.mohit.leetcode.tree.medium;
 
+import com.mohit.TreeBookPractice;
+import com.mohit.leetcode.tree.MakeTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 public class CountCompleteTreeNodes {
     public static void main(String[] s) {
-        CountCompleteTreeNodes nodes = new CountCompleteTreeNodes();
-        TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(5);
-        root.right.left = new TreeNode(6);
-        System.out.println(nodes.countNodes(root));
+        System.out.println(new CountCompleteTreeNodes().countNodes(MakeTree.stringToTreeNode("[1]")));
 
     }
 
     public int countNodes(TreeNode root) {
-        if (root == null) {
-            return 0;
+        if (root == null) return 0;
+        return 1 + count(root);
+    }
+
+    public int count(TreeNode root) {
+        if (root == null) return 0;
+        int sum = 0;
+        if (root.left != null && root.right != null) {
+            sum += 2;
+        } else if (root.left != null && root.right == null) {
+            sum += 1;
         }
-        return 1 + countNodes(root.left) + countNodes(root.right);
+        return sum + count(root.left) + count(root.right);
     }
 }
