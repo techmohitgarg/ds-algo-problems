@@ -1,4 +1,6 @@
-package com.mohit.tree.book_practice.binary_tree;
+package com.mohit.leetcode.tree.medium;
+
+import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;

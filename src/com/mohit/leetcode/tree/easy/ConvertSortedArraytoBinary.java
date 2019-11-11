@@ -5,31 +5,24 @@ import com.mohit.tree.book_practice.binary_tree.TreeNode;
 public class ConvertSortedArraytoBinary {
 
     public static void main(String[] s) {
-
+        new ConvertSortedArraytoBinary().sortedArrayToBST(new int[]{-10, -3, 0, 5, 9});
     }
 
     public TreeNode sortedArrayToBST(int[] nums) {
-        TreeNode root = null;
-        for (int i = 0; i < nums.length; i++) {
-            root = addNode(root, nums[i]);
-        }
+        TreeNode root = makeBST(nums, 0, nums.length - 1);
         return root;
     }
 
 
-    public TreeNode addNode(TreeNode root, int data) {
-        if (root == null) {
-            return new TreeNode(data);
+    private TreeNode makeBST(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
         }
-        TreeNode temp;
-        if (data <= root.val) {
-            temp = addNode(root.left, data);
-            root.left = temp;
-        } else {
-            temp = addNode(root.right, data);
-            root.right = temp;
-        }
-        return root;
+        int mid = (left + right) / 2;
+        TreeNode node = new TreeNode(nums[mid]);
+        node.left = makeBST(nums, left, mid - 1);
+        node.right = makeBST(nums, mid + 1, right);
+        return node;
     }
 
 }
