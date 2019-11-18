@@ -1,5 +1,7 @@
 package com.mohit.leetcode.tree.medium;
 
+import com.mohit.TreeBookPractice;
+import com.mohit.leetcode.tree.MakeTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.ArrayList;
@@ -7,10 +9,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class FindLargestValueinEachTreeRow {
+public class FindLargestValueInEachTreeRow {
 
     public static void main(String[] s) {
-
+        System.out.println(new FindLargestValueInEachTreeRow().largestValues(MakeTree.stringToTreeNode("[1,3,2,5,3,null,9]")));
     }
 
     public List<Integer> largestValues(TreeNode root) {
@@ -37,4 +39,23 @@ public class FindLargestValueinEachTreeRow {
         }
         return list;
     }
+    /*public List<Integer> largestValues(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+        getLargestValue(root, 0, list);
+        return list;
+    }
+
+
+    public void getLargestValue(TreeNode root, int val, List<Integer> list) {
+        if (root == null) return;
+        if (val >= list.size()) {
+            list.add(root.val);
+        } else {
+            list.set(val, Math.max(list.get(val), root.val));
+        }
+
+        getLargestValue(root.left, val + 1, list);
+        getLargestValue(root.right, val + 1, list);
+    }*/
 }

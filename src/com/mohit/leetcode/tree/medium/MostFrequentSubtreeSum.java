@@ -18,41 +18,33 @@ public class MostFrequentSubtreeSum {
         subtreeSum.findFrequentTreeSum(node);
     }
 
-    public int[] findFrequentTreeSum(TreeNode root) {
-        if (root == null) {
-            return new int[]{};
-        }
-        HashMap<Integer, Integer> map = new HashMap<>();
-        postOrder(map, root);
-        List<Integer> l = new ArrayList();
+    int maxCount = 0;
 
-        int max = Integer.MIN_VALUE;
+    public int[] findFrequentTreeSum(TreeNode root) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        sumOfSubTree(root, map);
+
+        ArrayList<Integer> list = new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (entry.getValue() > max) {
-                max = entry.getValue();
-                l.clear();
-                l.add(entry.getKey());
-            } else if (entry.getValue() == max) {
-                l.add(entry.getKey());
+            if (maxCount == entry.getValue()) {
+                list.add(entry.getKey());
             }
         }
-
-        int[] res = new int[l.size()];
-        for (int i = 0; i < l.size(); i++) {
-            res[i] = l.get(i);
+        int[] nums = new int[list.size()];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = list.get(i);
         }
-
-        return res;
+        return nums;
     }
 
-    public int postOrder(HashMap<Integer, Integer> map, TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int left = postOrder(map, root.left);
-        int right = postOrder(map, root.right);
-        int sum = root.val + left + right;
+
+    private int sumOfSubTree(TreeNode node, HashMap<Integer, Integer> map) {
+        if (node == null) return 0;
+        int sum = node.val;
+        sum += sumOfSubTree(node.left, map);
+        sum += sumOfSubTree(node.right, map);
         map.put(sum, map.getOrDefault(sum, 0) + 1);
+        maxCount = Math.max(maxCount, map.get(sum));
         return sum;
     }
 

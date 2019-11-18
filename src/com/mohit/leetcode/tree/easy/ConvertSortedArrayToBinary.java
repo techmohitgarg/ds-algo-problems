@@ -2,10 +2,10 @@ package com.mohit.leetcode.tree.easy;
 
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
-public class ConvertSortedArraytoBinary {
+public class ConvertSortedArrayToBinary {
 
     public static void main(String[] s) {
-        new ConvertSortedArraytoBinary().sortedArrayToBST(new int[]{-10, -3, 0, 5, 9});
+        new ConvertSortedArrayToBinary().sortedArrayToBST(new int[]{-10, -3, 0, 5, 9});
     }
 
     public TreeNode sortedArrayToBST(int[] nums) {

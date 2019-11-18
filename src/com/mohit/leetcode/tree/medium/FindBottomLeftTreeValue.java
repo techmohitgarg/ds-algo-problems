@@ -2,7 +2,9 @@ package com.mohit.leetcode.tree.medium;
 
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class FindBottomLeftTreeValue {
@@ -14,8 +16,6 @@ public class FindBottomLeftTreeValue {
         node.left = new TreeNode(1);
         System.out.println(treeValue.findBottomLeftValue(node));
     }
-
-
 
 
     public int findBottomLeftValue(TreeNode root) {
@@ -43,5 +43,22 @@ public class FindBottomLeftTreeValue {
         }
         return leftValue;
     }
+    /*public int findBottomLeftValue(TreeNode root) {
+        //Base case
+        if (root.left == null && root.right == null) return root.val;
+        List<Integer> list = new ArrayList<>();
+        getBottomLeft(list, root, 0);
+        return list.get(list.size() - 1);
+    }
+
+    private void getBottomLeft(List<Integer> list, TreeNode root, int k) {
+        if (root == null) return;
+
+        if (k >= list.size()) {
+            list.add(root.val);
+        }
+        getBottomLeft(list, root.left, k + 1);
+        getBottomLeft(list, root.right, k + 1);
+    }*/
 
 }
