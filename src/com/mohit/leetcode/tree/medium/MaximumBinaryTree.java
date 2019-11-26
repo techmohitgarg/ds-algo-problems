@@ -14,28 +14,29 @@ public class MaximumBinaryTree {
 
 
     public TreeNode constructMaximumBinaryTree(int[] nums) {
-        if (nums.length <= 0) {
-            return null;
-        }
-        return getMaxTree(nums, 0, nums.length);
+        TreeNode root = makeBinaryTree(nums, 0, nums.length - 1);
+        return root;
     }
 
-    public TreeNode getMaxTree(int[] nums, int left, int right) {
-        TreeNode temp = null;
-        if (left < right) {
-            int max = left;
-            int i = 0;
-            for (i = left; i < right; i++) {
-                if (nums[max] < nums[i]) {
+    private TreeNode makeBinaryTree(int[] num, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        if (start == end) {
+            TreeNode node = new TreeNode(num[start]);
+            return node;
+        } else {
+            // Find the max Number
+            int max = start;
+            for (int i = start; i <= end; i++) {
+                if (num[max] < num[i]) {
                     max = i;
                 }
             }
-            temp = new TreeNode(nums[max]);
-            temp.left = getMaxTree(nums, left, max);
-            temp.right = getMaxTree(nums, max + 1, right);
-            return temp;
+            TreeNode node = new TreeNode(num[max]);
+            node.left = makeBinaryTree(num, start, max - 1);
+            node.right = makeBinaryTree(num, max + 1, end);
+            return node;
         }
-
-        return null;
     }
 }

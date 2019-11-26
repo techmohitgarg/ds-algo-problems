@@ -11,35 +11,41 @@ import java.util.*;
 public class TreeBookPractice {
 
     public static void main(String[] args) {
-        TreeNode node = MakeTree.stringToTreeNode("[1,2,3,4,null,2,4,null,null,4]");
-        new TreeBookPractice().findDuplicateSubtrees(node);
+        //TreeNode node = MakeTree.stringToTreeNode("[1,1,1,1,1,1,1,null,null,null,1,null,null,null,null,2,2,2,2,2,2,2,null,2,null,null,2,null,2]");
+        TreeNode node = MakeTree.stringToTreeNode("[1,3,2,5,3,null,9]");
+
+        System.out.println(new TreeBookPractice().widthOfBinaryTree(node));
     }
 
 
-    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
-        List<TreeNode> list = new ArrayList<>();
-        if (root == null) {
-            return list;
+    public int widthOfBinaryTree(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNode> q = new LinkedList<>();
+        Map<TreeNode, Integer> m = new HashMap<>();
+        q.offer(root);
+        m.put(root, 1);
+        int curW = 0;
+        int maxW = 0;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            int start = 0;
+            int end = 0;
+            for (int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
+                if (i == 0) start = m.get(node);
+                if (i == size - 1) end = m.get(node);
+                if (node.left != null) {
+                    m.put(node.left, m.get(node) * 2);
+                    q.offer(node.left);
+                }
+                if (node.right != null) {
+                    m.put(node.right, m.get(node) * 2 + 1);
+                    q.offer(node.right);
+                }
+            }
+            curW = end - start + 1;
+            maxW = Math.max(curW, maxW);
         }
-        HashMap<String, Integer> map = new HashMap<>();
-        listOfDuplicates(root, map, list);
-        return list;
+        return maxW;
     }
-
-    public String listOfDuplicates(TreeNode root, HashMap<String, Integer> map, List<TreeNode> list) {
-        if (root == null) return "";
-        String path = "(";
-        path += listOfDuplicates(root.left, map, list);
-        path += root.val;
-        path += listOfDuplicates(root.right, map, list);
-        path += ")";
-        if (map.get(path) != null && map.get(path) == 1) {
-            list.add(root);
-        }
-        map.put(path, map.getOrDefault(path, 0) + 1);
-
-        return path;
-
-    }
-
 }
