@@ -1,14 +1,14 @@
-package com.mohit.leetcode.tree.medium;
+package com.mohit.leetcode.tree.hard;
 
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class SerializeandDeserializeBST {
+public class SerializeandDeserializeBS {
 
     public static void main(String[] args) {
-        SerializeandDeserializeBST deserializeBST = new SerializeandDeserializeBST();
+        SerializeandDeserializeBS deserializeBST = new SerializeandDeserializeBS();
         TreeNode root = new TreeNode(2);
         root.left = new TreeNode(1);
         root.right = new TreeNode(3);

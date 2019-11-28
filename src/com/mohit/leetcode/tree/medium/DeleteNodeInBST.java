@@ -31,10 +31,8 @@ public class DeleteNodeInBST {
             if (root.right == null) {
                 return root.left;
             }
-
             root.val = findMin(root.right).val;
             root.right = deleteNode(root.right, root.val);
-
         }
         return root;
     }
@@ -49,6 +47,7 @@ public class DeleteNodeInBST {
         }
         return findMin(root.left);
     }
+
     int minValue(TreeNode root) {
         int minv = root.val;
         while (root.left != null) {
