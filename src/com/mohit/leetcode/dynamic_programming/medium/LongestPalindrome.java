@@ -6,6 +6,7 @@
 package com.mohit.leetcode.dynamic_programming.medium;
 
 /**
+ *
  * @author Mohit Garg
  */
 public class LongestPalindrome {
@@ -15,46 +16,10 @@ public class LongestPalindrome {
      */
     public static void main(String[] args) {
         LongestPalindrome problems = new LongestPalindrome();
-        String string = "aaaa";
+        String string = "";
         System.out.println(problems.longestPalindrome(string));
     }
 
-    /*public String longestPalindrome(String A) {
-        if (A.length() == 0) {
-            return A;
-        }
-        String vaild = "";
-        for (int i = 0; i < A.length(); i++) {
-            int j = A.length() - 1;
-            if (A.length() <= vaild.length() + i) {
-                break;
-            }
-            while (j >= i) {
-                boolean b = isValidPalindrome(A, i, j);
-                String temp = A.substring(i, j + 1);
-                if (b && vaild.length() < temp.length()) {
-                    vaild = temp;
-                    break;
-                }
-                j--;
-            }
-
-        }
-        return vaild;
-    }
-
-    public boolean isValidPalindrome(String s, int l, int r) {
-        while (l < r) {
-            if (s.charAt(l) != s.charAt(r)) {
-                return false;
-            }
-            l++;
-            r--;
-        }
-        return true;
-    }*/
-
-    // Using Dynamic Programming
     public String longestPalindrome(String A) {
         if (A.length() == 0) return "";
         int len = A.length();
@@ -66,6 +31,7 @@ public class LongestPalindrome {
         // Check for 1 len string
         for (int i = 0; i < len; i++) {
             palin[i][i] = true;
+            maxLength = 1;
         }
         // Check for 2 len string
         for (int i = 0; i < len - 1; i++) {
@@ -96,6 +62,38 @@ public class LongestPalindrome {
         }
         return A.substring(start, start + maxLength);
     }
+  /*  public String longestPalindrome(String A) {
+        if (A.length() == 0) {
+            return A;
+        }
+        String vaild = "";
+        for (int i = 0; i < A.length(); i++) {
+            int j = A.length() - 1;
+            if (A.length() <= vaild.length() + i) {
+                break;
+            }
+            while (j >= i) {
+                boolean b = isValidPalindrome(A, i, j);
+                String temp = A.substring(i, j + 1);
+                if (b && vaild.length() < temp.length()) {
+                    vaild = temp;
+                    break;
+                }
+                j--;
+            }
 
+        }
+        return vaild;
+ }
 
+    public boolean isValidPalindrome(String s, int l, int r) {
+        while (l < r) {
+            if (s.charAt(l) != s.charAt(r)) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+    }*/
 }
