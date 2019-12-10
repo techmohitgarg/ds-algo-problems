@@ -1,8 +1,6 @@
-package com.mohit;
+package com.mohit.leetcode.dynamic_programming.medium;
 
-import java.util.Arrays;
-
-public class TreeBookPractice {
+public class RangeSumQuery2DImmutable {
     //https://leetcode.com/problems/range-sum-query-2d-immutable/solution/
     public static void main(String[] args) {
         int[][] matrix = {
