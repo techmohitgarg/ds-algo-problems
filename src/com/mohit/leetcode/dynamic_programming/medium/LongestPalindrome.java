@@ -6,7 +6,6 @@
 package com.mohit.leetcode.dynamic_programming.medium;
 
 /**
- *
  * @author Mohit Garg
  */
 public class LongestPalindrome {
@@ -21,6 +20,46 @@ public class LongestPalindrome {
     }
 
     public String longestPalindrome(String A) {
+        if (A.length() == 0) return A;
+        boolean[][] val = new boolean[A.length()][A.length()];
+        int maxLength = 0;
+        int start = 0;
+        // first find the LPS when length is 1
+        for (int i = 0; i < A.length(); i++) {
+            val[i][i] = true;
+            maxLength = 1;
+            start = i;
+        }
+
+        // Second find the LPS when length is 2
+        for (int i = 0; i < A.length() - 1; i++) {
+            if (A.charAt(i) == A.charAt(i + 1)) {
+                val[i][i + 1] = true;
+                maxLength = 2;
+                start = i;
+            }
+        }
+        // Third Find if Len >2
+        // i is for count the length
+        for (int i = 3; i <= A.length(); i++) {
+            // j is for start point of string palindrome(left)
+            for (int j = 0; j < A.length() - i + 1; j++) {
+                //k is end point of string palindrome(Right)
+                int k = j + i - 1;
+                if (val[j + 1][k - 1] && A.charAt(j) == A.charAt(k)) {
+                    val[j][k] = true;
+                    if (maxLength < i) {
+                        maxLength = i;
+                        start = j;
+                    }
+                }
+
+            }
+        }
+        return A.substring(start, start + maxLength);
+
+    }
+    /*public String longestPalindrome(String A) {
         if (A.length() == 0) return "";
         int len = A.length();
         boolean[][] palin = new boolean[len][len];
@@ -61,7 +100,7 @@ public class LongestPalindrome {
 
         }
         return A.substring(start, start + maxLength);
-    }
+    }*/
   /*  public String longestPalindrome(String A) {
         if (A.length() == 0) {
             return A;

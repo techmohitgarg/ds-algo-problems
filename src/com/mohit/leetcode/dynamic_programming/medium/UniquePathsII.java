@@ -1,4 +1,4 @@
-package com.mohit.leetcode.array.medium;
+package com.mohit.leetcode.dynamic_programming.medium;
 
 /*
 A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).

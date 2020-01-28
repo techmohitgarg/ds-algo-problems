@@ -19,7 +19,7 @@ public class GenerateParentheses {
      */
     public static void main(String[] args) {
         GenerateParentheses problems = new GenerateParentheses();
-        System.out.println(problems.generateParenthesis(3));
+        System.out.println(problems.generateParenthesis(5));
     }
 
     public List<String> generateParenthesis(int n) {
