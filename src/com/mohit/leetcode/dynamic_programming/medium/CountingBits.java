@@ -1,14 +1,11 @@
-package com.mohit;
+package com.mohit.leetcode.dynamic_programming.medium;
 
-import com.mohit.tree.book_practice.binary_tree.TreeNode;
-
-import java.util.*;
-
-public class Solution {
+public class CountingBits {
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
-        System.out.println(sol.countBits(10));
+        CountingBits sol = new CountingBits();
+        //System.out.println(sol.countBits(10));
+        System.out.println(Math.sqrt(17));
     }
 
 
