@@ -9,6 +9,25 @@ public class MaximalSquare {
     }
 
     public int maximalSquare(char[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return 0;
+        int res = 0;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0 || matrix[i][j] == '0') {
+                    res = Math.max(res, Character.getNumericValue(matrix[i][j]));
+                    continue;
+                }
+                int val = (1 + Math.min(Character.getNumericValue(matrix[i - 1][j - 1]),
+                        Math.min(Character.getNumericValue(matrix[i - 1][j]), Character.getNumericValue(matrix[i][j - 1]))));
+                matrix[i][j] = Character.forDigit(val, Character.MAX_RADIX);
+                res = Math.max(res, Character.getNumericValue(matrix[i][j]));
+            }
+        }
+        return res * res;
+    }
+    public int maximalSquare_(char[][] matrix) {
         if (matrix.length == 0)
             return 0;
         int[][] sum = new int[matrix.length][matrix[0].length];
