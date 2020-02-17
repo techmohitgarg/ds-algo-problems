@@ -1,5 +1,7 @@
 package com.mohit.leetcode.dynamic_programming.medium;
 
+import com.mohit.leetcode.linklist.ListNode;
+
 public class CountingBits {
 
     public static void main(String[] args) {
@@ -7,7 +9,6 @@ public class CountingBits {
         //System.out.println(sol.countBits(10));
         System.out.println(Math.sqrt(17));
     }
-
 
     public int[] countBits(int num) {
         int[] result = new int[num + 1];
