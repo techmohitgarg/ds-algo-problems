@@ -1,20 +1,83 @@
 package com.mohit;
 
-import com.mohit.leetcode.dynamic_programming.medium.CountingBits;
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.*;
 
 public class Solution {
+    class Node {
+        int val;
+        Node next;
+        Node random;
 
+        public Node(int val) {
+            this.val = val;
+            this.next = null;
+            this.random = null;
+        }
+
+        public Node setNext(Node next) {
+            this.next = next;
+            return this;
+        }
+
+        public Node setRandom(Node random) {
+            this.random = random;
+            return this;
+        }
+
+    }
+
+    //[[7,null],[13,0],[11,4],[10,2],[1,0]]
+    // [[1,1],[2,1]]
     public static void main(String[] args) {
         Solution sol = new Solution();
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(4);
         System.out.println(sol.countFriendsPairings(5));
+    }
+
+    public Node copyRandomList(Node head) {
+        if (head == null) return null;
+
+        HashMap<Node, Node> map = new HashMap<>();
+
+        Node oldNode = head;
+        Node deepNode = new Node(oldNode.val);
+        Node itr = deepNode;
+
+        map.put(head, deepNode);
+
+
+        while (oldNode.next != null) {
+            itr.next = new Node(oldNode.next.val);
+            map.put(oldNode.next, itr.next);
+            oldNode = oldNode.next;
+            itr = itr.next;
+        }
+
+
+        oldNode = head;
+        itr = deepNode;
+        while (oldNode!=null){
+            itr.random=map.get(oldNode.random);
+            oldNode = oldNode.next;
+            itr = itr.next;
+        }
+
+
+        return deepNode;
+    }
+
+    private Node getNewNode(Node node, int index, HashMap<Integer, Node> map) {
+        if (node == null) return null;
+        if (map.containsValue(index)) return map.get(index);
+        Node n = new Node(node.val);
+        n.next = node.next;
+        n.random = getNewNode(node.random, (node.random == null ? -1 : node.val), map);
+
+        // Adding the new update node in the map
+        map.put(index, n);
+
+        return n;
     }
 
     private int countFriendsPairings(int n) {
@@ -30,81 +93,6 @@ public class Solution {
         }
 
         return dp[n];
-    }
-
-    public void deleteNode(ListNode node) {
-        node.val = node.next.val;
-        node.next = node.next.next;
-    }
-   /* public ListNode middleNode(ListNode head) {
-        // Check if head is null
-        if (head == null) return head;
-
-        ListNode itr = head;
-        // Find the len of list
-        int len = 0;
-        while (itr != null) {
-            itr = itr.next;
-            len++;
-        }
-        // re-assign the head
-        itr = head;
-
-        // Find the middle of the list
-        //case even value: 4/2=2
-        //case odd value: 3/2=2
-        int middle = len / 2;
-
-        // Iteration till middle>0
-        while (middle > 0) {
-            itr = itr.next;
-            middle--;
-        }
-
-        return itr;
-    }*/
-
-    public ListNode middleNode(ListNode head) {
-        /**
-         * [1,2,3,4,5]
-         *
-         * Slow :-{1}-->Step2:-{2}-->Step3:-{3}
-         * fast :-{1}-->Step2:-{3}-->Step3:-{5}
-         *
-         * [1,2,3,4]
-         * Slow :-{1}-->Step2:-{2}-->Step3:-{3}
-         * fast :-{1}-->Step2:-{3}-->Step3:-{5}
-         *
-         * In Both case even and odd will get {3->4->5}
-         * beacuse we need to return (len/2) value
-         */
-        //
-        if (head == null && head.next == null) return head;
-        //Define two node
-        ListNode slow = head;
-        ListNode fast = slow;
-        while (fast != null && fast.next != null) {
-            // Move 2 step ahead from current
-            fast = fast.next.next;
-            // Move 1 step ahead from current
-            slow = slow.next;
-        }
-        //return middle of list
-        return slow;
-        /**
-         * Assume that n=5 n means total number of nodes in the list;
-         * Basically we need to find middle of the node from list its nothing but (middle node=n/2)
-         * So using 2 pointer 1.fast 2.slow (middle)
-         * 1. Fast means i=i+2 ==>Increasing the i by 2
-         * we can skip once node every time like (fast=fast.next.next) until (i>n) so iterations will goes up-to n/2 times its nothing but O(n)
-         *
-         * 2 Slow means middle of the list.
-         * Move 1 step by step like (slow=slow.next) until fast not reached at (i>n or fast != null && fast.next != null)
-         *
-         * Time Complexity : O(n)
-         * Space Complexity : O(1)
-         */
-
     }
 
 
