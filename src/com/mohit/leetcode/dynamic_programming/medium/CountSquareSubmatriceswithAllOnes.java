@@ -1,13 +1,9 @@
-package com.mohit;
+package com.mohit.leetcode.dynamic_programming.medium;
 
-import com.mohit.leetcode.linklist.ListNode;
-
-import java.util.*;
-
-public class Solution {
+public class CountSquareSubmatriceswithAllOnes {
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        CountSquareSubmatriceswithAllOnes sol = new CountSquareSubmatriceswithAllOnes();
         System.out.printf(String.valueOf(sol.countSquares(new int[][]{{0,0,1}, {1,1,0}, {1,1,0}})));
     }
 
