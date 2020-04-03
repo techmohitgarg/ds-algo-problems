@@ -1,6 +1,7 @@
 package com.mohit.tree.book_practice.binary_tree;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class InOrderTraversal {
@@ -14,67 +15,39 @@ public class InOrderTraversal {
         tree.left.right = new BinaryTree(5);
         tree.right.left = new BinaryTree(6);
         tree.right.right = new BinaryTree(7);
-        traversal.inOrderTraversal(tree);
+        traversal.inOrder(tree);
         System.out.println();
-        traversal.inOrderTraversal1(tree);
+        traversal.inorderTraversal(tree);
     }
 
-    public void inOrderTraversal(BinaryTree root) {
+    public void inOrder(BinaryTree root) {
         if (root != null) {
-            inOrderTraversal(root.left);
+            inOrder(root.left);
             System.out.print(String.valueOf(root.data) + " ");
-            inOrderTraversal(root.right);
+            inOrder(root.right);
         }
     }
 
-    public void inOrderTraversal1(BinaryTree root) {
-        if (root == null) {
-            return;
-        }
-        Stack<BinaryTree> s = new Stack<>();
-        BinaryTree node = root;
-        boolean isDone = false;
-        while (!isDone) {
-            if (node != null) {
-                s.push(node);
-                node = node.left;
+    public List<Integer> inorderTraversal(BinaryTree root) {
+        List<Integer> inorderTraversalList = new ArrayList<>();
+        if (root == null) return inorderTraversalList;
+        Stack<BinaryTree> prevNodes = new Stack<>();
+        while (true) {
+            if (root != null) {
+                // Push the current node to stack
+                prevNodes.push(root);
+                // move to left
+                root = root.left;
             } else {
-                if (s.empty()) {
-                    isDone = true;
-                } else {
-                    node = s.pop();
-                    System.out.print(String.valueOf(node.data) + " ");
-                    node = node.right;
-                }
-
+                // Break the loop stack is empty because we don't have more nodes to traverse
+                if (prevNodes.isEmpty()) break;
+                //Pop the current node root and add to the output list
+                root = prevNodes.pop();
+                inorderTraversalList.add(root.data);
+                //Move to the Right
+                root = root.right;
             }
         }
-
-    }
-
-    public ArrayList<Integer> inorderTraversal(TreeNode A) {
-        ArrayList<Integer> inOrderTraversal = new ArrayList<>();
-        if (A == null) {
-            return inOrderTraversal;
-        }
-        Stack<TreeNode> s = new Stack<>();
-        TreeNode node = A;
-        boolean isDone = false;
-        while (!isDone) {
-            if (node != null) {
-                s.push(node);
-                node = node.left;
-            } else {
-                if (s.empty()) {
-                    isDone = true;
-                } else {
-                    node = s.pop();
-                    inOrderTraversal.add(node.val);
-                    node = node.right;
-                }
-
-            }
-        }
-        return inOrderTraversal;
+        return inorderTraversalList;
     }
 }

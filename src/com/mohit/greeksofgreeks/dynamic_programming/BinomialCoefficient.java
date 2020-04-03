@@ -4,7 +4,7 @@ public class BinomialCoefficient {
     public static void main(String[] args) {
         BinomialCoefficient coefficient = new BinomialCoefficient();
 
-        coefficient.binomialCoefficientUsingDP(10, 3);
+        coefficient.binomialCoefficientUsingDP(4, 3);
     }
 
     private int binomialCoeff(int n, int k) {

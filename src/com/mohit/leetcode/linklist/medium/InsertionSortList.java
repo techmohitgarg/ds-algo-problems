@@ -42,4 +42,47 @@ public class InsertionSortList {
 
         return prev.next;
     }
+    /*public ListNode insertionSortList(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+
+        ListNode node = head;
+        ListNode prev = new ListNode(0);
+        ListNode next;
+        while (node != null) {
+            next = node.next;
+            ListNode listNode = prev;
+            while (listNode.next != null && listNode.next.val < node.val) {
+                listNode = listNode.next;
+            }
+
+            node.next = listNode.next;
+            listNode.next = node;
+
+            node = next;
+        }
+
+        return prev.next;
+    }*/
+ /*   public ListNode insertionSortList(ListNode head) {
+        if (head == null) return null;
+
+
+        ListNode curr = head;
+        ListNode sorted = new ListNode(0);
+        ListNode prev = sorted;
+
+        while (curr != null) {
+            ListNode itr = prev;
+            while (itr.next != null && itr.next.val < curr.val) {
+                itr = itr.next;
+            }
+            ListNode temp = itr.next;
+            itr.next = new ListNode(curr.val);
+            itr.next.next = temp;
+            curr=curr.next;
+        }
+        return sorted.next;
+    }*/
 }
