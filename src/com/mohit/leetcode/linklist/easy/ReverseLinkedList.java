@@ -11,7 +11,7 @@ public class ReverseLinkedList {
         headA.next.next = new ListNode(3);
         headA.next.next.next = new ListNode(4);
         headA.next.next.next.next = new ListNode(5);
-        PrintLinkList.print(elements.reverseList(headA));
+        PrintLinkList.print(elements.reverseList2(headA));
 
     }
 
@@ -39,5 +39,19 @@ public class ReverseLinkedList {
             current = next;
         }
         return prev;
+    }
+
+    public ListNode reverseList2(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode current = head, next;
+        while (current.next != null) {
+            next = current.next;
+            current.next = next.next;
+            next.next = head;
+            head = next;
+        }
+        return head;
     }
 }

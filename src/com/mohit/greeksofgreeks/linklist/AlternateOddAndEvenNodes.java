@@ -1,19 +1,14 @@
-package com.mohit;
+package com.mohit.greeksofgreeks.linklist;
 
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
-import com.mohit.leetcode.tree.Node;
-import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Stack;
 
-public class Solution {
+public class AlternateOddAndEvenNodes {
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        AlternateOddAndEvenNodes sol = new AlternateOddAndEvenNodes();
         //11 -> 20 -> 40 -> 55 -> 77 -> 80 -> NULL
         //11 -> 20 -> 55 -> 40 -> 77 -> 80 -> NULL
         ListNode head = new ListNode(11);
