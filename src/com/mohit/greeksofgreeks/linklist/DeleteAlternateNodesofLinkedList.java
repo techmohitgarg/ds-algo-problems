@@ -1,17 +1,13 @@
-package com.mohit;
+package com.mohit.greeksofgreeks.linklist;
 
 
 import com.mohit.leetcode.linklist.ListNode;
 import com.mohit.leetcode.linklist.PrintLinkList;
-import com.mohit.leetcode.tree.Node;
-import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
-import java.util.*;
-
-public class Solution {
+public class DeleteAlternateNodesofLinkedList {
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        DeleteAlternateNodesofLinkedList sol = new DeleteAlternateNodesofLinkedList();
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);
         head.next.next = new ListNode(3);
