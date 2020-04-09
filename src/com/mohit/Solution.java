@@ -1,6 +1,7 @@
 package com.mohit;
 
 
+import com.mohit.greeksofgreeks.linklist.FlattenMultilevelLinkedList;
 import com.mohit.leetcode.linklist.ListNode;
 import com.mohit.leetcode.linklist.PrintLinkList;
 import com.mohit.leetcode.tree.Node;
@@ -10,63 +11,45 @@ import java.util.*;
 
 public class Solution {
 
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            next = null;
+        }
+    }
+
+
+
     public static void main(String[] args) {
         Solution sol = new Solution();
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(5);
-        ListNode result = sol.deleteAlternateNodes(head);
-        PrintLinkList.print(result);
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(5);
+        sol.rearrange(head);
 
     }
 
+    void rearrange(Node node) {
 
-    public ListNode deleteAlternateNodes(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
+        // 1) Find the middle point using tortoise and hare method
+        Node slow = node, fast = slow.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        ListNode next = head.next;
-        head.next = next.next;
-        // FreeUp memory here
-        next = null;
-        deleteAlternateNodes(head.next);
-        return head;
+
+        // 2) Split the linked list in two halves
+        // node1, head of first half    1 -> 2 -> 3
+        // node2, head of second half   4 -> 5
+        Node node1 = node;
+        Node node2 = slow.next;
+        slow.next = null;
     }
 
-    /*public ListNode deleteAlternateNodes(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-
-        ListNode prev = head;
-        while (prev != null && prev.next != null) {
-            ListNode temp = prev.next;
-            prev.next = prev.next.next;
-            temp = null;
-            prev = prev.next;
-        }
-        return head;
-    }*/
-
-    /*public ListNode deleteAlternateNodes(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode node = new ListNode(-1);
-        node.next = head;
-        ListNode curr = node;
-        int i = 1;
-        while (curr.next != null) {
-            if (i % 2 == 0) {
-                curr.next = curr.next.next;
-            } else {
-                curr = curr.next;
-            }
-            i++;
-        }
-        return node.next;
-    }*/
 
 }

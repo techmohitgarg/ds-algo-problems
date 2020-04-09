@@ -18,11 +18,32 @@ public class SwapNodesInPairs {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode t = head.next;
-        ListNode n = swapPairs(t.next);
-        t.next = head;
-        head.next = n;
-        return t;
+        ListNode newHead = head.next;
+        ListNode newReversed = swapPairs(head.next.next);
+        head.next = newReversed;
+        newHead.next = head;
+        return newHead;
+    }
+
+    public void pairWiseSwap(ListNode node) {
+        if (node == null || node.next == null) return;
+
+        ListNode temp = node.next.next;
+        node.next.next = node;
+        node = node.next;
+        node.next.next = temp;
+
+        ListNode curr = node.next;
+
+        while (curr.next != null && curr.next.next != null) {
+            ListNode newHead = curr.next.next;
+            curr.next.next = curr.next.next.next;
+            newHead.next = curr.next;
+            curr.next = newHead;
+            curr = curr.next.next;
+        }
+
+        PrintLinkList.print(node);
     }
 
     public ListNode swapPairs1(ListNode head) {

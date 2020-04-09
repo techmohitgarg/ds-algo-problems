@@ -1,5 +1,7 @@
 package com.mohit.leetcode.linklist;
 
+import com.mohit.Solution;
+
 public class PrintLinkList {
 
     public static void print(ListNode node) {

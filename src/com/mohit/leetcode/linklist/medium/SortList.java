@@ -85,8 +85,8 @@ public class SortList {
             fast = fast.next.next;
         }
         prev.next = null;
-        ListNode l1 = sortList(head);
-        ListNode l2 = sortList(slow);
+        ListNode l1 = sortListUsingMerge2(head);
+        ListNode l2 = sortListUsingMerge2(slow);
         return mergeTwoLists(l1, l2);
     }
 
