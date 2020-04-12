@@ -11,7 +11,7 @@ public class SwapNodesInPairs {
         l1.next.next = new ListNode(3);
         l1.next.next.next = new ListNode(4);
         l1.next.next.next.next = new ListNode(5);
-        PrintLinkList.print(nodes.swapPairs(l1));
+        nodes.pairWiseSwap(l1);
     }
 
     public ListNode swapPairs(ListNode head) {

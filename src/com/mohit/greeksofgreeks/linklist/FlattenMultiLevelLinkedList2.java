@@ -1,14 +1,9 @@
-package com.mohit;
+package com.mohit.greeksofgreeks.linklist;
 
 
-import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
-
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
 
-public class Solution {
+public class FlattenMultiLevelLinkedList2 {
     static class Node {
         int data;
         Node next, down;
@@ -21,7 +16,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        FlattenMultiLevelLinkedList2 sol = new FlattenMultiLevelLinkedList2();
         Node head = new Node(1);
         head.next = new Node(2);
         head.next.next = new Node(3);

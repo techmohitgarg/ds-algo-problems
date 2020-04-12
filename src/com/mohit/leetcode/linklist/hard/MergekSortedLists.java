@@ -1,5 +1,6 @@
 package com.mohit.leetcode.linklist.hard;
 
+import com.mohit.Solution;
 import com.mohit.leetcode.linklist.easy.MergeTwoSortedLists;
 import com.mohit.leetcode.linklist.ListNode;
 
@@ -76,4 +77,56 @@ public class MergekSortedLists {
         }
         return node.next;
     }
+
+/*
+    public Solution.ListNode mergeKLists(Solution.ListNode[] lists) {
+        if (lists.length == 0) return null;
+        if (lists.length == 1) return lists[0];
+
+        Solution.ListNode result = mergeKLists(lists, lists.length - 1);
+        return result;
+    }
+
+    public static Solution.ListNode mergeKLists(Solution.ListNode arr[], int last) {
+        // repeat until only one list is left
+        while (last != 0) {
+            int i = 0, j = last;
+
+            // (i, j) forms a pair
+            while (i < j) {
+                // merge List i with List j and store
+                // merged list in List i
+                arr[i] = SortedMerge(arr[i], arr[j]);
+
+                // consider next pair
+                i++;
+                j--;
+
+                // If all pairs are merged, update last
+                if (i >= j)
+                    last = j;
+            }
+        }
+
+        return arr[0];
+    }
+
+    public static Solution.ListNode SortedMerge(Solution.ListNode a, Solution.ListNode b) {
+        Solution.ListNode result = null;
+        *//* Base cases *//*
+        if (a == null)
+            return b;
+        else if (b == null)
+            return a;
+
+        *//* Pick either a or b, and recur *//*
+        if (a.data <= b.data) {
+            result = a;
+            result.next = SortedMerge(a.next, b);
+        } else {
+            result = b;
+            result.next = SortedMerge(a, b.next);
+        }
+        return result;
+    }*/
 }

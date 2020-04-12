@@ -34,6 +34,39 @@ public class OddEvenLinkedList {
     }
 
     /*public ListNode oddEvenList(ListNode head) {
+
+        if (head == null||head.next==null||head.next.next==null) return head;
+
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenStart = even;
+        while (odd != null && even != null && even.next != null) {
+
+
+            // Set Next Odd Position than should be next to even number
+            odd.next = even.next;
+            // Now move next odd that will be next to even number
+            odd = even.next;
+
+            // If odd.next is null means there is not even number than break the loop
+            if (odd.next == null) {
+                even.next = null;
+                odd.next = evenStart;
+                break;
+            }
+
+            // set the next even number that should be odd next number
+            even.next = odd.next;
+            //Move to next even number that should be odd next number
+            even = odd.next;
+        }
+
+        // than add the even list next to the last node off odd list
+        odd.next = evenStart;
+
+        return head;
+    }*/
+    /*public ListNode oddEvenList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
