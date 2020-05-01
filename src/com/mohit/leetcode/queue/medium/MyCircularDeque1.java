@@ -5,25 +5,10 @@ public class MyCircularDeque1 {
     int size = 0;
     int front = -1;
     int rear = -1;
-    /**
-     * Initialize your data structure here. Set the size of the deque to be k.
-     */
-    /**
-     * insertFront : O(1)
-     * insertLast : O(1)
-     * deleteFront : O(1)
-     * deleteLast : O(1)
-     * getFront : O(1)
-     * getRear : O(1)
-     * isEmpty : O(1)
-     * isFull : O(1)
-     */
-
     public MyCircularDeque1(int k) {
         size = k;
         deque = new int[k];
     }
-
     /**
      * Adds an item at the front of Deque. Return true if the operation is successful.
      */

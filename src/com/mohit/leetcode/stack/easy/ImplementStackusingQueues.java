@@ -17,50 +17,23 @@ public class ImplementStackusingQueues {
     }
 
     static class MyStack {
-        Queue<Integer> head = null;
-        Integer top = null;
-
-        /**
-         * Initialize your data structure here.
-         */
+        Deque<Integer> head = null;
         public MyStack() {
             head = new LinkedList<>();
         }
-
-        /**
-         * Push element x onto stack.
-         */
         public void push(int x) {
-            head.add(x);
-            top = x;
+            head.addFirst(x);
         }
 
-        /**
-         * Removes the element on top of the stack and returns that element.
-         */
         public int pop() {
-            Queue<Integer> temp = new LinkedList<>();
-            while (head.size() > 1) {
-                top = head.remove();
-                temp.add(top);
-            }
-            int pop = -1;
-            pop = head.remove();
-            head = temp;
-            return pop;
+            if (head.isEmpty()) return -1;
+            return head.poll();
         }
 
-        /**
-         * Get the top element.
-         */
         public int top() {
-            if (top != null) return top;
-            return -1;
+            if (head.isEmpty()) return -1;
+            return head.peek();
         }
-
-        /**
-         * Returns whether the stack is empty.
-         */
         public boolean empty() {
             return head.isEmpty();
         }

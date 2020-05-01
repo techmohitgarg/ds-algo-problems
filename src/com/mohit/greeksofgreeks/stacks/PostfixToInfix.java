@@ -6,7 +6,7 @@ public class PostfixToInfix {
 
     public static void main(String[] args) {
         PostfixToInfix postfix = new PostfixToInfix();
-        System.out.println(postfix.postfixToInfix("ab*c+"));
+        System.out.println(postfix.postfixToInfix("abc++"));
     }
 
     public String postfixToInfix(String s) {

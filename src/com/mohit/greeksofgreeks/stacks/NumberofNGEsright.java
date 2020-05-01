@@ -1,5 +1,6 @@
 package com.mohit.greeksofgreeks.stacks;
 
+import java.util.HashMap;
 import java.util.Stack;
 
 public class NumberofNGEsright {
@@ -33,6 +34,32 @@ public class NumberofNGEsright {
             dp[j] = NGE[j] == -1 ? 0 : 1 + dp[NGE[j]];
         }
 
+
     }
+    /*private void fillNext(int[] arr, int n, int[] query) {
+        Stack<Integer> stack = new Stack<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
+                map.put(stack.peek(), i);
+                stack.pop();
+            }
+            stack.push(i);
+        }
+        while (!stack.isEmpty()) {
+            map.put(stack.peek(), -1);
+            stack.pop();
+        }
+        for (int i = 0; i < query.length; i++) {
+
+            int count = 0;
+            int index = query[i];
+            while (map.get(index) != -1) {
+                count++;
+                index = map.get(index);
+            }
+            System.out.println(count);
+        }
+    }*/
 
 }

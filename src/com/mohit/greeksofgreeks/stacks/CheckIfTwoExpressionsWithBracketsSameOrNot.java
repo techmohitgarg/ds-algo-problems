@@ -1,17 +1,12 @@
-package com.mohit;
+package com.mohit.greeksofgreeks.stacks;
 
-import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.queue.medium.MyCircularDequeUsingDoublyLinkedList;
-import com.mohit.leetcode.tree.MakeTree;
-import com.mohit.tree.book_practice.binary_tree.TreeNode;
-import com.sun.tools.javac.util.Pair;
+import java.util.Scanner;
+import java.util.Stack;
 
-import java.util.*;
-
-public class Solution {
+public class CheckIfTwoExpressionsWithBracketsSameOrNot {
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        CheckIfTwoExpressionsWithBracketsSameOrNot sol = new CheckIfTwoExpressionsWithBracketsSameOrNot();
         Scanner s = new Scanner(System.in);
         sol.areSame("-(a+b+c)", "-a-b-c");
     }

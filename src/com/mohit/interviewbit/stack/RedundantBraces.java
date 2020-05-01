@@ -39,5 +39,24 @@ public class RedundantBraces {
 
         return 0;
     }
+    public boolean isStackHasRedundantBrackets(String str) {
+        if (str.length() == 0) return false;
+        int i = -1;
+        Stack<Character> st = new Stack<>();
+        while (i < str.length() - 1) {
+            char ch = str.charAt(++i);
+            if (ch == '(' || ch == '+' || ch == '-' || ch == '/' || ch == '*') {
+                st.push(ch);
+            } else if (ch == ')') {
+                if (!st.isEmpty() && st.peek() == '(') return true;
+                while (!st.isEmpty() && st.peek() != '(') {
+                    st.pop();
+                }
+                if (!st.isEmpty() && st.peek() == '(')
+                    st.pop();
+            }
+        }
+        return false;
+    }
 }
 

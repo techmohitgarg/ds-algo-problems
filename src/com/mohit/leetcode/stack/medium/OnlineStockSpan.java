@@ -16,24 +16,33 @@ public class OnlineStockSpan {
     }
 
     static class StockSpanner {
-        Stack<Integer> prices = null;
-        Stack<Integer> weight = null;
+        Stack<int[]> st = null;
 
         public StockSpanner() {
-            prices = new Stack<>();
-            weight = new Stack<>();
+            st = new Stack<>();
         }
 
         public int next(int price) {
-            int days = 1;
-            while (!prices.isEmpty() && prices.peek() <= price) {
-                prices.pop();
-                    days += weight.pop();
+            int count = 1;
+            while (!st.isEmpty() && st.peek()[0] <= price) {
+                count += st.pop()[1];
             }
-            // Add Current Price Value
-            prices.add(price);
-            weight.add(days);
-            return days;
+            st.push(new int[]{price, count});
+            return count;
+        }
+    }
+    void calculateSpan(int price[]) {
+        if (price.length == 0) {
+            return;
+        }
+        int[] stock = new int[price.length];
+        Stack<Integer> st = new Stack<>();
+        for (int i = 0; i < price.length; i++) {
+            while (!st.isEmpty() && price[st.peek()] <= price[i]) {
+                st.pop();
+            }
+            stock[i] = st.isEmpty() ? i + 1 : i - st.peek();
+            st.push(i);
         }
     }
 }

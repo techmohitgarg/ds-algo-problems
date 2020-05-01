@@ -6,7 +6,7 @@ public class PerfixToInfix {
 
     public static void main(String[] args) {
         PerfixToInfix perfixToInfix = new PerfixToInfix();
-        System.out.println(perfixToInfix.convertPerfixToInfix("*+AB-CD"));
+        System.out.println(perfixToInfix.convertPerfixToInfix("*-A/BC-/AKL"));
 
     }
 

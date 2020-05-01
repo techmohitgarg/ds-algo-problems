@@ -1,6 +1,7 @@
 package com.mohit.tree.book_practice.binary_tree;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class PostOrderTraversal {
@@ -14,7 +15,7 @@ public class PostOrderTraversal {
         tree.left.right = new BinaryTree(5);
         tree.right.left = new BinaryTree(6);
         tree.right.right = new BinaryTree(7);
-        // traversal.postOrderTraversal(tree);
+        traversal.postOrderTraversal(tree);
         System.out.println();
         traversal.postOrderTraversal1(tree);
     }
@@ -26,6 +27,8 @@ public class PostOrderTraversal {
             System.out.print(String.valueOf(root.data) + " ");
         }
     }
+
+
 
     public void postOrderTraversal1(BinaryTree root) {
         if (root == null) {
@@ -47,12 +50,11 @@ public class PostOrderTraversal {
                     s.push(current.right);
                 }
             } else {
-                System.out.print(String.valueOf(current.data) + " ");
+                System.out.print(current.data + " ");
                 s.pop();
             }
             prev = current;
         }
-
     }
 
 
@@ -84,4 +86,50 @@ public class PostOrderTraversal {
         }
         return postOrderTraversal;
     }
+
+
+    //Using PreOrder Traversal
+    /*public List<Integer> postorderTraversal(TreeNode root) {
+        if (root == null) new ArrayList<>();
+
+        Stack<Integer> post = new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            if (node != null) {
+                // Add the Root Value in the List
+                post.push(node.val);
+                //Add the Right Node And Left Node in the Stack
+                if (node.left != null) stack.push(node.left);
+                if (node.right != null) stack.push(node.right);
+            }
+        }
+        List<Integer> postOrder = new ArrayList<>();
+        while (!post.isEmpty()) {
+            postOrder.add(post.pop());
+        }
+        return postOrder;
+    }*/
+
+    /*private void postOrderIterative(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (true) {
+            while (root != null) {
+                stack.push(root);
+                stack.push(root);
+                root = root.left;
+            }
+            // Check for empty stack
+            if (stack.empty()) return;
+            root = stack.pop();
+
+            if (!stack.empty() && stack.peek() == root)
+                root = root.right;
+            else {
+                System.out.print(root.val + " ");
+                root = null;
+            }
+        }
+    }*/
 }
