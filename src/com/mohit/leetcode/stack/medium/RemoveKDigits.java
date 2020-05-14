@@ -31,4 +31,33 @@ public class RemoveKDigits {
         if (sb.length() == 0) sb.append(0);
         return sb.toString();
     }
+
+   /* public String removeKdigits(String num, int k) {
+        Stack<Integer> stack = new Stack<>();
+        if (num.length() == 0) return "0";
+        if (k == 0) return num;
+        if (num.length() == 1 && k > 0) return "0";
+        int i = 1;
+        StringBuilder sb = new StringBuilder(num);
+        while (i < sb.length() && k > 0) {
+            if (sb.charAt(i - 1) > sb.charAt(i)) {
+                while (i > 0 && k > 0 && sb.length() > 1 && sb.charAt(i - 1) > sb.charAt(i)) {
+                    sb.deleteCharAt(i - 1);
+                    i--;
+                    k--;
+                }
+            }
+            i++;
+        }
+
+        while (k > 0 && sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+            k--;
+        }
+        while (sb.length() > 1 && sb.charAt(0) == '0') {
+            sb.deleteCharAt(0);
+        }
+
+        return sb.toString().length() == 0 ? "0" : sb.toString();
+    }*/
 }
