@@ -11,15 +11,186 @@ import java.util.Queue;
 
 public class TreePracticeSolution {
 
-
     public static void main(String[] args) {
         TreePracticeSolution sol = new TreePracticeSolution();
-        TreeNode root = MakeTree.stringToTreeNode("[4,2,7,1,3,6,9]");
-        TreeNode result = sol.invertTree(root);
+        TreeNode root = MakeTree.stringToTreeNode("[3,9,20,null,null,15,7]");
+        int result =
+                sol.sumOfLeftLeaves(root);
         System.out.println(result);
     }
 
+
+    //region Sum of Left Leaves
+    /**
+     *
+     * @param root tree
+     * @return sum of all the left nodes
+     */
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) return 0;
+
+        int sum = 0;
+        if (root.left != null && root.left.left == null && root.left.right == null) {
+            sum += root.left.val;
+        }
+
+        sum += sumOfLeftLeaves(root.left);
+        sum += sumOfLeftLeaves(root.right);
+        return sum;
+    }
+
+    private int sumofLeft(TreeNode root, boolean isLeft) {
+        if (root == null) return 0;
+        int sum = 0;
+        if (isLeft && root.left == null && root.right == null) {
+            sum += root.val;
+        }
+        return sum + sumofLeft(root.left, true) + sumofLeft(root.right, false);
+    }
+    //endregion
+
+    //region Binary Tree Paths
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> paths = new ArrayList<>();
+        findPathRootToleaf(root, paths, new ArrayList<>());
+        return paths;
+    }
+
+    private void findPathRootToleaf(TreeNode root, List<String> pathList, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root.val);
+        if (root.left == null && root.right == null) {
+            StringBuilder sb = new StringBuilder();
+            int i = 0;
+            for (i = 0; i < list.size() - 1; i++) {
+                sb.append(list.get(i));
+                sb.append("->");
+            }
+            sb.append(list.get(i));
+            pathList.add(sb.toString());
+        }
+
+        findPathRootToleaf(root.left, pathList, list);
+        findPathRootToleaf(root.right, pathList, list);
+        list.remove(list.size() - 1);
+    }
+
+    //endregion
+
+    //region Lowest Common Ancestor in a Binary Tree
+
+    /**
+     * @param A tree
+     * @param B node value
+     * @param C node value
+     * @return Ancestor of the tree
+     */
+
+    public int lca(TreeNode A, int B, int C) {
+        TreeNode result = lcaNode(A, B, C);
+        return result == null ? -1 : result.val;
+    }
+
+    public TreeNode lcaNode(TreeNode A, int B, int C) {
+        if (A == null) return null;
+
+
+        if (A.val == B || A.val == C) {
+            return A;
+        }
+
+        TreeNode left = lcaNode(A.left, B, C);
+        TreeNode right = lcaNode(A.right, B, C);
+
+        if (left != null && right != null) {
+            return A;
+        }
+
+        return left != null ? left : right;
+    }
+
+    public int lcaUsingList(TreeNode A, int B, int C) {
+        List<Integer> one = new ArrayList<>();
+        List<Integer> two = new ArrayList<>();
+
+        if (!findPath(one, A, B) || !findPath(two, A, C)) {
+            return -1;
+        }
+        int i;
+        for (i = 0; i < one.size() && i < two.size(); i++) {
+
+
+            if (!one.get(i).equals(two.get(i)))
+                break;
+        }
+
+        return one.get(i - 1);
+    }
+
+    public boolean findPath(List<Integer> list, TreeNode A, int val) {
+        if (A == null) return false;
+
+        list.add(A.val);
+
+        if (A.val == val) return true;
+
+        if (A.left != null && findPath(list, A.left, val)) {
+            return true;
+        }
+        if (A.right != null && findPath(list, A.right, val)) {
+            return true;
+        }
+
+        list.remove(list.size() - 1);
+
+        return false;
+    }
+    //endregion
+
+    //region Lowest Common Ancestor of a Binary Search Tree
+
+    /**
+     * @param root tree
+     * @param p    node one
+     * @param q    node two
+     * @return Ancestor of the tree
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        while (root != null) {
+            if (root != null) {
+                if (root.val > p.val && root.val > q.val) {
+                    root = root.left;
+                } else if (root.val < p.val && root.val < q.val) {
+                    root = root.right;
+                } else {
+                    break;
+                }
+            }
+        }
+        return root;
+    }
+
+    public TreeNode lowestCommonAncestorUsingRecursion(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val > p.val && root.val > q.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        }
+        if (root.val < p.val && root.val < q.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        return root;
+    }
+    //endregion
+
     //region invertTree
+
     /**
      * @param root tree
      * @return invert tree
