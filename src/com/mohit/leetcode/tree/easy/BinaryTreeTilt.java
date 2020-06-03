@@ -17,7 +17,6 @@ public class BinaryTreeTilt {
     }
 
     int tilt = 0;
-
     public int findTilt(TreeNode root) {
         find(root);
         return tilt;

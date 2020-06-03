@@ -28,4 +28,25 @@ public class MinimumAbsoluteDistanceBetweenBST {
         }
         return min;
     }
+    /*public int getMinimumDifference(TreeNode root) {
+        if (root == null) return 0;
+        int result = minABSDiffBetweenNodes(root);
+        return result == Integer.MAX_VALUE ? 0 : result;
+    }
+
+    public int minABSDiffBetweenNodes(TreeNode root) {
+        if (root == null) return Integer.MAX_VALUE;
+
+        int left = minABSDiffBetweenNodes(root.left);
+        int diff = Integer.MAX_VALUE;
+        if (prev != null) {
+            diff = Math.abs(prev - root.val);
+        }
+        //Update the Previous
+        prev = root.val;
+
+        int right = minABSDiffBetweenNodes(root.right);
+
+        return Math.min(diff, Math.min(left, right));
+    }*/
 }

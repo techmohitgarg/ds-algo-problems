@@ -92,5 +92,43 @@ public class PathSumIII {
         data.remove(data.size() - 1);
         return count + left + right;
     }
+
+    //Need to more works on this
+
+   /* public int pathSum_(TreeNode root, int sum) {
+        if (root == null) return 0;
+        int res = 0;
+        k_paths(root, sum, new HashMap<>(), 0, res);
+        return res;
+    }
+
+    void k_paths(TreeNode root, int k, HashMap<Integer, Integer> p,
+                 int sum, int res) {
+        // If root is not null
+        if (root != null) {
+            // If root value and previous sum equal
+            // to k then increase the count
+            if (sum + root.val == k)
+                res++;
+
+            // Add those values also which differes
+            // by the current sum and root data by k
+            res += p.containsKey(sum + root.val - k) ? p.get(sum + root.val - k) : 0;
+
+            // Insert the sum + root value in the map
+            //p[sum + root -> data]++;
+            p.put(sum + root.val, p.getOrDefault(sum + root.val, 0) + 1);
+
+            // Move to left and right trees
+            k_paths(root.left, k, p, sum + root.val, res);
+            k_paths(root.right, k, p, sum + root.val, res);
+
+            // remove the sum + root->data value from the
+            // map if they are n not required further or
+            // they do no sum up to k in any way
+            //p[sum + root -> data]--;
+            p.put(sum + root.val, p.getOrDefault(sum + root.val, 0) - 1);
+        }
+    }*/
 }
 
