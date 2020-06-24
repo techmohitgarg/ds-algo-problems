@@ -29,4 +29,33 @@ public class LongestUnivaluePath {
         }
         return Math.max(longestUnivaluePath(root.left, val), longestUnivaluePath(root.right, val)) + 1;
     }
+
+/*    //region Longest Univalue Path
+    int ans;
+
+    public int longestUnivaluePath(TreeNode root) {
+        if (root == null) return 0;
+        findTheLongestPath(root);
+        return ans;
+    }
+
+    public int findTheLongestPath(TreeNode root) {
+        if (root == null) return 0;
+
+        int left = findTheLongestPath(root.left);
+        int right = findTheLongestPath(root.right);
+        int arrowLeft = 0, arrowRight = 0;
+
+        if (root.left != null && root.val == root.left.val) {
+            arrowLeft += 1 + left;
+        }
+        if (root.right != null && root.val == root.right.val) {
+            arrowRight += 1 + right;
+        }
+
+        ans = Math.max(ans, arrowLeft + arrowRight);
+
+        return Math.max(arrowLeft, arrowRight);
+    }*/
+    //endregion
 }

@@ -14,21 +14,9 @@ public class MinimumAbsoluteDistanceBetweenBST {
 
     Integer min = Integer.MAX_VALUE;
     Integer prev = null;
+    //region Minimum Absolute Difference in BST
 
     public int getMinimumDifference(TreeNode root) {
-        if (root.left != null) {
-            getMinimumDifference(root.left);
-        }
-        if (prev != null) {
-            min = Math.min(min, Math.abs(root.val - prev));
-        }
-        prev = root.val;
-        if (root.right != null) {
-            getMinimumDifference(root.right);
-        }
-        return min;
-    }
-    /*public int getMinimumDifference(TreeNode root) {
         if (root == null) return 0;
         int result = minABSDiffBetweenNodes(root);
         return result == Integer.MAX_VALUE ? 0 : result;
@@ -48,5 +36,6 @@ public class MinimumAbsoluteDistanceBetweenBST {
         int right = minABSDiffBetweenNodes(root.right);
 
         return Math.min(diff, Math.min(left, right));
-    }*/
+    }
+    //endregion
 }

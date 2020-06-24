@@ -30,4 +30,28 @@ public class MinimumDistanceBetweenBST {
         }
         return min;
     }
+    //region Minimum Distance Between BST Nodes
+    /*public int minDiffInBST(TreeNode root) {
+        if (root == null) return 0;
+        int result = minDiffBetweenNodes(root);
+        return result == Integer.MAX_VALUE ? 0 : result;
+    }
+
+    public int minDiffBetweenNodes(TreeNode root) {
+        if (root == null) return Integer.MAX_VALUE;
+
+        int left = minDiffBetweenNodes(root.left);
+        int diff = Integer.MAX_VALUE;
+        if (prev != null) {
+            diff = root.val - prev;
+        }
+        //Update the Previous
+        prev = root.val;
+
+        int right = minABSDiffBetweenNodes(root.right);
+
+        return Math.min(diff, Math.min(left, right));
+    }*/
+
+    //endregion
 }

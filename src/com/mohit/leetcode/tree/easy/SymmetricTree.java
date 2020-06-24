@@ -17,10 +17,29 @@ public class SymmetricTree {
         treeOne.right.left = new TreeNode(4);
         treeOne.right.right = new TreeNode(3);
         System.out.println(tree.isSymmetric(treeOne));
-        System.out.println(tree.isSymmetric1(treeOne));
     }
 
-    public boolean isSymmetric1(TreeNode root) {
+    //region isSymmetric using recursion and iteration
+
+    /**
+     * @param root tree
+     * @return true or false
+     */
+
+    public boolean isSymmetric(TreeNode root) {
+        return isSameSymmetricForAllChild(root, root);
+    }
+
+    public boolean isSameSymmetricForAllChild(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
+        if (p.val != q.val) {
+            return false;
+        }
+        return isSameSymmetricForAllChild(p.left, q.right) && isSameSymmetricForAllChild(p.right, q.left);
+    }
+
+    public boolean isSymmetricUsingIteration(TreeNode root) {
         if (root == null) return true;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
@@ -28,6 +47,8 @@ public class SymmetricTree {
         while (!queue.isEmpty()) {
             TreeNode left = queue.poll();
             TreeNode right = queue.poll();
+            // Base Case's
+            //Check the node whether match or not
             if (left == null && right == null) continue;
             if (left == null || right == null) return false;
             if (left.val != right.val) return false;
@@ -40,24 +61,5 @@ public class SymmetricTree {
         }
         return true;
     }
-
-    public boolean isSymmetric(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-        return isMirrorEachOther(root.left, root.right);
-    }
-
-    public boolean isMirrorEachOther(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return true;
-        }
-        if (root1 == null || root2 == null) {
-            return false;
-        }
-        if (root1.val != root2.val) {
-            return false;
-        }
-        return isMirrorEachOther(root1.left, root2.right) && isMirrorEachOther(root1.right, root2.left);
-    }
+    //endregion and Iteration and Iteration
 }

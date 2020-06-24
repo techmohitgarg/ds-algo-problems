@@ -9,13 +9,10 @@ public class InorderSuccessor {
 
         InorderSuccessor successor = new InorderSuccessor();
         Node root = null, temp = null, suc = null, min = null;
-        root = successor.insert(root, 20);
-        root = successor.insert(root, 8);
-        root = successor.insert(root, 22);
+        root = successor.insert(root, 3);
+        root = successor.insert(root, 1);
         root = successor.insert(root, 4);
-        root = successor.insert(root, 12);
-        root = successor.insert(root, 10);
-        root = successor.insert(root, 14);
+        root = successor.insert(root, 2);
         temp = root.left.right;
         suc = successor.inOrderSuccessorWithOutRoot(root, temp);
         TreeNode tt = new TreeNode(1);

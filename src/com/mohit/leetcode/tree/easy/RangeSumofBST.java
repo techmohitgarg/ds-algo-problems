@@ -11,15 +11,21 @@ public class RangeSumofBST {
         System.out.println(new RangeSumofBST().rangeSumBST(t1, 6, 10));
     }
 
+    //region Range Sum of BST
     public int rangeSumBST(TreeNode root, int L, int R) {
         if (root == null) return 0;
-
-        int left = rangeSumBST(root.left, L, R);
-        int right = rangeSumBST(root.right, L, R);
+        int count = 0;
         if (root.val >= L && root.val <= R) {
-            return root.val + left + right;
+            count += root.val;
         }
-        return left + right;
+        if (L < root.val) {
+            count += rangeSumBST(root.left, L, R);
+        }
+        if (R > root.val) {
+            count += rangeSumBST(root.right, L, R);
+        }
+        return count;
     }
+    //endregion
 
 }

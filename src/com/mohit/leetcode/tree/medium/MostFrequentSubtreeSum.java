@@ -48,4 +48,51 @@ public class MostFrequentSubtreeSum {
         return sum;
     }
 
+    //region Most Frequent Subtree Sum
+/*    int maxLen = 0;
+    int count = 0;
+    public int[] findFrequentTreeSum(TreeNode root) {
+        if (root == null) return new int[]{};
+
+        HashMap<Integer, Integer> mostFrequentSum = new HashMap<>();
+
+        getSubTreeSum(root, mostFrequentSum);
+
+        if (maxLen <= 0) {
+            return new int[]{};
+        } else {
+            int[] result = new int[count];
+            int i = 0;
+            for (Map.Entry<Integer, Integer> e : mostFrequentSum.entrySet()) {
+                if (e.getValue() == maxLen) {
+                    result[i] = e.getKey();
+                    i++;
+                }
+            }
+            return result;
+        }
+    }
+
+    private int getSubTreeSum(TreeNode root, HashMap<Integer, Integer> mostFrequentSum) {
+        if (root == null) return 0;
+
+        int left = getSubTreeSum(root.left, mostFrequentSum);
+        int right = getSubTreeSum(root.right, mostFrequentSum);
+
+        int sum = root.val + left + right;
+
+        mostFrequentSum.put(sum, mostFrequentSum.getOrDefault(sum, 0) + 1);
+
+        int len = mostFrequentSum.get(sum);
+
+        if (len > maxLen) {
+            maxLen = len;
+            count = 1;
+        } else if (maxLen == len) {
+            count++;
+        }
+        return sum;
+    }*/
+    //endregion
+
 }

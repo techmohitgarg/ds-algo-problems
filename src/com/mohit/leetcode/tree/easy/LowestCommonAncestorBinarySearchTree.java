@@ -20,10 +20,35 @@ public class LowestCommonAncestorBinarySearchTree {
 
     }
 
-    // With recursion
+    //region Lowest Common Ancestor of a Binary Search Tree
+
+    /**
+     * @param root tree
+     * @param p    node one
+     * @param q    node two
+     * @return Ancestor of the tree
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) {
-            return root;
+            return null;
+        }
+        while (root != null) {
+            if (root != null) {
+                if (root.val > p.val && root.val > q.val) {
+                    root = root.left;
+                } else if (root.val < p.val && root.val < q.val) {
+                    root = root.right;
+                } else {
+                    break;
+                }
+            }
+        }
+        return root;
+    }
+
+    public TreeNode lowestCommonAncestorUsingRecursion(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
         }
         if (root.val > p.val && root.val > q.val) {
             return lowestCommonAncestor(root.left, p, q);
@@ -33,19 +58,5 @@ public class LowestCommonAncestorBinarySearchTree {
         }
         return root;
     }
-
-    //Without recursion
-    public TreeNode lowestCommonAncestorWithIterate(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null) return null;
-        while (root != null) {
-            if (root.val > p.val && root.val > q.val) {
-                root = root.left;
-            } else if (root.val < p.val && root.val < q.val) {
-                root = root.right;
-            } else {
-                break;
-            }
-        }
-        return root;
-    }
+    //endregion
 }

@@ -3,7 +3,9 @@ package com.mohit.leetcode.tree.easy;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class LeafSimilarTrees {
 
@@ -50,4 +52,35 @@ public class LeafSimilarTrees {
             list1.add(root1.val);
         }
     }
+/*    //region Leaf-Similar Trees
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        Queue<Integer> stack = new LinkedList<>();
+
+        addLeafsNode(root1, stack, true);
+
+        if (!addLeafsNode(root2, stack, false)) {
+            return false;
+        }
+        return stack.isEmpty() ? true : false;
+    }
+
+    private boolean addLeafsNode(TreeNode root, Queue<Integer> stack, boolean isAdd) {
+        if (root == null) return true;
+
+        if (root.left == null && root.right == null) {
+            if (isAdd) {
+                stack.add(root.val);
+                return true;
+            } else {
+                if (stack.isEmpty() || stack.peek() != root.val) {
+                    return false;
+                } else {
+                    stack.poll();
+                    return true;
+                }
+            }
+
+        }
+        return addLeafsNode(root.left, stack, isAdd) && addLeafsNode(root.right, stack, isAdd);
+    }*/
 }

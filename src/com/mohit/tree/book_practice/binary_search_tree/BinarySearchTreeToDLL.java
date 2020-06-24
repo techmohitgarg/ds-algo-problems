@@ -23,8 +23,6 @@ public class BinarySearchTreeToDLL {
         treeToDLL.convertBSTToDLL(root);
         System.out.println();
         treeToDLL.printlist(head);
-
-
     }
 
     static TreeNode head = null;
