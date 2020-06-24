@@ -64,5 +64,4 @@ public class AverageofLevelsBinaryTree {
         average(t.right, i + 1, sum, count);
     }*/
 
-
 }

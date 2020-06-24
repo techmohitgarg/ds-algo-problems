@@ -15,24 +15,21 @@ public class ConstructStringFromBinaryTree {
         System.out.println(binaryTree.tree2str(node));
     }
 
-
+    //region Construct String from Binary Tree
     public String tree2str(TreeNode t) {
-        if (t == null) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        helper(t, sb);
-        return sb.toString();
+        if (t == null) return "";
+        StringBuilder builder = new StringBuilder();
+        constructStringUsingTree(t, builder);
+        return builder.toString();
     }
 
-    public void helper(TreeNode root, StringBuilder sb) {
+
+    private void constructStringUsingTree(TreeNode root, StringBuilder sb) {
+        if (root == null) return;
         sb.append(root.val);
-        if (root.left == null && root.right == null) {
-            return;
-        }
         if (root.left != null) {
             sb.append("(");
-            helper(root.left, sb);
+            constructStringUsingTree(root.left, sb);
             sb.append(")");
         }
         if (root.right != null) {
@@ -40,9 +37,10 @@ public class ConstructStringFromBinaryTree {
                 sb.append("()");
             }
             sb.append("(");
-            helper(root.right, sb);
+            constructStringUsingTree(root.right, sb);
             sb.append(")");
         }
     }
+    //endregion
 
 }

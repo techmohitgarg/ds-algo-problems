@@ -2,9 +2,9 @@ package com.mohit.tree.book_practice.binary_tree;
 
 public class BinaryTree {
 
-    int data;
-    BinaryTree left;
-    BinaryTree right;
+    public int data;
+    public BinaryTree left;
+    public BinaryTree right;
 
     public BinaryTree(int data) {
         this.data = data;

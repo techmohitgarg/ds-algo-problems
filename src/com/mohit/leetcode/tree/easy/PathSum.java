@@ -10,11 +10,21 @@ public class PathSum {
 
         System.out.println(new PathSum().hasPathSum(a, -5));
     }
+    //region hasPathSum
 
+    /**
+     * @param root tree
+     * @param sum  sum need to find in the tree
+     * @return either sum exist or not from root to leaf node
+     */
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) return false;
-        if (root.left == null && root.right == null && sum == root.val) return true;
-        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+        if (root.val == sum && root.left == null && root.right == null) {
+            return true;
+        }
+        return hasPathSum(root.left, sum - root.val) ||
+                hasPathSum(root.right, sum - root.val);
     }
+    //endregion
 
 }

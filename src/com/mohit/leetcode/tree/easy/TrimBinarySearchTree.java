@@ -17,47 +17,55 @@ public class TrimBinarySearchTree {
     }
 
 
+    //region Trim a Binary Search Tree
     public TreeNode trimBST(TreeNode root, int L, int R) {
-        if (root == null) {
-            return null;
-        }
+        if (root == null) return null;
 
         if (root.val > R) {
             return trimBST(root.left, L, R);
         }
-        if (root.val > L) {
+        if (root.val < L) {
             return trimBST(root.right, L, R);
         }
+
         root.left = trimBST(root.left, L, R);
         root.right = trimBST(root.right, L, R);
+
         return root;
     }
 
-    public void inOrder(List<Integer> list, TreeNode root, int L, int R) {
-        if (root == null) {
-            return;
+    /*public TreeNode trimBST(TreeNode root, int L, int R) {
+        if (root == null) return null;
+        List<Integer> list = new ArrayList<>();
+
+        itrTree(root, L, R, list);
+        TreeNode node = null;
+        for (int i = 0; i < list.size(); i++) {
+            node = BST(node, list.get(i));
         }
+        return node;
+    }
+
+    private void itrTree(TreeNode root, int L, int R, List<Integer> list) {
+        if (root == null) return;
         if (root.val >= L && root.val <= R) {
             list.add(root.val);
         }
-        inOrder(list, root.left, L, R);
-        inOrder(list, root.right, L, R);
+        itrTree(root.left, L, R, list);
+        itrTree(root.right, L, R, list);
     }
 
+    public TreeNode BST(TreeNode root, int val) {
+        if (root == null) return new TreeNode(val);
 
-    private TreeNode addItem(TreeNode root, int data) {
-        if (root == null) {
-            return new TreeNode(data);
-        }
-        TreeNode temp;
-        if (data <= root.val) {
-            temp = addItem(root.left, data);
-            root.left = temp;
+        if (root.val >= val) {
+            root.left = BST(root.left, val);
         } else {
-            temp = addItem(root.right, data);
-            root.right = temp;
+            root.right = BST(root.right, val);
         }
+
         return root;
-    }
+    }*/
+    //endregion
 
 }

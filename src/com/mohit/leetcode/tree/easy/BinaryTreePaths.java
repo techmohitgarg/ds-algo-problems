@@ -36,5 +36,34 @@ public class BinaryTreePaths {
         printPaths(paths, pathToLeaf + "->", root.right);
     }
 
+    //region Binary Tree Paths
+    /*public List<String> binaryTreePaths(TreeNode root) {
+        List<String> paths = new ArrayList<>();
+        findPathRootToleaf(root, paths, new ArrayList<>());
+        return paths;
+    }
+
+    private void findPathRootToleaf(TreeNode root, List<String> pathList, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root.val);
+        if (root.left == null && root.right == null) {
+            StringBuilder sb = new StringBuilder();
+            int i = 0;
+            for (i = 0; i < list.size() - 1; i++) {
+                sb.append(list.get(i));
+                sb.append("->");
+            }
+            sb.append(list.get(i));
+            pathList.add(sb.toString());
+        }
+
+        findPathRootToleaf(root.left, pathList, list);
+        findPathRootToleaf(root.right, pathList, list);
+        list.remove(list.size() - 1);
+    }*/
+
+    //endregion
 
 }

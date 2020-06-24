@@ -54,63 +54,44 @@ public class SameTree {
 
     }
 
+    //region isSameTree using recursion and iteration
+
+    /**
+     * @param p tree
+     * @param q tree
+     * @return true or false
+     */
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        if (p == null && q == null) {
-            return true;
-        }
-        if (p == null || q == null) {
-            return false;
-        }
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
         if (p.val != q.val) {
             return false;
         }
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
-    public boolean isSameTree1(TreeNode p, TreeNode q) {
-        if (p == null && q == null) {
-            return true;
-        }
-        if (p == null || q == null) {
-            return false;
-        }
-        Queue<TreeNode> queueOne = new LinkedList<>();
-        Queue<TreeNode> queueTwo = new LinkedList<>();
-        queueOne.add(p);
-        queueTwo.add(q);
-        while (!queueOne.isEmpty() && !queueTwo.isEmpty()) {
-            TreeNode nodeOne = queueOne.poll();
-            TreeNode nodeTwo = queueTwo.poll();
-            if ((nodeOne.val != nodeTwo.val)) {
-                return false;
-            }
-            // First Tree
-            if (nodeOne.left != null || nodeTwo.left != null) {
-                if ((nodeOne.left != null && nodeTwo.left == null) || (nodeOne.left == null && nodeTwo.left != null)) {
-                    return false;
-                } else {
-                    queueOne.add(nodeOne.left);
-                    queueTwo.add(nodeTwo.left);
-                }
+    public boolean isSameTreeUsingIteration(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
 
-            }
-            // Second Tree
-            if (nodeOne.right != null || nodeTwo.right != null) {
-                if ((nodeOne.right != null && nodeTwo.right == null) || (nodeOne.right == null && nodeTwo.right != null)) {
-                    return false;
-                } else {
-                    queueOne.add(nodeOne.right);
-                    queueTwo.add(nodeTwo.right);
-                }
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(p);
+        nodes.add(q);
+        while (!nodes.isEmpty()) {
+            TreeNode pNode = nodes.poll();
+            TreeNode qNode = nodes.poll();
+            if (pNode == null && qNode == null) continue;
+            if (pNode == null || qNode == null) return false;
+            if (pNode.val != qNode.val) return false;
 
-            }
+            nodes.add(pNode.left);
+            nodes.add(qNode.left);
 
-
+            nodes.add(pNode.right);
+            nodes.add(qNode.right);
         }
-        if (queueOne.isEmpty() && queueTwo.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return true;
     }
+    //endregion
 }

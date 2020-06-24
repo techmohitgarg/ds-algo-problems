@@ -79,4 +79,31 @@ public class SecondMinimumNodeInaBinaryTree {
         inorder(list, root.right);
     }*/
 
+    // region Second Minimum Node In a Binary Tree
+/*    Integer first = null, second = null;
+    public int findSecondMinimumValue(TreeNode root) {
+        if (root == null) return -1;
+
+        findMinNumber(root);
+        return (second == null || first == second) ? -1 : second;
+    }
+
+
+    private void findMinNumber(TreeNode root) {
+        if (root == null) return;
+
+        if (first == null || first > root.val) {
+            second = first;
+            first = root.val;
+        }
+        if (root.val > first) {
+            if (second == null || (root.val < second)) {
+                second = root.val;
+            }
+        }
+        findMinNumber(root.left);
+        findMinNumber(root.right);
+    }*/
+
+    //endregion
 }

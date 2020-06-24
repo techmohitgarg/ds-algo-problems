@@ -6,6 +6,7 @@ import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class PathSumIII {
@@ -14,40 +15,8 @@ public class PathSumIII {
         TreeNode node = MakeTree.stringToTreeNode("[5,4,8,11,null,13,4,7,2,null,null,5,1]");
         int sum = 22;
         System.out.println(sumIII.pathSum(node, sum));
-        System.out.println(sumIII.pathSum2(node, sum));
     }
 
-
-    public int pathSum(TreeNode root, int sum) {
-        if (root == null) {
-            return 0;
-        }
-        HashMap<Integer, Integer> perSum = new HashMap<>();
-        int count = sumCount(root, 0, sum, perSum);
-        return count;
-    }
-
-
-    public int sumCount(TreeNode root, int currentSum, int target, HashMap<Integer, Integer> perSum) {
-        if (root == null) {
-            return 0;
-        }
-        int count = 0;
-        currentSum += root.val;
-        if (perSum.containsKey(currentSum - target)) {
-            count += perSum.get(currentSum - target);
-        }
-
-        if (!perSum.containsKey(currentSum)) {
-            perSum.put(currentSum, 1);
-        } else {
-            perSum.put(currentSum, perSum.get(currentSum) + 1);
-        }
-        count += sumCount(root.left, currentSum, target, perSum);
-        count += sumCount(root.right, currentSum, target, perSum);
-        perSum.put(currentSum, perSum.get(currentSum) - 1);
-        return count;
-    }
 
     public int pathSum1(TreeNode root, int sum) {
         if (root == null) return 0;
@@ -70,65 +39,47 @@ public class PathSumIII {
         return count;
     }
 
-
-    public int pathSum2(TreeNode root, int sum) {
-        if (root == null) return 0;
-        int count = sum(root, sum, new ArrayList<>());
-        return count;
-    }
-
-    public int sum(TreeNode root, int sum, ArrayList<Integer> data) {
-        if (root == null) return 0;
-        data.add(root.val);
-        int left = sum(root.left, sum, data);
-        int right = sum(root.right, sum, data);
+    //region Path Sum III
+    private int printPath(List<Integer> list, TreeNode node, int sum) {
+        if (node == null) return 0;
+        list.add(node.val);
+        int left = printPath(list, node.left, sum);
+        int right = printPath(list, node.right, sum);
 
         int count = 0;
-        int val = 0;
-        for (int i = data.size() - 1; i >= 0; i--) {
-            val += data.get(i);
-            if (val == sum) count++;
+        int temp = 0;
+        for (int i = list.size() - 1; i >= 0; i--) {
+            temp += list.get(i);
+            if (temp == sum) {
+                count++;
+            }
         }
-        data.remove(data.size() - 1);
+
+        list.remove(list.size() - 1);
         return count + left + right;
     }
 
-    //Need to more works on this
 
-   /* public int pathSum_(TreeNode root, int sum) {
+    public int pathSum(TreeNode root, int sum) {
         if (root == null) return 0;
-        int res = 0;
-        k_paths(root, sum, new HashMap<>(), 0, res);
-        return res;
+
+        int count = pathSumExist(root, sum);
+        count += pathSum(root.left, sum);
+        count += pathSum(root.right, sum);
+        return count;
     }
 
-    void k_paths(TreeNode root, int k, HashMap<Integer, Integer> p,
-                 int sum, int res) {
-        // If root is not null
-        if (root != null) {
-            // If root value and previous sum equal
-            // to k then increase the count
-            if (sum + root.val == k)
-                res++;
+    public int pathSumExist(TreeNode root, int sum) {
+        if (root == null) return 0;
 
-            // Add those values also which differes
-            // by the current sum and root data by k
-            res += p.containsKey(sum + root.val - k) ? p.get(sum + root.val - k) : 0;
-
-            // Insert the sum + root value in the map
-            //p[sum + root -> data]++;
-            p.put(sum + root.val, p.getOrDefault(sum + root.val, 0) + 1);
-
-            // Move to left and right trees
-            k_paths(root.left, k, p, sum + root.val, res);
-            k_paths(root.right, k, p, sum + root.val, res);
-
-            // remove the sum + root->data value from the
-            // map if they are n not required further or
-            // they do no sum up to k in any way
-            //p[sum + root -> data]--;
-            p.put(sum + root.val, p.getOrDefault(sum + root.val, 0) - 1);
+        int count = 0;
+        if (root.val == sum) {
+            count++;
         }
-    }*/
+        count += pathSumExist(root.left, sum - root.val);
+        count += pathSumExist(root.right, sum - root.val);
+        return count;
+    }
+    //endregion
 }
 

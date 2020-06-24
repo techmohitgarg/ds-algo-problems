@@ -16,17 +16,23 @@ public class InvertBinaryTree {
         System.out.println(invertBinaryTree.invertTree(tree));
     }
 
+    //region invertTree
 
+    /**
+     * @param root tree
+     * @return invert tree
+     */
     public TreeNode invertTree(TreeNode root) {
-        if (root == null) {
-            return null;
-        }
+        if (root == null) return null;
+
         invertTree(root.left);
         invertTree(root.right);
+
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
         return root;
     }
+    //endregion
 
 }
