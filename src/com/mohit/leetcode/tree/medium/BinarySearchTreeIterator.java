@@ -4,7 +4,9 @@ import com.mohit.leetcode.tree.MakeTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BinarySearchTreeIterator {
 
@@ -23,40 +25,38 @@ public class BinarySearchTreeIterator {
         iterator.hasNext(); // return false
     }
 
+    //region Binary Search Tree Iterator
     static class BSTIterator {
-        List<Integer> list = new ArrayList<>();
-        int i = 0;
+
+        Queue<Integer> queue = new LinkedList<>();
 
         public BSTIterator(TreeNode root) {
-            inOrder(list, root);
+            inOrder(root);
         }
 
         /**
          * @return the next smallest number
          */
         public int next() {
-            if (hasNext()) {
-                int num = list.get(i);
-                i++;
-                return num;
-            }
-            return -1;
+            if (queue.isEmpty()) return -1;
+            return queue.poll().intValue();
         }
 
         /**
          * @return whether we have a next smallest number
          */
         public boolean hasNext() {
-            return (i < list.size());
+            return !queue.isEmpty();
         }
 
-        private void inOrder(List<Integer> list, TreeNode root) {
-            if (root == null) return;
-            inOrder(list, root.left);
-            list.add(root.val);
-            inOrder(list, root.right);
+        private void inOrder(TreeNode node) {
+            if (node == null) return;
+            inOrder(node.left);
+            queue.add(node.val);
+            inOrder(node.right);
         }
     }
+    //endregion
 
 
 }

@@ -63,5 +63,52 @@ public class FlattenBinaryTreetoLinkedList {
         temp.right = right;
     }
 
+    //region Flatten Binary Tree to Linked List
+    /*public void flatten(TreeNode root) {
+        TreeNode t = root;
+        while (t != null) {
+            if (t.left == null) {
+                t = t.right;
+                continue;
+            }
+            TreeNode l = t.left;
+            while (l.right != null) {
+                l = l.right;
+            }
+            l.right = t.right;
+            t.right = t.left;
+            t.left = null;
+        }
+
+
+    }*/
+
+   /* public void flatten(TreeNode root) {
+        if (root == null) return;
+
+        TreeNode temp = root.right;
+
+        root.right = root.left;
+        root.left = null;
+        TreeNode cur = root;
+        while (cur.right != null) {
+            cur = cur.right;
+        }
+        cur.right = temp;
+        flatten(root.right);
+    }*/
+    /*public void flatten (TreeNode root){
+        if (root == null) return;
+        Stack<TreeNode> nodes = new Stack<>();
+        nodes.push(root);
+        while (!nodes.isEmpty()) {
+            TreeNode node = nodes.pop();
+            if (node.right != null) nodes.push(node.right);
+            if (node.left != null) nodes.push(node.left);
+            node.left = null;
+            node.right = nodes.isEmpty() ? null : nodes.peek();
+        }
+    }*/
+    //endregion
 
 }

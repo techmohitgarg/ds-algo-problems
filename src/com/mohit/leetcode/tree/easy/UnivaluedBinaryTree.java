@@ -23,5 +23,17 @@ public class UnivaluedBinaryTree {
         }
         return isUnivalTree(root.left, data) && isUnivalTree(root.right, data);
     }
+    //region Univalued Binary Tree
+    /*public boolean isUnivalTree(TreeNode root) {
+        if (root == null) return true;
+
+        if ((root.left != null && root.val != root.left.val) ||
+                (root.right != null && root.val != root.right.val)) {
+            return false;
+        }
+
+        return isUnivalTree(root.left) && isUnivalTree(root.right);
+    }*/
+    //endregion
 
 }

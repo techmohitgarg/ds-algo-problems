@@ -2,9 +2,7 @@ package com.mohit.leetcode.tree.medium;
 
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class FindDuplicateSubtrees {
 
@@ -20,6 +18,87 @@ public class FindDuplicateSubtrees {
         System.out.println(subtrees.findDuplicateSubtrees(root));
     }
 
+    /*public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        List<TreeNode> treeNodeList = new ArrayList<>();
+        findDuplication(root, treeNodeList, new HashMap<>());
+        return treeNodeList;
+    }
+
+    public String findDuplication(TreeNode root, List<TreeNode> list, HashMap<String, Integer> subTreeValue) {
+        if (root == null) return "";
+        String subTree = "(";
+        subTree += findDuplication(root.left, list, subTreeValue);
+        subTree += root.val;
+        subTree += findDuplication(root.right, list, subTreeValue);
+        subTree += ")";
+
+        if (subTreeValue.containsKey(subTree)) {
+            if (subTreeValue.get(subTree) == 1) {
+                System.out.println(subTree);
+                list.add(root);
+            }
+        }
+        subTreeValue.put(subTree, subTreeValue.getOrDefault(subTree, 0) + 1);
+        return subTree;
+    }*/
+
+
+    /*ublic List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        Map<TreeId, TreeId> subtrees = new HashMap<>();
+        treeId(root, subtrees);
+        List<TreeNode> duplicates = new ArrayList<>();
+        for (TreeId id : subtrees.values()) {
+            if (id.hasDuplicates()) {
+                duplicates.add(id.node);
+            }
+        }
+        return duplicates;
+    }
+
+    private static class TreeId {
+        private final TreeId left, right;
+        public final TreeNode node;
+        private int count;
+
+        public TreeId(TreeNode node, TreeId left, TreeId right) {
+            this.node = node;
+            this.left = left;
+            this.right = right;
+            this.count = 0;
+        }
+
+        public boolean hasDuplicates() {
+            return count > 1;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof TreeId)) {
+                return false;
+            }
+            TreeId other = (TreeId) o;
+            return node.val == other.node.val && left == other.left && right == other.right;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(node.val, System.identityHashCode(left), System.identityHashCode(right));
+        }
+    }
+
+    private static TreeId treeId(TreeNode tree, Map<TreeId, TreeId> subtrees) {
+        if (tree == null) {
+            return null;
+        }
+        TreeId key = new TreeId(tree, treeId(tree.left, subtrees), treeId(tree.right, subtrees));
+        TreeId realId = subtrees.get(key);
+        if (realId == null) {
+            subtrees.put(key, key);
+            realId = key;
+        }
+        ++realId.count;
+        return realId;
+    }*/
 
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
         if (root == null) {

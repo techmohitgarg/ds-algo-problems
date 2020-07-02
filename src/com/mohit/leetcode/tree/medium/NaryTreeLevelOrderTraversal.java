@@ -15,7 +15,6 @@ public class NaryTreeLevelOrderTraversal {
         TreeNode root1 = MakeTree.stringToTreeNode("[5,3,6,2,4,null,7]");
 
     }
-
     //region N-ary Tree Level Order Traversal
     public List<List<Integer>> levelOrder(Node root) {
         List<List<Integer>> list = new ArrayList<>();

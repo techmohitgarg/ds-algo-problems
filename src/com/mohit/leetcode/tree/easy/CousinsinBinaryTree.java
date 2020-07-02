@@ -17,7 +17,70 @@ public class CousinsinBinaryTree {
         System.out.println(new CousinsinBinaryTree().isCousins(t1, 5, 1));
     }
 
+    //region Cousins in Binary Tree
+    int xD = 0;
+    int yD = 0;
+    TreeNode xP = null;
+    TreeNode yP = null;
+
     public boolean isCousins(TreeNode root, int x, int y) {
+        if (root == null) return false;
+
+        return isCousins(root, x, y, null, 0);
+    }
+
+    private boolean isCousins(TreeNode root, int x, int y, TreeNode parent, int depth) {
+        if (xD > 0 && xD == yD && xP != yP) {
+            return true;
+        }
+        if (root == null) return false;
+
+        if (root.val == x) {
+            xD = depth;
+            xP = parent;
+        } else if (root.val == y) {
+            yD = depth;
+            yP = parent;
+        }
+        return isCousins(root.left, x, y, root, depth + 1) || isCousins(root.right, x, y, root, depth + 1);
+    }
+
+
+    /*public boolean isCousins(TreeNode root, int x, int y) {
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(root);
+        while (!nodes.isEmpty()) {
+            boolean XMatch = false;
+            boolean YMatch = false;
+            int len = nodes.size();
+            while (len > 0) {
+                TreeNode node = nodes.poll();
+
+                if (node.left != null && node.left.val == x) {
+                    XMatch = true;
+                } else if (node.right != null && node.right.val == x) {
+                    XMatch = true;
+                } else if (node.left != null && node.left.val == y) {
+                    YMatch = true;
+                } else if (node.right != null && node.right.val == y) {
+                    YMatch = true;
+                }
+
+                if (node.left != null) nodes.add(node.left);
+                if (node.right != null) nodes.add(node.right);
+
+
+                if (XMatch && YMatch) return true;
+
+                len--;
+            }
+
+        }
+
+        return false;
+    }*/
+    //endregion
+    /*public boolean isCousins(TreeNode root, int x, int y) {
         if (root == null) return false;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
@@ -71,7 +134,7 @@ public class CousinsinBinaryTree {
         if (dep1 != dep2) return false;
         else if (par1 == par2) return false;
         return true;
-    }
+    }*/
 
 
 }

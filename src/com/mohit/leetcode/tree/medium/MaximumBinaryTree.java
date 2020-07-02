@@ -2,6 +2,8 @@ package com.mohit.leetcode.tree.medium;
 
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
+import java.util.Stack;
+
 public class MaximumBinaryTree {
 
 
@@ -14,29 +16,38 @@ public class MaximumBinaryTree {
 
 
     public TreeNode constructMaximumBinaryTree(int[] nums) {
-        TreeNode root = makeBinaryTree(nums, 0, nums.length - 1);
-        return root;
+        Stack<TreeNode> stk = new Stack<>();
+        for (int i = 0; i < nums.length; ++i) {
+            TreeNode cur = new TreeNode(nums[i]);
+            while (!stk.empty() && stk.peek().val < nums[i]) {
+                cur.left = stk.peek();
+                stk.pop();
+            }
+            if (!stk.empty())
+                stk.peek().right = cur;
+            stk.push(cur);
+        }
+        return stk.firstElement();
     }
 
-    private TreeNode makeBinaryTree(int[] num, int start, int end) {
-        if (start > end) {
-            return null;
-        }
-        if (start == end) {
-            TreeNode node = new TreeNode(num[start]);
-            return node;
-        } else {
-            // Find the max Number
-            int max = start;
-            for (int i = start; i <= end; i++) {
-                if (num[max] < num[i]) {
-                    max = i;
-                }
+    /*public TreeNode constructMaximumBinaryTree(int[] nums) {
+        TreeNode root = constructMaximumBinaryTree(nums, 0, nums.length - 1);
+        return root;
+    }*/
+
+
+    public TreeNode constructMaximumBinaryTree(int[] num, int left, int right) {
+        if (left > right) return null;
+
+        int mid = left; //Mid is the max value
+        for (int i = left; i <= right; i++) {
+            if (num[i] > num[mid]) {
+                mid = i;
             }
-            TreeNode node = new TreeNode(num[max]);
-            node.left = makeBinaryTree(num, start, max - 1);
-            node.right = makeBinaryTree(num, max + 1, end);
-            return node;
         }
+        TreeNode node = new TreeNode(num[mid]);
+        node.left = constructMaximumBinaryTree(num, left, mid - 1);
+        node.right = constructMaximumBinaryTree(num, mid + 1, right);
+        return node;
     }
 }

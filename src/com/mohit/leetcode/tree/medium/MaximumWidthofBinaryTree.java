@@ -1,5 +1,6 @@
 package com.mohit.leetcode.tree.medium;
 
+import com.mohit.leetcode.tree.MakeTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.HashMap;
@@ -11,19 +12,51 @@ public class MaximumWidthofBinaryTree {
 
     public static void main(String[] s) {
         MaximumWidthofBinaryTree binaryTree = new MaximumWidthofBinaryTree();
-        TreeNode node = new TreeNode(1);
-        node.left = new TreeNode(3);
-        node.left.left = new TreeNode(5);
-        node.left.left.left = new TreeNode(6);
-        node.right = new TreeNode(2);
-        node.right.right = new TreeNode(9);
-        node.right.right.right = new TreeNode(7);
+        TreeNode node = MakeTree.stringToTreeNode("[1,3,2,5,3,null,9]");
 
         System.out.println(binaryTree.widthOfBinaryTree(node));
     }
 
+    class TreeNodeContext {
+        TreeNode node;
+        int index;
+
+        public TreeNodeContext(TreeNode node, int index) {
+            this.node = node;
+            this.index = index;
+        }
+    }
+
 
     public int widthOfBinaryTree(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNodeContext> q = new LinkedList<>();
+        q.offer(new TreeNodeContext(root, 1));
+        int curW = 0;
+        int maxW = 0;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            int start = 0;
+            int end = 0;
+            for (int i = 0; i < size; i++) {
+                TreeNodeContext treeNodeContext = q.poll();
+                TreeNode node = treeNodeContext.node;
+                int index = treeNodeContext.index;
+                if (i == 0) start = index;
+                if (i == size - 1) end = index;
+                if (node.left != null) {
+                    q.offer(new TreeNodeContext(node.left, index * 2));
+                }
+                if (node.right != null) {
+                    q.offer(new TreeNodeContext(node.right, index * 2 + 1));
+                }
+            }
+            curW = end - start + 1;
+            maxW = Math.max(curW, maxW);
+        }
+        return maxW;
+    }
+    /*public int widthOfBinaryTree(TreeNode root) {
         if (root == null) return 0;
         Queue<TreeNode> q = new LinkedList<>();
         Map<TreeNode, Integer> m = new HashMap<>();
@@ -52,5 +85,5 @@ public class MaximumWidthofBinaryTree {
             maxW = Math.max(curW, maxW);
         }
         return maxW;
-    }
+    }*/
 }
