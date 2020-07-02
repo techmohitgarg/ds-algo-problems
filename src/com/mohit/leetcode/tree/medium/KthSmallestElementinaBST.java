@@ -57,4 +57,39 @@ public class KthSmallestElementinaBST {
         return node == null ? -1 : node.val;
     }
 
+    //region Kth Smallest Element in a BST
+    /*int kIdx = 0;
+
+    public int kthSmallest(TreeNode root, int k) {
+        if (root == null) return -1;
+
+        int left = kthSmallest(root.left, k);
+
+        if (left != -1) {
+            return left;
+        }
+        kIdx++;
+        if (kIdx == k) return root.val;
+
+        return kthSmallest(root.right, k);
+
+    }
+   *//* public int kthSmallest(TreeNode root, int k) {
+        if (root == null) return -1;
+        Stack<TreeNode> nodes = new Stack<>();
+        while (true) {
+            if (root != null) {
+                nodes.push(root);
+                root = root.left;
+            } else {
+                if (nodes.isEmpty()) return -1;
+                k--;
+                root = nodes.pop();
+                if (k == 0) return root.val;
+
+                root = root.right;
+            }
+        }
+    }*/
+    //endregion
 }

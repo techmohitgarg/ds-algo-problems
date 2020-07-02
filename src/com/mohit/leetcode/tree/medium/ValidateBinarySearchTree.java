@@ -82,4 +82,19 @@ public class ValidateBinarySearchTree {
         }
         return root.val;
     }*/
+    //region Validate Binary Search Tree
+    /*public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+
+        boolean left = isValidBST(root.left);
+        if (left == false) return false;
+
+        if (lastNode != null && lastNode.val >= root.val) {
+            return false;
+        }
+        lastNode = root;
+        return isValidBST(root.right);
+    }*/
+
+    //endregion
 }

@@ -1,5 +1,6 @@
 package com.mohit.leetcode.tree.medium;
 
+import com.mohit.leetcode.tree.MakeTree;
 import com.mohit.tree.book_practice.binary_tree.TreeNode;
 
 import java.util.LinkedList;
@@ -9,12 +10,7 @@ public class AddOneRowtoTree {
 
     public static void main(String[] s) {
         AddOneRowtoTree addOneRowtoTree = new AddOneRowtoTree();
-        TreeNode node = new TreeNode(4);
-        node.left = new TreeNode(2);
-        node.right = new TreeNode(6);
-        node.left.left = new TreeNode(3);
-        node.left.right = new TreeNode(1);
-        node.right.left = new TreeNode(5);
+        TreeNode node = MakeTree.stringToTreeNode("[4,null,2,3,1]");
         TreeNode treeNode = addOneRowtoTree.addOneRow(node, 1, 2);
         System.out.println(treeNode);
     }
@@ -44,51 +40,44 @@ public class AddOneRowtoTree {
             }
             return nodeNew;
         }
-        root.left = addOne(root.left, maxDepth + 1, v, d - 1, true);
-        root.right = addOne(root.right, maxDepth + 1, v, d - 1, false);
+        root.left = addOne(root.left, maxDepth + 1, v, d, true);
+        root.right = addOne(root.right, maxDepth + 1, v, d, false);
         return root;
     }
 
 
     public TreeNode addOneRow1(TreeNode root, int v, int d) {
-        if (root == null) {
-            return null;
-        }
+        if (root == null) return root;
+
         if (d == 1) {
             TreeNode node = new TreeNode(v);
             node.left = root;
             return node;
         }
-        Queue<TreeNode> stack = new LinkedList<>();
-        stack.add(root);
-        while (!stack.isEmpty() && d > 1) {
-            int size = stack.size();
-            d--;
-            while (size > 0) {
-                if (d == 1) {
-                    TreeNode temp = stack.poll();
-                    // Store Previous node
-                    TreeNode tempLeft = temp.left;
-                    TreeNode tempright = temp.right;
-                    // Add New Node
-                    TreeNode leftNode = new TreeNode(v);
-                    TreeNode rightNode = new TreeNode(v);
-                    // Assign temp node to new Node
-                    leftNode.left = tempLeft;
-                    rightNode.right = tempright;
-                    temp.left = leftNode;
-                    temp.right = rightNode;
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(root);
+        while (!nodes.isEmpty()) {
+            int len = nodes.size();
+            while (len > 0) {
+                TreeNode data = nodes.poll();
+                if (d > 2) {
+                    if (data.left != null) nodes.add(data.left);
+                    if (data.right != null) nodes.add(data.right);
                 } else {
-                    TreeNode temp = stack.poll();
-                    if (temp.left != null) {
-                        stack.add(temp.left);
-                    }
-                    if (temp.right != null) {
-                        stack.add(temp.right);
-                    }
+                    TreeNode left = new TreeNode(v);
+                    TreeNode right = new TreeNode(v);
+                    left.left = data.left;
+                    right.right = data.right;
+
+                    data.left = left;
+                    data.right = right;
                 }
-                size--;
+                len--;
             }
+            if (d <= 2) {
+                break;
+            }
+            d--;
         }
         return root;
     }

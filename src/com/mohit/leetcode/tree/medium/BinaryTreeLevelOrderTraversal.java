@@ -15,34 +15,27 @@ public class BinaryTreeLevelOrderTraversal {
         TreeNode t1 = MakeTree.stringToTreeNode("[10,5,15,null,null,6,20]");
         System.out.println(new BinaryTreeLevelOrderTraversal().levelOrder(t1));
     }
-
+    //region Binary Tree Level Order Traversal
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
         if (root == null) return list;
-        List<Integer> integers = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        queue.add(null);
         while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            if (node != null) {
+            int len = queue.size();
+            List<Integer> integers = new ArrayList<>();
+            while (len > 0) {
 
-                // add Value here in the list
+                TreeNode node = queue.poll();
                 integers.add(node.val);
-
                 if (node.left != null) queue.add(node.left);
                 if (node.right != null) queue.add(node.right);
-
-            } else {
-                list.add(new ArrayList<>(integers));
-                integers.clear();
-                if (!queue.isEmpty()) {
-                    queue.add(null);
-                }
+                len--;
             }
+            list.add(integers);
+
         }
         return list;
     }
-
-
+    //endregion
 }

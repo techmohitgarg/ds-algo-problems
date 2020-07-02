@@ -43,4 +43,31 @@ public class PathSumII {
     }
 
 
+    //region Path Sum II
+    public List<List<Integer>> pathSum_(TreeNode root, int sum) {
+        List<List<Integer>> list = new ArrayList<>();
+        findPath(root, list, new ArrayList<>(), sum);
+        return list;
+    }
+
+    private boolean findPath(TreeNode root, List<List<Integer>> lists, List<Integer> list, int sum) {
+        if (root == null) return false;
+
+        list.add(root.val);
+
+        if (sum == root.val && root.left == null && root.right == null) {
+            lists.add(new ArrayList<>(list));
+        }
+
+        if (root.left != null && findPath(root.left, lists, list, sum - root.val)) {
+            return true;
+        }
+        if (root.right != null && findPath(root.right, lists, list, sum - root.val)) {
+            return true;
+        }
+        list.remove(list.size() - 1);
+
+        return false;
+    }
+    //endregion
 }

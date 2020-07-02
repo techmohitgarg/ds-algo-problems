@@ -10,19 +10,44 @@ public class CountCompleteTreeNodes {
 
     }
 
+    //region Count Complete Tree Nodes
+    /* public int countNodes(TreeNode root) {
+     *//*if (root == null) return 0;
+        return 1 + count(root);*//*
+        if (root == null) return 0;
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }*/
+
+    /*public int count(TreeNode root) {
+        if (root == null) return 0;
+        int count = 0;
+        if (root.left != null && root.right != null) {
+            count += 2;
+        } else if (root.left != null && root.right == null) {
+            count += 1;
+        }
+        return count + count(root.left) + count(root.right);
+    }*/
     public int countNodes(TreeNode root) {
         if (root == null) return 0;
-        return 1 + count(root);
+        int leftH = 0;
+        int rightH = 0;
+        TreeNode pLeft = root;
+        TreeNode pRight = root;
+
+        while (pLeft != null) {
+            pLeft = pLeft.left;
+            leftH++;
+        }
+        while (pLeft != null) {
+            pLeft = pLeft.right;
+            rightH++;
+        }
+
+        if (leftH == rightH) return (int)Math.pow(2, leftH) - 1;
+
+        return 1 + countNodes(root.left) + countNodes(root.right);
     }
 
-    public int count(TreeNode root) {
-        if (root == null) return 0;
-        int sum = 0;
-        if (root.left != null && root.right != null) {
-            sum += 2;
-        } else if (root.left != null && root.right == null) {
-            sum += 1;
-        }
-        return sum + count(root.left) + count(root.right);
-    }
+    //endregion
 }

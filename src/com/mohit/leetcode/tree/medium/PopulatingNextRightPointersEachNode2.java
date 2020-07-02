@@ -157,4 +157,59 @@ public class PopulatingNextRightPointersEachNode2 {
         }
         return getNextNode(node.next);
     }*/
+
+    //region Populating Next Right Pointers in Each Node II
+    public Node connect(Node root) {
+        if (root == null) return root;
+
+        if (root.left != null) {
+            // check if the right is not null
+            if (root.right != null) {
+                root.left.next = root.right;
+            } else {
+                // find the next right node at the same level
+                root.left.next = findNext(root.next);
+            }
+        }
+        if (root.right != null) {
+            root.right.next = findNext(root.next);
+        }
+
+        connect(root.right);
+        connect(root.left);
+
+        return root;
+    }
+
+    private Node findNext(Node root) {
+        if (root == null) return root;
+        else if (root.left != null) return root.left;
+        else if (root.right != null) return root.right;
+        else return findNext(root.next);
+    }
+    /*public Node connect(Node root) {
+        if (root == null) return root;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(null);
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            if (node != null) {
+                node.next = queue.peek();
+
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            } else {
+                if (!queue.isEmpty())
+                    queue.add(null);
+            }
+        }
+        return root;
+    }*/
+    //endregion
 }

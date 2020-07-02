@@ -47,6 +47,24 @@ public class BinaryTreeRightSideView {
         return list;
     }
 
+    //region Binary Tree Right Side View
+    /*public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        rightSideViewNodeList(root, list, 0);
+        return list;
+    }
+
+    private void rightSideViewNodeList(TreeNode root, List<Integer> list, int level) {
+        if (root == null) return;
+
+        if (list.size() <= level) {
+            list.add(root.val);
+        }
+
+        rightSideViewNodeList(root.right, list, level + 1);
+        rightSideViewNodeList(root.left, list, level + 1);
+    }*/
+    //endregion
     /*public List<Integer> rightSideView1(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         rightSide(list, root, 0);

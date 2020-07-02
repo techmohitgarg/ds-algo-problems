@@ -17,8 +17,28 @@ public class FindBottomLeftTreeValue {
         System.out.println(treeValue.findBottomLeftValue(node));
     }
 
+    int left = 0;
+    int lastLevel = 0;
 
     public int findBottomLeftValue(TreeNode root) {
+        left = root.val;
+        findBottomLeftValue(root, 0, false);
+        return left;
+    }
+
+    public void findBottomLeftValue(TreeNode root, int level, boolean isLeft) {
+        if (root == null) return;
+
+        if (isLeft && lastLevel < level && root.left == null && root.right == null) {
+            left = root.val;
+            lastLevel = level;
+        }
+
+        findBottomLeftValue(root.left, level + 1, true);
+        findBottomLeftValue(root.right, level + 1, true);
+    }
+
+/*    public int findBottomLeftValue(TreeNode root) {
         if (root == null) {
             return -1;
         }
@@ -42,7 +62,7 @@ public class FindBottomLeftTreeValue {
             }
         }
         return leftValue;
-    }
+    }*/
     /*public int findBottomLeftValue(TreeNode root) {
         //Base case
         if (root.left == null && root.right == null) return root.val;

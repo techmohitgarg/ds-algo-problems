@@ -18,75 +18,113 @@ public class ZigzagTreeTraversal {
         tree.left.right = new TreeNode(5);
         tree.right.left = new TreeNode(6);
         tree.right.right = new TreeNode(7);
-        System.out.println(zigzagTreeTraversal.zigzagTree(tree));
+        System.out.println(zigzagTreeTraversal.zigzagLevelOrder(tree));
     }
 
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> list = new ArrayList<>();
-        if (root == null) return list;
-        List<Integer> integers = new ArrayList<>();
+    //region Binary Tree Zigzag Level Order Traversal
+    public int[][] zigzagLevelOrder(TreeNode A) {
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        if (A == null) return new int[][]{};
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        queue.add(null);
-        boolean b = false;
+        queue.add(A);
+        boolean b = true;
         while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            if (node != null) {
+            int len = queue.size();
+            ArrayList<Integer> integers = new ArrayList<>();
+            while (len > 0) {
+
+                TreeNode node = queue.poll();
                 if (b)
                     integers.add(node.val);
                 else
                     integers.add(0, node.val);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+                len--;
+            }
+            b = !b;
+            list.add(integers);
 
+        }
+        int[][] result = new int[list.size()][];
+        for (int i = 0; i < list.size(); i++) {
+            result[i] = new int[list.get(i).size()];
+        }
 
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
-            } else {
-
-                list.add(new ArrayList<>(integers));
-                integers.clear();
-                if (!queue.isEmpty()) {
-                    queue.add(null);
-                    b = !b;
-                }
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.get(i).size(); j++) {
+                result[i][j] = list.get(i).get(j);
             }
         }
-        return list;
+
+
+        return result;
     }
 
-    public List<Integer> zigzagTree(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<Integer> list = new ArrayList<>();
+    /*public int[][] zigzagLevelOrder(TreeNode A) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (A == null) return new int[][]{};
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        boolean isleft = true;
+        queue.add(A);
+        boolean b = true;
         while (!queue.isEmpty()) {
             int len = queue.size();
             List<Integer> integers = new ArrayList<>();
             while (len > 0) {
+
                 TreeNode node = queue.poll();
-                if (isleft) {
+                if (b)
                     integers.add(node.val);
-                } else {
+                else
                     integers.add(0, node.val);
-                }
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
                 len--;
             }
-            isleft = !isleft;
-            list.addAll(new ArrayList<>(integers));
+            b = !b;
+            list.add(integers);
+
+        }
+        int[][] result = new int[list.size()][];
+
+        for (int i = 0; i < list.size(); i++) {
+            int[] num = new int[list.get(i).size()];
+            for (int j = 0; j < list.get(i).size(); j++) {
+                num[j] = list.get(i).get(j);
+            }
+            result[i] = num;
+        }
+
+        return result;
+    }*/
+
+
+    /*public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (root == null) return list;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean b = true;
+        while (!queue.isEmpty()) {
+            int len = queue.size();
+            List<Integer> integers = new ArrayList<>();
+            while (len > 0) {
+
+                TreeNode node = queue.poll();
+                if (b)
+                    integers.add(node.val);
+                else
+                    integers.add(0, node.val);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+                len--;
+            }
+            b = !b;
+            list.add(integers);
+
         }
         return list;
-    }
+    }*/
+    //endregion
 
 }
