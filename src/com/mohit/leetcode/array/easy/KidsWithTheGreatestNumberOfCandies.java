@@ -16,6 +16,8 @@ public class KidsWithTheGreatestNumberOfCandies {
      * @param candies      array of candies integer
      * @param extraCandies array of extra candies integer
      * @return list of boolean value those candies can make greater with extra candies
+     * TC : O(N)
+     * SC : O(1) if ignore the return result otherwise SC = O(n)
      */
     public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
         List<Boolean> resultList = new ArrayList<>();

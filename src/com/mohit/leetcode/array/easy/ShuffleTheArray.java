@@ -13,7 +13,7 @@ public class ShuffleTheArray {
      * @param n    size of array
      * @return array in the form [x1,y1,x2,y2,...,xn,yn]
      * TC :O(N)
-     * SC :O(n) if ignore the return result than SC =O(1)
+     * SC :O(1) if ignore the return result otherwise SC = O(n)
      */
     public int[] shuffle(int[] nums, int n) {
         if (n <= 1) return nums;
