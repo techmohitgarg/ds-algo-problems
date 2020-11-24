@@ -27,19 +27,28 @@ Notes:
 https://leetcode.com/problems/flipping-an-image/
  */
 class FlipAndInvertImage {
-    public static void main(String[] args) {
-        FlipAndInvertImage flipAndInvertImage = new FlipAndInvertImage();
-        int[][] nums = {{1, 1, 0, 0}, {1, 0, 0, 1}, {0, 1, 1, 1}, {1, 0, 1, 0}};
-        int[][] result = flipAndInvertImage.flipAndInvertImage(nums);
-        for (int[] is : result) {
-            for (int i : is) {
-                System.out.print(i + " ");
-            }
-            System.out.println();
-        }
-    }
+
 
     public int[][] flipAndInvertImage(int[][] A) {
+        for (int[] arr : A) {
+            int left = 0;
+            int right = arr.length - 1;
+            while (left <= right) {
+                int temp = arr[left];
+                arr[left] = getInvert(arr[right]);
+                arr[right] = getInvert(temp);
+                left++;
+                right--;
+            }
+        }
+        return A;
+    }
+
+    private int getInvert(int num) {
+        return num == 0 ? 1 : 0;
+    }
+
+    public int[][] flipAndInvertImage_(int[][] A) {
         for (int[] is : A) {
             int left = 0;
             int right = is.length - 1;
