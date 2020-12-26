@@ -1,4 +1,4 @@
-//package com.mohit.cses.dynamic_programming;
+package com.mohit.cses.dynamic_programming;
 
 import java.util.Scanner;
 
