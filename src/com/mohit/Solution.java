@@ -1,33 +1,73 @@
 package com.mohit;
 
-import java.util.Arrays;
+import com.mohit.leetcode.linklist.ListNode;
 
 public class Solution {
 
-
     public static void main(String[] args) {
         Solution sol = new Solution();
-        System.out.println(singleton(new int[]{1, 1, 2, 2, 4, 5, 5}));
-        System.out.println(singleton(new int[]{10, 10, 12, 12, 15, 15, 16, 18, 18}));
-        System.out.println(singleton(new int[]{1, 2, 2, 5, 5, 6, 6, 7, 7}));
-        System.out.println(singleton(new int[]{1, 1, 2, 5, 5, 6, 6, 7, 7}));
-        System.out.println(singleton(new int[]{10, 10, 12, 12, 15, 15, 16, 16, 18}));
+        ListNode node = new ListNode(1);
+        node.next = new ListNode(2);
+        node.next.next = new ListNode(4);
+
+
+        ListNode head2 = new ListNode(1);
+        head2.next = new ListNode(3);
+        head2.next.next = new ListNode(4);
+
+        ListNode result = sol.mergeTwoLists(node, head2);
+
+        System.out.println(result);
     }
 
-    public static int singleton(int[] arr) {
-        int m = arr.length / 2;
-        if (m == 0) return arr[0];
-        if (m % 2 == 1) {
-            if (arr[m] == arr[m - 1]) return singleton(Arrays.copyOfRange(arr, m + 1, arr.length));
-            if (arr[m] != arr[m + 1]) return arr[m];
-            return singleton(Arrays.copyOfRange(arr, 0, m));
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null && l2 == null) return null;
+
+        else if (l1 == null) return l2;
+
+        else if (l2 == null) return l1;
+
+        else if (l1.val <= l2.val) {
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
         } else {
-            if (arr[m] == arr[m + 1]) return singleton(Arrays.copyOfRange(arr, m + 2, arr.length));
-            if (arr[m] != arr[m - 1]) return arr[m];
-            return singleton(Arrays.copyOfRange(arr, 0, m + 1));
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
         }
     }
 
+    public ListNode mergeTwoLists_(ListNode headA, ListNode headB) {
+        if (headA == null && headB == null) {
+            return null;
+        }
+        if (headA == null) return headB;
+        if (headB == null) return headA;
+
+        ListNode head = new ListNode(0);
+        ListNode itr = head;
+
+        ListNode a = headA;
+        ListNode b = headB;
+
+        while (a != null && b != null) {
+            if (a.val <= b.val) {
+                itr.next = new ListNode(a.val);
+                a = a.next;
+            } else {
+                itr.next = new ListNode(b.val);
+                b = b.next;
+            }
+            itr = itr.next;
+        }
+
+        if (a == null) {
+            itr.next = b;
+        }
+        if (b == null) {
+            itr.next = a;
+        }
+
+        return head.next;
+    }
 
 }
-

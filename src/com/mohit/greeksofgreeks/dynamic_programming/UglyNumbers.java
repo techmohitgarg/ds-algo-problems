@@ -3,19 +3,12 @@ package com.mohit.greeksofgreeks.dynamic_programming;
 
 public class UglyNumbers {
 
-    public static void main(String[] args) {
-        UglyNumbers sol = new UglyNumbers();
-        int nth = 11;
-        System.out.println(sol.nthUglyNumber(nth));
-        System.out.println(sol.getNthUglyNo(nth));
-    }
-
     /**
      * @param n
      * @return nth ugly number
      * @TC: O(N) with O(N) SC but its running time is fast
      */
-    int getNthUglyNo(int n) {
+    public int getNthUglyNo(int n) {
         if (n <= 0) return 0;
         int[] dp = new int[n];
 

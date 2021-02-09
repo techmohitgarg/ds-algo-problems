@@ -2,14 +2,6 @@ package com.mohit.greeksofgreeks.dynamic_programming;
 
 
 public class FibonacciNumbers {
-
-    public static void main(String[] args) {
-        FibonacciNumbers sol = new FibonacciNumbers();
-        int num = 5;
-        System.out.println(sol.fib(num));
-        System.out.println(sol.fibonacciNum(num));
-    }
-
     /**
      * @param n
      * @return nth Fibonacci number
