@@ -1,10 +1,11 @@
 package com.mohit.leetcode.linklist.easy;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class IntersectionofTwoLinkedLists {
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class IntersectionofTwoLinkedLists {
         headA.next.next.next.next.next.next.next.next.next = new ListNode(19);
         headA.next.next.next.next.next.next.next.next.next.next = new ListNode(21);
         ListNode headB = new ListNode(21);
-        PrintLinkList.print(lists.getIntersectionNode(headA, headB));
+        print(lists.getIntersectionNode(headA, headB));
 
     }
 

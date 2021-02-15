@@ -4,6 +4,8 @@ import com.mohit.leetcode.linklist.ListNode;
 
 import java.util.Stack;
 
+import static com.mohit.leetcode.linklist.LinkedUtil.reverse;
+
 public class PalindromeLinkedList {
 
 
@@ -105,4 +107,28 @@ public class PalindromeLinkedList {
 
         return true;
     }*/
+
+    public boolean isPalindrome_(ListNode head) {
+        if (head == null) return false;
+
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode prev = null;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            prev = slow;
+            slow = slow.next;
+        }
+        prev.next = null;
+
+        slow = reverse(slow);
+
+        while (slow != null && head != null) {
+            if (slow.val != head.val) return false;
+            slow = slow.next;
+            head = head.next;
+        }
+        return true;
+    }
 }

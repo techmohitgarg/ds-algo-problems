@@ -2,9 +2,10 @@ package com.mohit.leetcode.linklist.medium;
 
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
 
 import java.util.*;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class SortList {
 
@@ -14,7 +15,7 @@ public class SortList {
         l1.next = new ListNode(2);
         l1.next.next = new ListNode(1);
         l1.next.next.next = new ListNode(3);
-        PrintLinkList.print(list.sortListUsingMerge(l1));
+        print(list.sortListUsingMerge(l1));
 
     }
 

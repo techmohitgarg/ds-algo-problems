@@ -2,7 +2,8 @@ package com.mohit.greeksofgreeks.linklist;
 
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class SubtractTwoNumbers {
     public static void main(String[] args) {
@@ -14,7 +15,7 @@ public class SubtractTwoNumbers {
         ListNode l2 = new ListNode(7);
         l2.next = new ListNode(8);
         l2.next.next = new ListNode(6);
-        PrintLinkList.print(sol.subtractTwoList(l1, l2));
+        print(sol.subtractTwoList(l1, l2));
     }
 
 

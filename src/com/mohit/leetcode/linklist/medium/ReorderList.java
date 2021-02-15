@@ -1,9 +1,10 @@
 package com.mohit.leetcode.linklist.medium;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
 
 import java.util.HashMap;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class ReorderList {
 
@@ -48,6 +49,6 @@ public class ReorderList {
         if (left > right) {
             iter.next = null;
         }
-        PrintLinkList.print(head);
+        print(head);
     }
 }

@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.medium;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class RemoveDuplicatesfromSortedListII {
     public static void main(String[] args) {
@@ -13,7 +14,7 @@ public class RemoveDuplicatesfromSortedListII {
         l1.next.next.next.next = new ListNode(4);
         l1.next.next.next.next.next = new ListNode(4);
         l1.next.next.next.next.next.next = new ListNode(5);
-        PrintLinkList.print(sortedListII.deleteDuplicates(l1));
+        print(sortedListII.deleteDuplicates(l1));
     }
 
 

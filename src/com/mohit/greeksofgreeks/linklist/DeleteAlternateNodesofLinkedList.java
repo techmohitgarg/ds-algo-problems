@@ -2,7 +2,8 @@ package com.mohit.greeksofgreeks.linklist;
 
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class DeleteAlternateNodesofLinkedList {
 
@@ -14,7 +15,7 @@ public class DeleteAlternateNodesofLinkedList {
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
         ListNode result = sol.deleteAlternateNodes(head);
-        PrintLinkList.print(result);
+        print(result);
 
     }
 

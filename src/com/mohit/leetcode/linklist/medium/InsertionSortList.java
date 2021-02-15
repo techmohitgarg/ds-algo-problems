@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.medium;
 
-import com.mohit.leetcode.linklist.PrintLinkList;
 import com.mohit.leetcode.linklist.ListNode;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class InsertionSortList {
 
@@ -15,7 +16,7 @@ public class InsertionSortList {
         l1.next.next.next.next.next = new ListNode(7);
         l1.next.next.next.next.next.next = new ListNode(2);
         l1.next.next.next.next.next.next.next = new ListNode(4);
-        PrintLinkList.print(sortList.insertionSortList(l1));
+        print(sortList.insertionSortList(l1));
     }
 
 

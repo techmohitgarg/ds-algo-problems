@@ -2,7 +2,8 @@ package com.mohit.leetcode.linklist.medium;
 
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class ReverseLinkedListII {
 
@@ -14,7 +15,7 @@ public class ReverseLinkedListII {
         l1.next.next.next = new ListNode(4);
         l1.next.next.next.next = new ListNode(5);
         l1.next.next.next.next.next = new ListNode(6);
-        PrintLinkList.print(listII.reverseBetween(l1, 1, 6));
+        print(listII.reverseBetween(l1, 1, 6));
 
     }
 

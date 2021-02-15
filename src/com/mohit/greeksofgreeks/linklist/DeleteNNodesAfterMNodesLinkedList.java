@@ -2,7 +2,9 @@ package com.mohit.greeksofgreeks.linklist;
 
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+import com.mohit.leetcode.linklist.Node;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class DeleteNNodesAfterMNodesLinkedList {
 
@@ -46,7 +48,28 @@ public class DeleteNNodesAfterMNodesLinkedList {
             }
              curr = curr.next;
         }
-        PrintLinkList.print(head);
+        print(head);
 
+    }
+    static void linkdelete(Node head, int M, int N) {
+        if (head == null) return;
+
+        Node itr = head;
+        while (itr != null) {
+
+            int i = M;
+            while (itr != null && i > 1) {
+                itr = itr.next;
+                i--;
+            }
+
+            int j = N;
+            while (itr != null && itr.next != null && j > 0) {
+                itr.next = itr.next.next;
+                j--;
+            }
+            if (itr == null) break;
+            itr = itr.next;
+        }
     }
 }

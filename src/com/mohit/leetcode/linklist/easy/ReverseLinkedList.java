@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.easy;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class ReverseLinkedList {
     public static void main(String[] args) {
@@ -11,7 +12,7 @@ public class ReverseLinkedList {
         headA.next.next = new ListNode(3);
         headA.next.next.next = new ListNode(4);
         headA.next.next.next.next = new ListNode(5);
-        PrintLinkList.print(elements.reverseList(headA));
+        print(elements.reverseList(headA));
 
     }
 

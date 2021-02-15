@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.hard;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class ReverseNodesinkGroup {
 
@@ -12,7 +13,7 @@ public class ReverseNodesinkGroup {
         l1.next.next = new ListNode(3);
         l1.next.next.next = new ListNode(4);
         l1.next.next.next.next = new ListNode(5);
-        PrintLinkList.print(group.reverseKGroup(l1, 2));
+        print(group.reverseKGroup(l1, 2));
     }
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode cur = head;
