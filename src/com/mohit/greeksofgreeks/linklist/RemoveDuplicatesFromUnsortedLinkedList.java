@@ -1,11 +1,13 @@
-package com.mohit.leetcode.linklist;
+package com.mohit.greeksofgreeks.linklist;
+
+import com.mohit.leetcode.linklist.LinkedUtil;
+import com.mohit.leetcode.linklist.Node;
 
 import java.util.HashSet;
 
-import static com.mohit.leetcode.linklist.LinkedUtil.makeLoop;
 import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
-public class LinkedListSolution {
+public class RemoveDuplicatesFromUnsortedLinkedList {
 
 
     public static void main(String[] args) {
