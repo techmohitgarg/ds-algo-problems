@@ -1,7 +1,9 @@
 package com.mohit.leetcode.linklist.easy;
 
 import com.mohit.leetcode.linklist.ListNode;
+import com.mohit.leetcode.linklist.Node;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +30,7 @@ public class IntersectionofTwoLinkedLists {
     }
 
 
-    /*public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    public ListNode getIntersectionNode__(ListNode headA, ListNode headB) {
 
         ListNode a1 = headA;
         while (a1 != null) {
@@ -45,7 +47,7 @@ public class IntersectionofTwoLinkedLists {
 
 
         return null;
-    }*/
+    }
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         Set<ListNode> set = new HashSet<>();
@@ -66,7 +68,7 @@ public class IntersectionofTwoLinkedLists {
     }
 
 
-    /*public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    public ListNode getIntersectionNode_(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
             return null;
         }
@@ -110,5 +112,30 @@ public class IntersectionofTwoLinkedLists {
             iterB = iterB.next;
         }
         return iterA;
-    }*/
+    }
+
+    public Node findIntersection(Node headA, Node headB) {
+        HashMap<Integer, Integer> set = new HashMap<>();
+        Node a1 = headA;
+        while (a1 != null) {
+            set.put(a1.data, set.getOrDefault(a1.data, 0) + 1);
+            a1 = a1.next;
+        }
+
+        if (set.isEmpty()) return null;
+        Node b1 = headB;
+        Node head = new Node(0);
+        Node itr = head;
+
+        while (b1 != null) {
+            if (set.containsKey(b1.data) && set.get(b1.data) > 0) {
+                itr.next = new Node(b1.data);
+                itr = itr.next;
+                set.put(b1.data, set.getOrDefault(b1.data, 0) - 1);
+            }
+            b1 = b1.next;
+        }
+
+        return head.next;
+    }
 }

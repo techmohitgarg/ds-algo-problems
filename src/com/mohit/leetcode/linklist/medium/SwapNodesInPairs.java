@@ -35,7 +35,6 @@ public class SwapNodesInPairs {
         node.next.next = temp;
 
         ListNode curr = node.next;
-
         while (curr.next != null && curr.next.next != null) {
             ListNode newHead = curr.next.next;
             curr.next.next = curr.next.next.next;
