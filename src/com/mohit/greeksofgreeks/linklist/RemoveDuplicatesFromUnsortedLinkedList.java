@@ -11,7 +11,7 @@ public class RemoveDuplicatesFromUnsortedLinkedList {
 
 
     public static void main(String[] args) {
-        Node head = LinkedUtil.makeNode(new int[]{5, 2, 2, 4, 1, 3, 2, 3,3});
+        Node head = LinkedUtil.makeNode(new int[]{5, 2, 2, 4, 1, 3, 2, 3, 3});
         removeDuplicates_(head);
         print(head);
 
