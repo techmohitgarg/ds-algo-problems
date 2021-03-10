@@ -1,100 +1,59 @@
 package com.mohit.greeksofgreeks.linklist;
 
 
+import com.mohit.leetcode.linklist.LinkedUtil;
 import com.mohit.leetcode.linklist.ListNode;
+import com.mohit.leetcode.linklist.Node;
 
 public class SwapNodesWithExchangeData {
 
     public static void main(String[] args) {
         SwapNodesWithExchangeData sol = new SwapNodesWithExchangeData();
-
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(5);
-        head.next.next.next.next.next = new ListNode(6);
-        head.next.next.next.next.next.next = new ListNode(7);
+        Node head = LinkedUtil.makeNode(new int[]{1, 2, 3, 4, 5, 6, 7});
         sol.swapNodes(head, 3, 5);
     }
+    //Swap nodes in a linked list without swapping data
+
+    private static void swapNodes(Node head, int x, int y) {
+        if (head == null || head.next == null) return;
 
 
-    public ListNode swapNodes(ListNode head, int x, int y) {
-        if (head == null || x == y) return head;
+        if (x == y) return;
 
-
-        ListNode prevX = null;
-        ListNode prevY = null;
-
-        ListNode currX = head;
-
-        while (currX != null && currX.val != x) {
-            prevX = currX;
-            currX = currX.next;
+        Node itrX = head;
+        Node itrY = head;
+        Node prev_x = null;
+        Node prev_y = null;
+        // Searching for x and prev-x
+        while (itrX != null && itrX.data != x) {
+            prev_x = itrX;
+            itrX = itrX.next;
         }
-        ListNode currY = head;
-        while (currY != null && currY.val != y) {
-            prevY = currY;
-            currY = currY.next;
-        }
-
-        // there is no element to swap
-        if (prevX == null && prevY == null) {
-            return head;
+        // Searching for y and prev-y
+        while (itrY != null && itrY.data != y) {
+            prev_y = itrY;
+            itrY = itrY.next;
         }
 
-        // check if x not head
-        if (prevX != null) {
-            prevX.next = currY;
+        // check if current index is null
+        if (itrX == null || itrY == null) return;
+
+        if (prev_x != null) {
+            prev_x.next = itrY;
         } else {
-            head = currY;
+            head = itrY;
         }
 
-        // check if y not head
-        if (prevY != null) {
-            prevY.next = currX;
+        if (prev_y != null) {
+            prev_y.next = itrX;
         } else {
-            head = currX;
+            head = itrX;
         }
 
-        // Swap next pointers
-        ListNode temp = currX.next;
-        currX.next = currY.next;
-        currY.next = temp;
+        Node temp = itrX.next;
+        itrX.next = itrY.next;
+        itrY.next = temp;
 
-        return head;
-    }
-
-    public ListNode swapNodes_(ListNode head, int x, int y) {
-        if (head == null || x == y) return head;
-
-
-        ListNode prevX = null;
-        ListNode prevY = null;
-
-        ListNode curr = head;
-
-        while (curr != null && curr.next != null) {
-            if (curr.next.val == x) {
-                prevX = curr;
-            }
-            if (curr.next.val == y) {
-                prevY = curr;
-            }
-        }
-
-
-        if (prevX != null && prevY != null) {
-            ListNode temp = prevX.next;
-            prevX.next = prevY.next;
-            prevY.next = temp;
-
-            temp = prevX.next.next;
-            prevX.next.next = prevY.next.next;
-            prevY.next.next = temp;
-        }
-
-        return head;
     }
 
 }

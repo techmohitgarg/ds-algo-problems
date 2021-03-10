@@ -1,11 +1,7 @@
 package com.mohit.leetcode.linklist.medium;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Stack;
 
 public class NextGreaterNodeInLinkedList {
@@ -43,60 +39,35 @@ public class NextGreaterNodeInLinkedList {
         return num;
     }
 
-    /*public int[] nextLargerNodes(ListNode head) {
-        if (head == null) return new int[0];
+    public int[] nextLargerNodes_(ListNode head) {
+        if (head == null) return new int[]{};
+
+        if (head.next == null) return new int[]{0};
+
+        int[] nums = new int[10000];
+
+        int index = 0, len = 0;
+
         ListNode itr = head;
-        int len = 0;
+
+        Stack<int[]> values = new Stack<>();
+
         while (itr != null) {
-            itr = itr.next;
+            while (!values.isEmpty() && values.peek()[1] < itr.val) {
+                int[] data = values.pop();
+                nums[data[0]] = itr.val;
+            }
+            values.add(new int[]{index, itr.val});
+            index++;
             len++;
-        }
-        int[] num = new int[len];
-        itr = head;
-
-        int i = 0;
-        while (itr != null && i < len) {
-            ListNode next = itr.next;
-            int val = itr.val;
-            while (itr.next != null && itr.next.val <= val) {
-                itr = itr.next;
-            }
-            if (itr.next != null && itr.next.val > val) {
-                num[i] = itr.next.val;
-            }
-            i++;
-            itr = next;
-        }
-        return num;
-    }*/
-
-    /*public int[] nextLargerNodes(ListNode head) {
-        if (head == null) return new int[0];
-        ListNode itr = head;
-        int len = 0;
-        while (itr != null) {
-            itr = itr.next;
-            len++;
-        }
-        int[] num = new int[len];
-        itr = head;
-        for (int i = 0; i < len && itr != null; i++) {
-            num[i] = itr.val;
             itr = itr.next;
         }
 
-        for (int i = 0; i < num.length; i++) {
-            int temp = num[i];
-            num[i] = 0;
-            int j = i + 1;
-            while (j < len && num[j] <= temp) {
-                j++;
-            }
-            if (j < len && num[j] > temp) num[i] = num[j];
-
+        int[] result = new int[len];
+        for (int i = 0; i < len; i++) {
+            result[i] = nums[i];
         }
-        return num;
-
-    }*/
+        return result;
+    }
 
 }

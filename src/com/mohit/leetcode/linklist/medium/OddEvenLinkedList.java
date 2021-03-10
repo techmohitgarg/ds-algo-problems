@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.medium;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class OddEvenLinkedList {
 
@@ -11,7 +12,7 @@ public class OddEvenLinkedList {
         l1.next = new ListNode(2);
         l1.next.next = new ListNode(3);
         l1.next.next.next = new ListNode(4);
-        PrintLinkList.print(linkedList.oddEvenList(l1));
+        print(linkedList.oddEvenList(l1));
     }
 
 

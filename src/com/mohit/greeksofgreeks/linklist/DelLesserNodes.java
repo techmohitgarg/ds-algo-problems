@@ -2,7 +2,8 @@ package com.mohit.greeksofgreeks.linklist;
 
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class DelLesserNodes {
 
@@ -36,7 +37,7 @@ public class DelLesserNodes {
                 itr = itr.next;
             }
         }
-        PrintLinkList.print(curr.next);
+        print(curr.next);
     }
 
 

@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.medium;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class PartitionList {
 
@@ -13,7 +14,7 @@ public class PartitionList {
         l1.next.next.next = new ListNode(2);
         l1.next.next.next.next = new ListNode(5);
         l1.next.next.next.next.next = new ListNode(2);
-        PrintLinkList.print(list.partition(l1, 3));
+        print(list.partition(l1, 3));
     }
 
     public ListNode partition(ListNode head, int x) {

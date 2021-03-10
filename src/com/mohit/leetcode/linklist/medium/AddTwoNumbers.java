@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.medium;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class AddTwoNumbers {
 
@@ -15,7 +16,7 @@ public class AddTwoNumbers {
         ListNode l2 = new ListNode(5);
         l2.next = new ListNode(6);
         l2.next.next = new ListNode(4);
-        PrintLinkList.print(numbers.addTwoNumbers(l1, l2));
+        print(numbers.addTwoNumbers(l1, l2));
 
     }
 

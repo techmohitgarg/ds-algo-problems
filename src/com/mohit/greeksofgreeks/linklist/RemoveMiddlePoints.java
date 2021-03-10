@@ -1,6 +1,8 @@
 package com.mohit.greeksofgreeks.linklist;
 
 
+import com.mohit.leetcode.linklist.LinkedListSolution;
+
 public class RemoveMiddlePoints {
     Node head;
 
@@ -44,68 +46,7 @@ public class RemoveMiddlePoints {
         sol.printList();
     }
 
-    // This function deletes middle nodes in a sequence of
-    // horizontal and vertical line segments represented
-    // by linked list.
-    Node deleteMiddle() {
-        // If only one node or no node...Return back
-        if (head == null || head.next == null ||
-                head.next.next == null)
-            return head;
-
-        Node Next = head.next;
-        Node NextNext = Next.next;
-
-        // check if this is vertical or horizontal line
-        if (head.x == Next.x) {
-            // Find middle nodes with same value as x and
-            // delete them.
-            while (NextNext != null && Next.x == NextNext.x) {
-                head.next = Next.next;
-                Next.next = null;
-
-                // Update NextNext for the next iteration
-                Next = NextNext;
-                NextNext = NextNext.next;
-            }
-        }
-
-        // if horizontal
-        else if (head.y == Next.y) {
-            // find middle nodes with same value as y and
-            // delete them
-            while (NextNext != null && Next.y == NextNext.y) {
-                head.next = Next.next;
-                Next.next = null;
-
-                // Update NextNext for the next iteration
-                Next = NextNext;
-                NextNext = NextNext.next;
-            }
-        }
-
-        // Adjacent points should have same x or same y
-        else {
-            System.out.println("Given list is not valid");
-            return null;
-        }
-
-        // recur for other segment
-
-        // temporarily store the head and move head forward.
-        Node temp = head;
-        head = head.next;
-
-        // call deleteMiddle() for next segment
-        this.deleteMiddle();
-
-        // restore head
-        head = temp;
-
-        // return the head
-        return head;
-    }
-    /*public Node deleteMiddle() {
+    public Node deleteMiddle() {
         if (head == null || head.next == null || head.next.next == null) {
             return head;
         }
@@ -127,7 +68,35 @@ public class RemoveMiddlePoints {
             }
         }
         return head;
-    }*/
+    }
+
+    Node deleteMiddle_(Node head) {
+        if (head == null || head.next == null || head.next.next == null) return head;
+
+        Node curr = head;
+
+        while (curr != null) {
+            if (curr.next != null && curr.x == curr.next.x) {
+                while (curr != null
+                        && curr.next != null
+                        && curr.next.next != null
+                        && curr.next.x == curr.next.next.x) {
+                    curr.next = curr.next.next;
+                }
+            } else if (curr.next != null && curr.y == curr.next.y) {
+                while (curr != null
+                        && curr.next != null
+                        && curr.next.next != null
+                        && curr.next.y == curr.next.next.y) {
+                    curr.next = curr.next.next;
+                }
+            }
+            curr = curr.next;
+        }
+
+
+        return head;
+    }
 
     void printList() {
         Node temp = head;

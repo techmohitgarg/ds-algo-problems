@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.easy;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class MergeTwoSortedLists {
 
@@ -15,7 +16,7 @@ public class MergeTwoSortedLists {
         ListNode l2 = new ListNode(1);
         l2.next = new ListNode(3);
         l2.next.next = new ListNode(4);
-        PrintLinkList.print(lists
+        print(lists
                 .mergeTwoLists_two(l1, l2));
     }
 

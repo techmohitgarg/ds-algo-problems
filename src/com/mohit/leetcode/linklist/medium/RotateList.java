@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.medium;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class RotateList {
 
@@ -12,7 +13,7 @@ public class RotateList {
         node.next.next = new ListNode(3);
         node.next.next.next = new ListNode(4);
         node.next.next.next.next = new ListNode(5);
-        PrintLinkList.print(main.rotateRight(node, 2));
+        print(main.rotateRight(node, 2));
     }
 
     public ListNode rotateRight(ListNode head, int k) {

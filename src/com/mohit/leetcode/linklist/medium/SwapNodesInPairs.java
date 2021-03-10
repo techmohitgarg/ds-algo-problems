@@ -1,7 +1,8 @@
 package com.mohit.leetcode.linklist.medium;
 
 import com.mohit.leetcode.linklist.ListNode;
-import com.mohit.leetcode.linklist.PrintLinkList;
+
+import static com.mohit.leetcode.linklist.LinkedUtil.print;
 
 public class SwapNodesInPairs {
     public static void main(String[] args) {
@@ -34,7 +35,6 @@ public class SwapNodesInPairs {
         node.next.next = temp;
 
         ListNode curr = node.next;
-
         while (curr.next != null && curr.next.next != null) {
             ListNode newHead = curr.next.next;
             curr.next.next = curr.next.next.next;
@@ -43,7 +43,7 @@ public class SwapNodesInPairs {
             curr = curr.next.next;
         }
 
-        PrintLinkList.print(node);
+        print(node);
     }
 
     public ListNode swapPairs1(ListNode head) {
