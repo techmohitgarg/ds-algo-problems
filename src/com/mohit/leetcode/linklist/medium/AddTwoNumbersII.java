@@ -1,7 +1,9 @@
 package com.mohit.leetcode.linklist.medium;
 
+import com.mohit.leetcode.linklist.LinkedUtil;
 import com.mohit.leetcode.linklist.ListNode;
 
+import java.util.List;
 import java.util.Stack;
 
 import static com.mohit.leetcode.linklist.LinkedUtil.print;
@@ -9,17 +11,93 @@ import static com.mohit.leetcode.linklist.LinkedUtil.print;
 public class AddTwoNumbersII {
     public static void main(String[] args) {
         AddTwoNumbersII numbersII = new AddTwoNumbersII();
-        ListNode l1 = new ListNode(1);
-        l1.next = new ListNode(2);
-        l1.next.next = new ListNode(3);
+        ListNode l1 = LinkedUtil.makeListNode(new int[]{5});
+        ListNode l2 = LinkedUtil.makeListNode(new int[]{5});
 
-        ListNode l2 = new ListNode(1);
-        l2.next = new ListNode(2);
-        l2.next.next = new ListNode(3);
         print(numbersII.addTwoNumbers(l1, l2));
     }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if (l1 == null && l2 == null) {
+            return l1;
+        }
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+
+        int n1 = 0;
+        ListNode itr1 = l1;
+        while (itr1 != null) {
+            itr1 = itr1.next;
+            n1++;
+        }
+
+        int n2 = 0;
+        ListNode itr2 = l2;
+        while (itr2 != null) {
+            itr2 = itr2.next;
+            n2++;
+        }
+
+        ListNode result = addNumber(l1, l2, n1, n2);
+        if (carry == 1) {
+            ListNode node = new ListNode(carry);
+            node.next = result;
+            return node;
+        }
+        return result;
+    }
+
+    int carry = 0;
+
+    private ListNode addNumber(ListNode l1, ListNode l2, int n1, int n2) {
+        ListNode prev1;
+        ListNode prev2;
+
+        if (n1 == 0 && n2 == 0) {
+            return null;
+        } else if (n1 > n2) {
+            prev1 = l1;
+            ListNode result = addNumber(l1.next, l2, n1 - 1, n2);
+            if (prev1 != null) {
+                carry += prev1.val;
+            }
+            ListNode temp = new ListNode(carry % 10);
+            temp.next = result;
+            carry /= 10;
+            return temp;
+        } else if (n2 > n1) {
+            prev2 = l2;
+            ListNode result = addNumber(l1, l2.next, n1, n2 - 1);
+            if (prev2 != null) {
+                carry += prev2.val;
+            }
+            ListNode temp = new ListNode(carry % 10);
+            temp.next = result;
+            carry /= 10;
+            return temp;
+
+        } else {
+            prev1 = l1;
+            prev2 = l2;
+            ListNode result = addNumber(l1.next, l2.next, n1 - 1, n2 - 1);
+            if (prev1 != null) {
+                carry += prev1.val;
+            }
+            if (prev2 != null) {
+                carry += prev2.val;
+            }
+            ListNode temp = new ListNode(carry % 10);
+            temp.next = result;
+            carry /= 10;
+            return temp;
+        }
+    }
+
+    public ListNode addTwoNumbers_(ListNode l1, ListNode l2) {
         if (l1 == null && l2 == null) {
             return l1;
         }

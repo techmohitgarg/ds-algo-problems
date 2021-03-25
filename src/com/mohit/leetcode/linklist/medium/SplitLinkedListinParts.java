@@ -56,4 +56,42 @@ public class SplitLinkedListinParts {
     }
 
 
+    public ListNode[] splitListToParts1(ListNode root, int k) {
+        ListNode[] listNodes = new ListNode[k];
+
+        int len = size(root);
+
+        int subSetLen = len / k;
+        int remain = len % k;
+
+        ListNode itr = root;
+
+        int i = 0;
+        while (i < k && itr != null) {
+            int j = 0;
+            int setLen = (i < remain) ? subSetLen + 1 : subSetLen;
+            ListNode start = itr;
+            ListNode prev = null;
+            while (j < setLen && itr != null) {
+                prev = itr;
+                itr = itr.next;
+                j++;
+            }
+            prev.next = null;
+            listNodes[i] = start;
+            i++;
+        }
+        return listNodes;
+    }
+
+    private int size(ListNode root) {
+        int len = 0;
+        ListNode itr = root;
+        while (itr != null) {
+            itr = itr.next;
+            len++;
+        }
+        return len;
+    }
+
 }

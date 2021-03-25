@@ -40,7 +40,30 @@ public class RemoveDuplicatesfromSortedListII {
 
         return node.next;
     }
+    /*public static ListNode deleteDuplicates(ListNode A) {
+        // Null case
+        if (A == null) return A;
 
+
+        ListNode node = new ListNode(-1);
+        node.next = A;
+        ListNode itr = node;
+        ListNode prev = itr;
+        while (itr != null && itr.next != null) {
+            int val = itr.next.val;
+            int count = 0;
+            while (itr != null && itr.next != null && itr.next.val == val) {
+                itr = itr.next;
+                count++;
+            }
+            if (count > 1) {
+                prev.next = itr.next;
+            } else {
+                prev = itr;
+            }
+        }
+        return node.next;
+    }*/
     /*public ListNode deleteDuplicates(ListNode head) {
         HashMap<Integer, Integer> set = new HashMap<>();
         ListNode iter = head;

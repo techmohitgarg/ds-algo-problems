@@ -1,51 +1,21 @@
 package com.mohit.leetcode.linklist.medium;
 
-public class FlattenMultilevelDoublyLinkedList {
-    static class Node {
-        public int val;
-        public Node prev;
-        public Node next;
-        public Node child;
+import com.mohit.leetcode.linklist.LinkedUtil;
+import com.mohit.leetcode.linklist.Node;
 
-        public Node(int val) {
-            this.val = val;
-        }
-    }
+public class FlattenMultilevelDoublyLinkedList {
+
 
     public static void main(String[] args) {
         FlattenMultilevelDoublyLinkedList sol = new FlattenMultilevelDoublyLinkedList();
-        Node node = new Node(1);
+        Node first = LinkedUtil.makeNode(new int[]{1, 2, 3, 4, 5, 6});
+        Node second = LinkedUtil.makeNode(new int[]{7, 8,9,10});
+        Node third = LinkedUtil.makeNode(new int[]{11, 12});
 
-        node.next = new Node(2);
-        node.next.prev = node;
+        first.next.next.child = second;
+        second.next.child = third;
 
-        node.next.next = new Node(3);
-        node.next.next.prev = node.next;
-
-        node.next.next.next = new Node(5);
-        node.next.next.next.prev = node.next.next;
-
-        node.next.next.next.next = new Node(6);
-        node.next.next.next.next.prev = node.next.next.next;
-
-        node.next.next.child = new Node(7);
-
-        node.next.next.child.next = new Node(8);
-        node.next.next.child.next.prev = node.next.next.child;
-
-        node.next.next.child.next.next = new Node(9);
-        node.next.next.child.next.next.prev = node.next.next.child.next;
-
-        node.next.next.child.next.next.next = new Node(10);
-        node.next.next.child.next.next.next.prev = node.next.next.child.next.next;
-
-        node.next.next.child.next.child = new Node(11);
-
-        node.next.next.child.next.child.next = new Node(12);
-        node.next.next.child.next.child.next.prev = node.next.next.child.next.child;
-
-
-        Node result = sol.flatten(node);
+        Node result = sol.flatten(first);
 
         System.out.println(result);
     }
@@ -76,10 +46,41 @@ public class FlattenMultilevelDoublyLinkedList {
                     prev.next = next;
                     next.prev = prev;
                 }
-                p = next;
+                if (next != null)
+                    p = next;
+                else {
+                    p = prev;
+                }
             }
         }
         return p;
+    }
+
+    public static Node flatten1(Node head) {
+        if (head == null) return head;
+
+        Node itr = head;
+        Node next = null;
+        while (itr != null) {
+            if (itr.child != null) {
+                next = itr.next;
+                itr.next = flatten1(itr.child);
+                itr.child = null;
+                if (itr.next != null)
+                    itr.next.prev = itr;
+
+                while (itr.next != null) {
+                    itr = itr.next;
+                }
+                if (itr.next == null) {
+                    itr.next = next;
+                    if (itr.next != null)
+                        itr.next.prev = itr;
+                }
+            }
+            itr = itr.next;
+        }
+        return head;
     }
    /* public Node flatten(Node head) {
         if (head == null) return null;
