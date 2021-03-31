@@ -10,30 +10,47 @@ public class LinkedListSolution {
 
     public static void main(String[] args) {
         LinkedListSolution solution = new LinkedListSolution();
-        ListNode root = LinkedUtil.makeListNode(new int[]{6, 5, 3, 1, 8, 7, 2, 4});
-        solution.insertionSortList(root);
+        ListNode root = LinkedUtil.makeListNode(new int[]{2, 3, 2, 3, 2, 2});
+        LinkedUtil.print(solution.partition(root, 1));
     }
 
-    public ListNode insertionSortList(ListNode head) {
-        //Base Case
-        if (head == null || head.next == null) return head;
+    public ListNode partition(ListNode head, int x) {
+        if (head == null) {
+            return null;
+        }
+        ListNode lessThanX = new ListNode(0);
+        ListNode itrLess = lessThanX;
 
-        ListNode prev = null;
+        //check if head starting from less value
+
+        while (head != null && head.val < x) {
+            ListNode temp = head;
+            // set the small value to less node
+            itrLess.next = temp;
+            itrLess = itrLess.next;
+            head = head.next;
+        }
+
 
         ListNode curr = head;
+        ListNode prev = null;
+        ListNode temp = null;
         while (curr != null) {
-            ListNode itr = prev;
-            while (itr != null && itr.val < curr.val) {
-                itr = itr.next;
+            if (curr.val < x) {
+                temp = curr;
+                //Delete the small value from the head
+                prev.next = curr.next;
+                // set the small value to less node
+                itrLess.next = temp;
+                itrLess = itrLess.next;
+            } else {
+                prev = curr;
             }
-
-            ListNode next = curr.next;
-            ListNode temp = itr.next;
-            itr.next = curr;
-            itr.next.next = temp;
-            curr = next;
+            curr = curr.next;
         }
-        return prev.next;
+        itrLess.next = head;
+
+        return lessThanX.next;
     }
 
 }

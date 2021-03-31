@@ -19,6 +19,44 @@ public class PartitionList {
 
     public ListNode partition(ListNode head, int x) {
         if (head == null) {
+            return null;
+        }
+        ListNode lessThanX = new ListNode(0);
+        ListNode itrLess = lessThanX;
+
+        //check if head starting from less value
+        while (head != null && head.val < x) {
+            ListNode temp = head;
+            // set the small value to less node
+            itrLess.next = temp;
+            itrLess = itrLess.next;
+            head = head.next;
+        }
+
+
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode temp = null;
+        while (curr != null) {
+            if (curr.val < x) {
+                temp = curr;
+                //Delete the small value from the head
+                prev.next = curr.next;
+                // set the small value to less node
+                itrLess.next = temp;
+                itrLess = itrLess.next;
+            } else {
+                prev = curr;
+            }
+            curr = curr.next;
+        }
+        itrLess.next = head;
+
+        return lessThanX.next;
+    }
+
+    /*public ListNode partition(ListNode head, int x) {
+        if (head == null) {
             return head;
         }
 
@@ -40,29 +78,6 @@ public class PartitionList {
 
         before.next = node_.next;
         return node.next;
-    }
-    /*public ListNode partition(ListNode head, int x) {
-        if (head == null) return head;
-
-        ListNode lessThan = new ListNode(-1);
-        ListNode node = lessThan;
-        ListNode itr = new ListNode(-1);
-        itr.next = head;
-        ListNode greater = itr;
-        while (greater.next != null) {
-            if (greater.next.val < x) {
-                // Add Small number in linked list
-                node.next = new ListNode(greater.next.val);
-                node = node.next;
-
-                // Than remove small number from main list
-                greater.next = greater.next.next;
-            } else {
-                greater = greater.next;
-            }
-        }
-
-        node.next = itr.next;
-        return lessThan.next;
     }*/
+
 }
